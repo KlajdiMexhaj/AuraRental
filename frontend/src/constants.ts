@@ -1,0 +1,92 @@
+
+import type { Car } from './types';
+
+export const NAV_LINKS = [
+  { name: 'Home', href: '#home' },
+  { name: 'Cars', href: '#cars' },
+  { name: 'About Us', href: '#about' },
+  { name: 'Contact', href: '#contact' },
+];
+
+export const CAR_CATEGORIES = ['All', 'Luxury', 'SUV', 'Sport', 'Electric'];
+
+export const MOCK_CARS: Car[] = [
+  {
+    id: '1',
+    brand: 'Mercedes-Benz',
+    model: 'G-Class AMG',
+    year: 2024,
+    pricePerDay: 450,
+    image: 'https://images.unsplash.com/photo-1520031441872-265e4ff70366?auto=format&fit=crop&q=80&w=800',
+    category: 'Luxury',
+    transmission: 'Automatic',
+    fuel: 'Petrol',
+    seats: 5,
+    rating: 4.9,
+  },
+  {
+    id: '2',
+    brand: 'Tesla',
+    model: 'Model S Plaid',
+    year: 2024,
+    pricePerDay: 320,
+    image: 'https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&q=80&w=800',
+    category: 'Electric',
+    transmission: 'Automatic',
+    fuel: 'Electric',
+    seats: 5,
+    rating: 4.8,
+  },
+  {
+    id: '3',
+    brand: 'Porsche',
+    model: '911 Carrera',
+    year: 2023,
+    pricePerDay: 550,
+    image: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=800',
+    category: 'Sport',
+    transmission: 'Automatic',
+    fuel: 'Petrol',
+    seats: 2,
+    rating: 5.0,
+  },
+  {
+    id: '4',
+    brand: 'Land Rover',
+    model: 'Range Rover SV',
+    year: 2024,
+    pricePerDay: 400,
+    image: 'https://images.unsplash.com/photo-1606148633266-0158aa9b9a4d?auto=format&fit=crop&q=80&w=800',
+    category: 'SUV',
+    transmission: 'Automatic',
+    fuel: 'Hybrid',
+    seats: 5,
+    rating: 4.7,
+  },
+  {
+    id: '5',
+    brand: 'Audi',
+    model: 'RS e-tron GT',
+    year: 2024,
+    pricePerDay: 380,
+    image: 'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&q=80&w=800',
+    category: 'Electric',
+    transmission: 'Automatic',
+    fuel: 'Electric',
+    seats: 5,
+    rating: 4.9,
+  },
+  {
+    id: '6',
+    brand: 'BMW',
+    model: 'M8 Competition',
+    year: 2023,
+    pricePerDay: 480,
+    image: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&q=80&w=800',
+    category: 'Sport',
+    transmission: 'Automatic',
+    fuel: 'Petrol',
+    seats: 4,
+    rating: 4.8,
+  }
+];

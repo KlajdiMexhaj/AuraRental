@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 
 # Create your models here.
 
@@ -15,26 +16,63 @@ class Car(models.Model):
 
 
 class Reservation(models.Model):
-    car = models.ForeignKey(
-        Car,
-        on_delete=models.CASCADE,
-        related_name='reservations'
+    STATUS_PENDING = 'pending'
+    STATUS_APPROVED = 'approved'
+
+    STATUS_CHOICES = [
+        (STATUS_PENDING, 'Pending'),
+        (STATUS_APPROVED, 'Approved'),
+    ]
+
+    car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='reservations')
+
+    name_surname = models.CharField(max_length=200, blank=True, null=True)
+    phone_number = models.CharField(max_length=30, blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+
+    pickup_datetime = models.DateTimeField(blank=True, null=True)
+    return_datetime = models.DateTimeField(blank=True, null=True)
+
+    passport_front = models.ImageField(upload_to='passports/', blank=True, null=True)
+    passport_back = models.ImageField(upload_to='passports/', blank=True, null=True)
+
+    status = models.CharField(
+        max_length=10,
+        choices=STATUS_CHOICES,
+        default=STATUS_PENDING
     )
 
-    name_surname = models.CharField(max_length=200,blank=True,null=True)
-    phone_number = models.CharField(max_length=30,blank=True,null=True)
-    email = models.EmailField(blank=True,null=True)
-    
-    pickup_date = models.DateField(blank=True,null=True)
-    pickup_date = models.TimeField(blank=True,null=True)
-
-    return_date = models.DateField(blank=True,null=True)
-    return_date = models.TimeField(blank=True,null=True)
-
-    passport_front = models.ImageField(upload_to='passports/',blank=True,null=True)
-    passport_back = models.ImageField(upload_to='passports/',blank=True,null=True)
-
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def clean(self):
+        # Allow pending reservations without date/time
+        if self.status == self.STATUS_PENDING:
+            return
+        
+        if not self.pickup_datetime or not self.return_datetime:
+            raise ValidationError(
+                "Pickup and return date/time are required before approving a reservation."
+            )
+
+        if self.pickup_datetime >= self.return_datetime:
+            raise ValidationError("Return datetime must be after pickup datetime")
+        
+        # ONLY block when approving
+        if self.status == self.STATUS_APPROVED:
+            overlapping = Reservation.objects.filter(
+                car=self.car,
+                status=self.STATUS_APPROVED,
+                pickup_datetime__lt=self.return_datetime,
+                return_datetime__gt=self.pickup_datetime,
+            ).exclude(pk=self.pk).exists()
+
+            if overlapping:
+                raise ValidationError(
+                    "This car is already booked for the seleceted date and time"
+                )
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.name_surname} - {self.car.name}"
