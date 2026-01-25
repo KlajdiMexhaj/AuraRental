@@ -14,10 +14,12 @@ export interface Car {
 }
 
 export interface SearchQuery {
-  pickupLocation: string;
+  pickupLocation: 'Airport' | 'Hotel' | '';
   pickupDate: string;
+  pickupTime: string;
   returnDate: string;
-  carType: string;
+  returnTime: string;
+  
 }
 
 export interface ContactFormData {
