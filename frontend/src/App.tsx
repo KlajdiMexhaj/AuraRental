@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import SearchSection from './components/SearchSection';
@@ -7,45 +6,58 @@ import CarSection from './components/CarSection';
 import AboutSection from './components/AboutSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
-import { MOCK_CARS } from './constants';
 import type { Car, SearchQuery } from './types';
 
+const API_URL = 'http://127.0.0.1:8000/api/cars/';
+
 const App: React.FC = () => {
+  const [cars, setCars] = useState<Car[]>([]);
+  const [filteredCars, setFilteredCars] = useState<Car[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const [filteredCars, setFilteredCars] = useState<Car[]>(MOCK_CARS);
-  const [isLoading, setIsLoading] = useState(false);
+  /* -------------------- FETCH CARS FROM BACKEND -------------------- */
+  useEffect(() => {
+    fetch(API_URL)
+      .then(res => res.json())
+      .then((data: Car[]) => {
+        setCars(data);
+        setFilteredCars(data);
+        setIsLoading(false);
+      })
+      .catch(error => {
+        console.error('Error fetching cars:', error);
+        setIsLoading(false);
+      });
+  }, []);
 
+  /* -------------------- SEARCH HANDLER -------------------- */
   const handleSearch = (query: SearchQuery) => {
     setIsLoading(true);
-    // Simulate API call delay
+
+    // You can later send `query` to backend
     setTimeout(() => {
-      let results = MOCK_CARS;
-      if (query.carType !== 'All') {
-        results = results.filter(car => car.category === query.carType);
-      }
-      // Simple text search for location (not really filtering cars, just simulating intent)
       console.log('Searching in:', query.pickupLocation);
-      
-      setFilteredCars(results);
+      console.log('Pickup:', query.pickupDate, query.pickupTime);
+      console.log('Return:', query.returnDate, query.returnTime);
+
+      // For now: no filtering, show all cars
+      setFilteredCars(cars);
       setIsLoading(false);
-      
-      // Scroll to results
+
       const carsSection = document.getElementById('cars');
-      if (carsSection) {
-        carsSection.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 800);
+      carsSection?.scrollIntoView({ behavior: 'smooth' });
+    }, 600);
   };
 
   return (
     <div className="min-h-screen flex flex-col font-sans">
       <Header />
-      
+
       <main className="flex-grow">
         <section id="home">
           <Hero />
         </section>
-        
+
         <div className="relative z-20 -mt-16 md:-mt-24 px-4">
           <SearchSection onSearch={handleSearch} />
         </div>

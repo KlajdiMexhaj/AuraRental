@@ -55,9 +55,12 @@
 
       .text-gradient {
         background: linear-gradient(to right, #ffffff, #8ecd24);
-        -webkit-background-clip: text;
+        background-clip: text;              /* standard */
+        -webkit-background-clip: text;      /* WebKit (Chrome, Safari) */
+        color: transparent;                 /* standard */
         -webkit-text-fill-color: transparent;
       }
+
     </style>
 
     <!-- Import map -->

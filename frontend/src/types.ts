@@ -1,16 +1,10 @@
 
 export interface Car {
-  id: string;
-  brand: string;
-  model: string;
-  year: number;
-  pricePerDay: number;
+  id: number;
+  name: string;
   image: string;
-  category: 'Luxury' | 'SUV' | 'Sport' | 'Electric';
-  transmission: 'Automatic' | 'Manual';
-  fuel: 'Petrol' | 'Electric' | 'Hybrid';
-  seats: number;
-  rating: number;
+  detail: string;
+  price: number;
 }
 
 export interface SearchQuery {
