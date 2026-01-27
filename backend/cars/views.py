@@ -4,16 +4,20 @@ from .models import *
 from .serializers import *
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.parsers import MultiPartParser, FormParser
 # Create your views here.
 
-class CarListAPIView(generics.ListCreateAPIView):
-    queryset = Car.objects.all()
-    serializer_class = CarSerializer
+class CarListAPIView(generics.ListAPIView):
+    serializer_class = CarListSerializer
+
+    def get_queryset(self):
+        # Only fetch necessary fields
+        return Car.objects.only("id", "name", "price", "image").order_by("id")
 
 class ReservationCreateAPIView(generics.ListCreateAPIView):
     queryset = Reservation.objects.all()
     serializer_class = ReservationSerializer
-
+    parser_classes = (MultiPartParser, FormParser)
 
 class CarAvailabilityAPIView(APIView):
     def get(self, request):
@@ -29,3 +33,7 @@ class CarAvailabilityAPIView(APIView):
         ).exists()
 
         return Response({"available": is_available})
+    
+class CarDetailAPIView(generics.RetrieveAPIView):
+    queryset = Car.objects.all()
+    serializer_class = CarDetailSerializer

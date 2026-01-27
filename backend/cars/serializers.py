@@ -2,11 +2,20 @@ from rest_framework import serializers
 from .models import *
 
 
-class CarSerializer(serializers.ModelSerializer):
+class CarListSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
     class Meta:
         model = Car
-        fields = '__all__'
+        fields = ("id", "name", "price", "image")  # exclude detail
 
+    def get_image(self, obj):
+        return obj.image.url if obj.image else None
+    
+class CarDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Car
+        fields = "__all__"
 class ReservationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reservation

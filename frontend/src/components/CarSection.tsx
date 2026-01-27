@@ -1,12 +1,13 @@
 import React from 'react';
 import type { Car } from '../types';
-
+import { useNavigate } from 'react-router-dom';
 interface CarSectionProps {
   cars: Car[];
   isLoading: boolean;
 }
 
 const CarSection: React.FC<CarSectionProps> = ({ cars, isLoading }) => {
+  const navigate = useNavigate();
   return (
     <div className="container mx-auto px-6">
       {/* Header */}
@@ -42,8 +43,8 @@ const CarSection: React.FC<CarSectionProps> = ({ cars, isLoading }) => {
               {/* Image */}
               <div className="relative h-64 overflow-hidden">
                 <img
-                  src={car.image}
-                  alt={car.name}
+                  src={car?.image || "/placeholder.png"}
+                  alt={car?.name || "Car"}
                   className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
                 />
 
@@ -72,7 +73,7 @@ const CarSection: React.FC<CarSectionProps> = ({ cars, isLoading }) => {
 
                 {/* Description from backend */}
                 <p className="text-sm text-white/50 mb-6 line-clamp-3">
-                  {car.detail}
+                  {car?.detail || "No description"}
                 </p>
 
                 {/* STATIC specs */}
@@ -89,7 +90,9 @@ const CarSection: React.FC<CarSectionProps> = ({ cars, isLoading }) => {
                     </span>
                     <span className="text-white/40 text-sm"> / day</span>
                   </div>
-                  <button className="bg-white/10 hover:bg-primary hover:text-dark px-6 py-2 rounded-xl text-sm font-bold transition-all">
+                  <button
+                  onClick={() => navigate(`/cars/${car.id}`)}
+                  className="bg-white/10 hover:bg-primary hover:text-dark px-6 py-2 rounded-xl text-sm font-bold transition-all">
                     View Details
                   </button>
                 </div>
