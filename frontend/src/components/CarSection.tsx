@@ -5,6 +5,7 @@ interface CarSectionProps {
   cars: Car[];
   isLoading: boolean;
 }
+const API_BASE_URL = 'http://127.0.0.1:8000';
 
 const CarSection: React.FC<CarSectionProps> = ({ cars, isLoading }) => {
   const navigate = useNavigate();
@@ -43,10 +44,16 @@ const CarSection: React.FC<CarSectionProps> = ({ cars, isLoading }) => {
               {/* Image */}
               <div className="relative h-64 overflow-hidden">
                 <img
-                  src={car?.image || "/placeholder.png"}
-                  alt={car?.name || "Car"}
-                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
-                />
+  src={
+    car?.image
+      ? car.image.startsWith('http')
+        ? car.image
+        : `${API_BASE_URL}${car.image}`
+      : '/placeholder.png'
+  }
+  alt={car?.name || 'Car'}
+  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+/>
 
                 {/* STATIC category */}
                 <div className="absolute top-4 left-4">
