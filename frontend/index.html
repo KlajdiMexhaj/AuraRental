@@ -33,34 +33,43 @@
       };
     </script>
 
-    <!-- Global styles -->
     <style>
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-      }
-
-      body {
-        background-color: #011111;
-        color: white;
-        scroll-behavior: smooth;
-      }
-
-      .glass {
-        background: rgba(255, 255, 255, 0.03);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-      }
-
-      .text-gradient {
-        background: linear-gradient(to right, #ffffff, #8ecd24);
-        background-clip: text;              /* standard */
-        -webkit-background-clip: text;      /* WebKit (Chrome, Safari) */
-        color: transparent;                 /* standard */
-        -webkit-text-fill-color: transparent;
-      }
-
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #011111;
+            color: white;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, .font-accent {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .glow-green {
+            box-shadow: 0 0 20px rgba(142, 205, 36, 0.15);
+        }
+        .glow-green-strong {
+            box-shadow: 0 0 35px rgba(142, 205, 36, 0.3);
+        }
+        .glass {
+            background: rgba(11, 28, 28, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #011111;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #8ecd24;
+            border-radius: 10px;
+        }
+        /* Fix for datetime-local appearance in dark mode */
+        input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
+        }
     </style>
 
     <!-- Import map -->
@@ -74,7 +83,7 @@
     </script>
 
     <!-- App CSS -->
-    <link rel="stylesheet" href="/index.css" />
+    
   </head>
 
   <body>

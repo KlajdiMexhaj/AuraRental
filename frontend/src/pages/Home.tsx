@@ -1,77 +1,69 @@
-import React, { useEffect, useState } from "react";
-import Hero from "../components/Hero";
-import SearchSection from "../components/SearchSection";
-import CarSection from "../components/CarSection";
-import AboutSection from "../components/AboutSection";
-import ContactSection from "../components/ContactSection";
-import type { Car, SearchQuery } from "../types";
 
-const API_URL = "http://127.0.0.1:8000/api/cars/";
+import React, { useEffect, useState } from 'react';
+import Hero from '../components/Hero';
+import CarCard from '../components/CarCard';
+import About from '../components/About';
+import Location from '../components/Location';
+import Footer from '../components/Footer';
+import { fetchCars } from '../services/api';
+import type { Car } from '../types';
+import { Link } from 'react-router-dom';
 
 const Home: React.FC = () => {
-  const [cars, setCars] = useState<Car[]>([]);
-  const [filteredCars, setFilteredCars] = useState<Car[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [featuredCars, setFeaturedCars] = useState<Car[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchCars = async () => {
-      setIsLoading(true);
+    const loadCars = async () => {
       try {
-        const res = await fetch(API_URL);
-        const data = await res.json();
-
-        // DRF pagination: extract results array
-        const carList: Car[] = data.results || [];
-        setCars(carList);
-        setFilteredCars(carList);
+        const data = await fetchCars();
+        setFeaturedCars(data.results.slice(0, 3));
       } catch (err) {
-        console.error("Failed to fetch cars:", err);
+        console.error(err);
       } finally {
-        setIsLoading(false);
+        setLoading(false);
       }
     };
-
-    fetchCars();
+    loadCars();
   }, []);
 
-  const handleSearch = (query: SearchQuery) => {
-    setIsLoading(true);
-
-    // Example: filter by name (replace with your search logic)
-    setTimeout(() => {
-    //   const filtered = cars.filter(car =>
-    //     car.name?.toLowerCase().includes(query.carType?.toLowerCase() || "")
-    //   );
-    //   setFilteredCars(filtered);
-    //   setIsLoading(false);
-
-      // Scroll to cars section
-      document.getElementById("cars")?.scrollIntoView({ behavior: "smooth" });
-    }, 600);
-  };
-
   return (
-    <>
-      <section id="home">
-        <Hero />
+    <div className="bg-[#011111] overflow-hidden">
+      <Hero />
+      
+      {/* Featured Fleet Preview */}
+      <section className="py-32 max-w-7xl mx-auto px-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div>
+            <span className="text-[#8ecd24] text-[10px] font-black tracking-[0.4em] uppercase mb-4 block animate-fade-in">Exclusive Collection</span>
+            <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tighter uppercase">Our Featured Fleet</h2>
+          </div>
+          <Link to="/cars" className="text-[#8ecd24] font-black text-xs uppercase tracking-[0.2em] flex items-center gap-3 group">
+            <span>View Full Collection</span>
+            <div className="w-10 h-10 rounded-full border border-[#8ecd24]/30 flex items-center justify-center group-hover:bg-[#8ecd24] group-hover:text-[#011111] transition-all">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+            </div>
+          </Link>
+        </div>
+
+        {loading ? (
+          <div className="flex flex-col items-center justify-center py-20 gap-4">
+            <div className="w-16 h-16 border-4 border-[#8ecd24] border-t-transparent rounded-full animate-spin"></div>
+            <span className="text-[10px] font-black uppercase tracking-widest text-gray-700">Accessing Vault...</span>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {featuredCars.map(car => (
+              <CarCard key={car.id} car={car} />
+            ))}
+          </div>
+        )}
       </section>
 
-      <div className="relative z-20 -mt-16 md:-mt-24 px-4">
-        <SearchSection onSearch={handleSearch} />
-      </div>
-
-      <section id="cars" className="py-20">
-        <CarSection cars={filteredCars} isLoading={isLoading} />
-      </section>
-
-      <section id="about" className="py-20 bg-black/30">
-        <AboutSection />
-      </section>
-
-      <section id="contact" className="py-20">
-        <ContactSection />
-      </section>
-    </>
+      <About />
+      <Location />
+      <Footer />
+    </div>
   );
 };
 

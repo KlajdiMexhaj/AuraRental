@@ -1,28 +1,37 @@
+
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import Navbar from './components/Navbar';
 import Home from './pages/Home';
-import Cars from './pages/Cars';
-import CarDetails from './pages/CarDetails';
+import CarList from './pages/CarList';
+import CarDetail from './pages/CarDetail';
+import SocialFloating from './components/SocialFloating';
+
+// Wrapper to handle scroll to top on navigation
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+};
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
-      <div className="min-h-screen flex flex-col font-sans">
-        <Header />
-
-        <main className="flex-grow">
+    <Router>
+      <div className="bg-[#011111] text-white min-h-screen font-sans selection:bg-[#8ecd24] selection:text-[#011111] relative">
+        <ScrollToTop />
+        <Navbar />
+        <SocialFloating />
+        <main>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/cars" element={<Cars />} />
-            <Route path="/cars/:id" element={<CarDetails />} />
+            <Route path="/cars" element={<CarList />} />
+            <Route path="/car/:id" element={<CarDetail />} />
           </Routes>
         </main>
-
-        <Footer />
       </div>
-    </BrowserRouter>
+    </Router>
   );
 };
 

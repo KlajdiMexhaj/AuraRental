@@ -5,6 +5,7 @@ from .serializers import *
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
+
 # Create your views here.
 
 class CarListAPIView(generics.ListAPIView):
@@ -37,3 +38,7 @@ class CarAvailabilityAPIView(APIView):
 class CarDetailAPIView(generics.RetrieveAPIView):
     queryset = Car.objects.all()
     serializer_class = CarDetailSerializer
+
+class CarExtraListAPIView(generics.ListAPIView):
+    queryset = CarExtra.objects.all().order_by("id")
+    serializer_class = CarExtraSerializer

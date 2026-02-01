@@ -1,60 +1,105 @@
 
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Hero: React.FC = () => {
+  const navigate = useNavigate();
+  const [dates, setDates] = useState({ pickup: '', return: '' });
+  const now = new Date().toISOString().slice(0, 16);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (dates.pickup && dates.return) {
+      navigate(`/cars?pickup=${dates.pickup}&return=${dates.return}`);
+    } else {
+      navigate('/cars');
+    }
+  };
+
   return (
-    <div className="relative h-[85vh] min-h-[600px] flex items-center overflow-hidden">
-      {/* Background Image & Overlay */}
-      <div className="absolute inset-0 z-0">
-        <img 
-          src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=2000" 
-          alt="Luxury Car Background" 
-          className="w-full h-full object-cover opacity-40"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-dark/60 via-dark/80 to-dark"></div>
-      </div>
-
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-3xl">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-6 animate-pulse">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-            </span>
-            <span>Premium Car Rental 2024</span>
+    <section className="relative min-h-[90vh] flex items-center pt-28 overflow-hidden bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-[#0b1c1c] via-[#011111] to-[#011111]">
+      {/* Background Accents */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#8ecd24]/10 blur-[150px] rounded-full -translate-y-1/2 translate-x-1/2"></div>
+      
+      <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
+        <div className="flex flex-col items-center text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#8ecd24]/20 bg-[#8ecd24]/5 text-[#8ecd24] text-[10px] font-bold tracking-[0.2em] uppercase mb-8 animate-pulse">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#8ecd24]"></span>
+            Now Available in your city
           </div>
-          
-          <h1 className="text-5xl md:text-7xl font-heading font-extrabold mb-6 leading-tight">
-            Elevate Your <span className="text-gradient">Journey</span> Beyond Boundaries.
+          <h1 className="text-6xl md:text-8xl font-bold text-white leading-[0.9] mb-8 tracking-tighter">
+            PRESTIGE RENTALS <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8ecd24] via-white to-[#8ecd24] bg-[length:200%_auto] animate-gradient">REDEFINED</span>
           </h1>
-          
-          <p className="text-lg md:text-xl text-white/70 mb-10 leading-relaxed max-w-xl">
-            Experience the pinnacle of automotive excellence. Rent the world's most exclusive cars with seamless service and tailored experiences.
+          <p className="text-gray-400 text-lg md:text-xl max-w-2xl leading-relaxed">
+            Don't just arrive. Make an entrance with our curated collection of high-performance and luxury vehicles.
           </p>
+        </div>
 
-          <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
-            <button className="w-full sm:w-auto bg-primary text-dark px-10 py-4 rounded-full font-bold text-lg hover:bg-white hover:scale-105 transition-all shadow-[0_0_30px_rgba(142,205,36,0.3)]">
-              Browse Fleet
+        {/* Search Widget */}
+        <div className="max-w-4xl mx-auto">
+          <form 
+            onSubmit={handleSearch} 
+            className="glass p-2 md:p-3 rounded-3xl border border-white/10 flex flex-col md:flex-row gap-3 shadow-2xl relative"
+          >
+            <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-3 px-2">
+              <div className="relative group p-3 rounded-2xl bg-white/5 border border-transparent focus-within:border-[#8ecd24]/30 transition-all">
+                <label className="block text-[10px] uppercase font-black text-gray-500 mb-1 tracking-widest group-focus-within:text-[#8ecd24]">Pick-up</label>
+                <div className="flex items-center gap-3">
+                  <svg className="w-4 h-4 text-[#8ecd24]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                  <input 
+                    type="datetime-local" 
+                    min={now}
+                    step="3600"
+                    className="bg-transparent text-white w-full focus:outline-none text-sm font-medium"
+                    value={dates.pickup}
+                    onChange={(e) => setDates({...dates, pickup: e.target.value})}
+                  />
+                </div>
+              </div>
+
+              <div className="relative group p-3 rounded-2xl bg-white/5 border border-transparent focus-within:border-[#8ecd24]/30 transition-all">
+                <label className="block text-[10px] uppercase font-black text-gray-500 mb-1 tracking-widest group-focus-within:text-[#8ecd24]">Return</label>
+                <div className="flex items-center gap-3">
+                  <svg className="w-4 h-4 text-[#8ecd24]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                  <input 
+                    type="datetime-local" 
+                    min={dates.pickup || now}
+                    step="3600"
+                    className="bg-transparent text-white w-full focus:outline-none text-sm font-medium"
+                    value={dates.return}
+                    onChange={(e) => setDates({...dates, return: e.target.value})}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <button 
+              type="submit"
+              className="bg-[#8ecd24] text-[#011111] px-10 py-5 rounded-2xl font-black text-sm hover:bg-white hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3 shadow-[0_0_20px_rgba(142,205,36,0.3)]"
+            >
+              <span>Explore Fleet</span>
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
             </button>
-            <button className="w-full sm:w-auto px-10 py-4 rounded-full font-bold text-lg border border-white/20 hover:bg-white/10 transition-all">
-              Our Services
-            </button>
+          </form>
+          
+          <div className="mt-8 flex justify-center gap-12">
+            <div className="flex items-center gap-3 opacity-60 grayscale hover:grayscale-0 transition-all cursor-default">
+              <span className="w-2 h-2 rounded-full bg-[#8ecd24]"></span>
+              <span className="text-[10px] font-bold uppercase tracking-widest">Instant Booking</span>
+            </div>
+            <div className="flex items-center gap-3 opacity-60 grayscale hover:grayscale-0 transition-all cursor-default">
+              <span className="w-2 h-2 rounded-full bg-[#8ecd24]"></span>
+              <span className="text-[10px] font-bold uppercase tracking-widest">24/7 Support</span>
+            </div>
+            <div className="flex items-center gap-3 opacity-60 grayscale hover:grayscale-0 transition-all cursor-default">
+              <span className="w-2 h-2 rounded-full bg-[#8ecd24]"></span>
+              <span className="text-[10px] font-bold uppercase tracking-widest">Free Cancellation</span>
+            </div>
           </div>
         </div>
       </div>
-
-      {/* Floating Elements/Stats */}
-      <div className="hidden lg:flex absolute bottom-32 right-32 flex-col space-y-6">
-        <div className="glass p-6 rounded-2xl flex items-center space-x-4 transform hover:-translate-y-2 transition-transform cursor-default">
-          <div className="text-4xl font-bold text-primary">500+</div>
-          <div className="text-xs uppercase tracking-widest text-white/50">Happy<br/>Clients</div>
-        </div>
-        <div className="glass p-6 rounded-2xl flex items-center space-x-4 translate-x-12 transform hover:-translate-y-2 transition-transform cursor-default">
-          <div className="text-4xl font-bold text-primary">45+</div>
-          <div className="text-xs uppercase tracking-widest text-white/50">Luxury<br/>Models</div>
-        </div>
-      </div>
-    </div>
+    </section>
   );
 };
 
