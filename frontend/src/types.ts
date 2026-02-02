@@ -3,7 +3,7 @@ export interface Car {
   id: number;
   name: string;
   price: string;
-  image: string;
+  image: string | null;
   description?: string;
   category?: string;
   fuel?: string;

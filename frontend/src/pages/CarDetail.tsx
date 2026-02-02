@@ -146,7 +146,11 @@ const CarDetail: React.FC = () => {
 
   if (!car) return <div className="min-h-screen pt-40 text-center text-xl font-bold text-white">Vehicle Not Found</div>;
 
-  const imageUrl = car.image.startsWith('http') ? car.image : `http://127.0.0.1:8000${car.image}`;
+  const imageUrl = car.image
+  ? car.image.startsWith('http')
+    ? car.image
+    : `http://127.0.0.1:8000${car.image}`
+  : '/vite.svg';
 
   return (
     <div className="min-h-screen pt-24 md:pt-32 pb-20 max-w-7xl mx-auto px-4 sm:px-6">

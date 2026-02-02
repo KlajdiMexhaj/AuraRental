@@ -8,7 +8,11 @@ interface CarCardProps {
 }
 
 const CarCard: React.FC<CarCardProps> = ({ car }) => {
-  const imageUrl = car.image.startsWith('http') ? car.image : `http://127.0.0.1:8000${car.image}`;
+  const imageUrl = car.image
+  ? car.image.startsWith('http')
+    ? car.image
+    : `http://127.0.0.1:8000${car.image}`
+  : '/vite.svg';
 
   return (
     <div className="group relative glass rounded-[2.5rem] overflow-hidden transition-all duration-700 hover:border-[#8ecd24]/40 hover:-translate-y-2">
