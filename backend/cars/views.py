@@ -42,3 +42,7 @@ class CarDetailAPIView(generics.RetrieveAPIView):
 class CarExtraListAPIView(generics.ListAPIView):
     queryset = CarExtra.objects.all().order_by("id")
     serializer_class = CarExtraSerializer
+
+class DestinationListAPIView(generics.ListAPIView):
+    queryset = Destination.objects.all()
+    serializer_class = DestinationSerializer

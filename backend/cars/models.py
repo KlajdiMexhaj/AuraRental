@@ -22,8 +22,13 @@ class Car(models.Model):
     )
     air_conditioning = models.BooleanField(default=False, blank=True, null=True)
     doors = models.PositiveSmallIntegerField(blank=True, null=True)
+    def __str__(self):
+        return self.name or f"Car #{self.pk}"
+class Destination(models.Model):
+    name = models.CharField(max_length=200)
 
-
+    def __str__(self):
+        return self.name
 class Reservation(models.Model):
     STATUS_PENDING = 'pending'
     STATUS_APPROVED = 'approved'
@@ -34,7 +39,13 @@ class Reservation(models.Model):
     ]
 
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='reservations')
-
+    destination = models.ForeignKey(
+        Destination,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="reservations"
+    )
     name_surname = models.CharField(max_length=200, blank=True, null=True)
     phone_number = models.CharField(max_length=30, blank=True, null=True)
     email = models.EmailField(blank=True, null=True)

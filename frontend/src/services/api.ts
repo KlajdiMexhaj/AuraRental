@@ -1,7 +1,7 @@
 
-import type { Car, Reservation, ApiResponse, CarExtra } from '../types';
+import type { Car, Reservation, ApiResponse, CarExtra, Destination } from '../types';
 
-const BASE_URL = 'http://127.0.0.1:8000/api';
+const BASE_URL = 'http://192.168.10.215:8000/api';
 
 const MOCK_CARS: Car[] = [
   {
@@ -9,59 +9,13 @@ const MOCK_CARS: Car[] = [
     name: "Mercedes AMG GT",
     price: "1230.00",
     image: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=1200",
-    description: "Experience the pinnacle of luxury and performance.",
+    detail: "Experience the pinnacle of luxury and performance.\n- 0 to 100 in 3.2s\n- Hand-built engine\n- Panoramic sunroof",
     category: "Luxury",
     fuel: "Petrol",
     transmission: "Automatic",
-    seats: 2
-  },
-  {
-    id: 2,
-    name: "Audi RS6 Avant",
-    price: "850.00",
-    image: "https://images.unsplash.com/photo-1606152424101-ad4492a0249c?auto=format&fit=crop&q=80&w=1200",
-    description: "The perfect blend of utility and brutal power.",
-    category: "Sport Estate",
-    fuel: "Hybrid",
-    transmission: "Automatic",
-    seats: 5
-  },
-  {
-    id: 3,
-    name: "Porsche 911 Carrera",
-    price: "1100.00",
-    image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=1200",
-    description: "An icon of automotive engineering.",
-    category: "Coupe",
-    fuel: "Petrol",
-    transmission: "Manual/PDK",
-    seats: 2
-  }
-];
-
-const MOCK_EXTRAS: CarExtra[] = [
-  {
-    id: 1,
-    name: "Siguracion kasko",
-    price: "20.00"
-  },
-  {
-    id: 2,
-    name: "Shofer shtese",
-    price: "3.00"
-  }
-];
-
-const MOCK_RESERVATIONS: Reservation[] = [
-  {
-    id: 1,
-    name_surname: "Klajdi Mexhaj",
-    phone_number: "+355684720777",
-    email: "mexhajklajdi@gmail.com",
-    pickup_datetime: "2026-01-29T23:00:00Z",
-    return_datetime: "2026-01-31T23:00:00Z",
-    status: "approved",
-    car: 1
+    seats: 2,
+    air_conditioning: true,
+    doors: 2
   }
 ];
 
@@ -100,10 +54,25 @@ export async function fetchCarExtras(): Promise<ApiResponse<CarExtra>> {
     return await response.json();
   } catch (error) {
     return {
-      count: MOCK_EXTRAS.length,
+      count: 0,
       next: null,
       previous: null,
-      results: MOCK_EXTRAS
+      results: []
+    };
+  }
+}
+
+export async function fetchDestinations(): Promise<ApiResponse<Destination>> {
+  try {
+    const response = await fetch(`${BASE_URL}/destination/`);
+    if (!response.ok) throw new Error('Network response was not ok');
+    return await response.json();
+  } catch (error) {
+    return {
+      count: 0,
+      next: null,
+      previous: null,
+      results: []
     };
   }
 }
@@ -132,10 +101,10 @@ export async function fetchReservations(): Promise<ApiResponse<Reservation>> {
     return await response.json();
   } catch (error) {
     return { 
-      count: MOCK_RESERVATIONS.length, 
+      count: 0, 
       next: null, 
       previous: null, 
-      results: MOCK_RESERVATIONS 
+      results: [] 
     };
   }
 }

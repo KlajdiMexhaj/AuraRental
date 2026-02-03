@@ -8,11 +8,11 @@ interface CarCardProps {
 }
 
 const CarCard: React.FC<CarCardProps> = ({ car }) => {
-  const imageUrl = car.image
-  ? car.image.startsWith('http')
-    ? car.image
-    : `http://127.0.0.1:8000${car.image}`
-  : '/vite.svg';
+  const imageUrl = car.image?.startsWith('http') 
+    ? car.image 
+    : car.image 
+      ? `http://192.168.10.215:8000${car.image}`
+      : 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=1200';
 
   return (
     <div className="group relative glass rounded-[2.5rem] overflow-hidden transition-all duration-700 hover:border-[#8ecd24]/40 hover:-translate-y-2">
@@ -58,7 +58,7 @@ const CarCard: React.FC<CarCardProps> = ({ car }) => {
 
         <Link 
           to={`/car/${car.id}`}
-          className="group/btn relative overflow-hidden bg-white/5 border border-white/10 text-white py-5 rounded-[1.25rem] text-center font-bold text-sm transition-all hover:bg-[#8ecd24] hover:text-[#011111] hover:border-[#8ecd24] overflow-hidden"
+          className="group/btn relative overflow-hidden bg-white/5 border border-white/10 text-white py-5 rounded-[1.25rem] text-center font-bold text-sm transition-all hover:bg-[#8ecd24] hover:text-[#011111] hover:border-[#8ecd24]"
         >
           <span className="relative z-10 flex items-center justify-center gap-2">
             View Reservation

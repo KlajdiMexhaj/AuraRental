@@ -4,11 +4,18 @@ export interface Car {
   name: string;
   price: string;
   image: string | null;
-  description?: string;
+  detail?: string;
   category?: string;
   fuel?: string;
   transmission?: string;
   seats?: number;
+  air_conditioning?: boolean;
+  doors?: number;
+}
+
+export interface Destination {
+  id: number;
+  name: string;
 }
 
 export interface CarExtra {
@@ -30,6 +37,7 @@ export interface Reservation {
   created_at?: string;
   car: number;
   extras?: number[];
+  destination?: number | null;
 }
 
 export interface ApiResponse<T> {

@@ -6,4 +6,5 @@ urlpatterns = [
     path('reservations/', ReservationCreateAPIView.as_view()),
     path('cars/<int:pk>/', CarDetailAPIView.as_view(), name='car-detail'),
     path("car-extras/", CarExtraListAPIView.as_view(), name="car-extras"),
+    path("destination/", DestinationListAPIView.as_view(), name="destination"),
 ]

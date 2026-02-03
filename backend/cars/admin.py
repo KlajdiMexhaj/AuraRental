@@ -6,7 +6,9 @@ from django import forms
 @admin.register(Car)
 class CarAdmin(admin.ModelAdmin):
     list_display = ("name", "price")
-
+@admin.register(Destination)
+class DestinationAdmin(admin.ModelAdmin):
+    list_display = ("name",)
 class ReservationAdminForm(forms.ModelForm):
     extras_select = forms.ModelMultipleChoiceField(
         queryset=CarExtra.objects.all(),
@@ -50,6 +52,7 @@ class ReservationAdmin(admin.ModelAdmin):
     form = ReservationAdminForm
     fields = (
         "car",
+        "destination",
         "name_surname",
         "phone_number",
         "email",

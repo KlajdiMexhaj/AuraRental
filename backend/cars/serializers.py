@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Car, Reservation, CarExtra
+from .models import Car, Reservation, CarExtra, Destination
 
 
 class CarListSerializer(serializers.ModelSerializer):
@@ -7,7 +7,7 @@ class CarListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Car
-        fields = ("id", "name", "price", "image")
+        fields = ("id", "name", "price", "image","detail","seats","transmission","air_conditioning","doors")
 
     def get_image(self, obj):
         return obj.image.url if obj.image else None
@@ -18,7 +18,10 @@ class CarDetailSerializer(serializers.ModelSerializer):
         model = Car
         fields = "__all__"
 
-
+class DestinationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Destination
+        fields = ("id", "name")
 class ReservationSerializer(serializers.ModelSerializer):
     # ✅ CORRECT field for FormData + JSON
     extras = serializers.JSONField(required=False, allow_null=True)
