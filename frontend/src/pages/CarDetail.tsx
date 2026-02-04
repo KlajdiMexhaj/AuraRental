@@ -3,7 +3,8 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { fetchCarDetail, createReservation, fetchCarExtras, fetchDestinations } from '../services/api';
 import type { Car, CarExtra, Destination } from '../types';
-
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
 const CarDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -18,13 +19,12 @@ const CarDetail: React.FC = () => {
   
   const [formData, setFormData] = useState({
     name_surname: '',
-    phone_number: '',
     email: '',
     pickup_datetime: '',
     return_datetime: '',
     destination: '',
   });
-
+  const [phone, setPhone] = useState<string | undefined>();
   const [passportFront, setPassportFront] = useState<File | null>(null);
   const [passportBack, setPassportBack] = useState<File | null>(null);
 
@@ -105,11 +105,16 @@ const CarDetail: React.FC = () => {
       setSubmissionErrors({ return_datetime: ["Return date must be after pickup date."] });
       return;
     }
-
+    if (!phone) {
+      setSubmissionErrors({
+        phone_number: ['Phone number is required'],
+      });
+      return;
+    }
     setSubmitting(true);
     const data = new FormData();
     data.append('name_surname', formData.name_surname);
-    data.append('phone_number', formData.phone_number);
+    data.append('phone_number', phone);
     data.append('email', formData.email);
     data.append('pickup_datetime', pickupDate.toISOString());
     data.append('return_datetime', returnDate.toISOString());
@@ -283,11 +288,22 @@ data.append('extras', JSON.stringify(extrasPayload));
                       <input required name="email" value={formData.email} onChange={handleInputChange} type="email" placeholder="client@aurarental.com" className={`w-full bg-white/[0.03] border ${submissionErrors.email ? 'border-red-500/50' : 'border-white/10'} rounded-2xl px-5 py-4 focus:outline-none focus:border-[#8ecd24] text-white text-sm transition-all`} />
                       {submissionErrors.email && <p className="text-red-500 text-[10px] font-bold mt-1 ml-1">{submissionErrors.email[0]}</p>}
                     </div>
-                    <div className="space-y-1.5">
-                      <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Phone</label>
-                      <input required name="phone_number" value={formData.phone_number} onChange={handleInputChange} type="tel" placeholder="+355..." className={`w-full bg-white/[0.03] border ${submissionErrors.phone_number ? 'border-red-500/50' : 'border-white/10'} rounded-2xl px-5 py-4 focus:outline-none focus:border-[#8ecd24] text-white text-sm transition-all`} />
-                      {submissionErrors.phone_number && <p className="text-red-500 text-[10px] font-bold mt-1 ml-1">{submissionErrors.phone_number[0]}</p>}
+ <div className="space-y-1.5">
+                      <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Direct Line</label>
+                      <PhoneInput
+                        international
+                        defaultCountry="AL"
+                        value={phone}
+                        onChange={setPhone}
+                        className={`phone-input-aura ${submissionErrors.phone_number ? 'phone-input-error' : ''}`}
+                      />
+                      {submissionErrors.phone_number && (
+                        <p className="text-red-500 text-[10px] font-bold mt-1 ml-1">
+                          {submissionErrors.phone_number[0]}
+                        </p>
+                      )}
                     </div>
+
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -314,6 +330,7 @@ data.append('extras', JSON.stringify(extrasPayload));
                           name="destination"
                           value={formData.destination}
                           onChange={handleInputChange}
+                          required
                           className={`
                             w-full
                             bg-white/[0.03]
@@ -341,6 +358,7 @@ data.append('extras', JSON.stringify(extrasPayload));
                               key={dest.id}
                               value={dest.id}
                               className="bg-[#011111] text-white"
+                              
                             >
                               {dest.name}
                             </option>
@@ -396,12 +414,12 @@ data.append('extras', JSON.stringify(extrasPayload));
 
                   <div className="pt-4 grid grid-cols-2 gap-4">
                     <label className={`relative cursor-pointer p-6 rounded-[2rem] border-2 border-dashed transition-all flex flex-col items-center gap-2 group/upload ${passportFront ? 'bg-[#8ecd24]/5 border-[#8ecd24]/40' : 'bg-white/[0.03] border-white/10 hover:border-white/30'}`}>
-                      <input type="file" accept="image/*" onChange={(e) => handleFileChange(e, 'front')} className="absolute inset-0 opacity-0 cursor-pointer" />
+                      <input required type="file" accept="image/*" onChange={(e) => handleFileChange(e, 'front')} className="absolute inset-0 opacity-0 cursor-pointer" />
                       <svg className="w-6 h-6 text-gray-600 group-hover/upload:text-[#8ecd24] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" /></svg>
                       <span className="text-[9px] font-black uppercase tracking-widest text-center leading-tight">{passportFront ? 'Front Loaded' : 'Passport Front'}</span>
                     </label>
                     <label className={`relative cursor-pointer p-6 rounded-[2rem] border-2 border-dashed transition-all flex flex-col items-center gap-2 group/upload ${passportBack ? 'bg-[#8ecd24]/5 border-[#8ecd24]/40' : 'bg-white/[0.03] border-white/10 hover:border-white/30'}`}>
-                      <input type="file" accept="image/*" onChange={(e) => handleFileChange(e, 'back')} className="absolute inset-0 opacity-0 cursor-pointer" />
+                      <input required type="file" accept="image/*" onChange={(e) => handleFileChange(e, 'back')} className="absolute inset-0 opacity-0 cursor-pointer" />
                       <svg className="w-6 h-6 text-gray-600 group-hover/upload:text-[#8ecd24] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" /></svg>
                       <span className="text-[9px] font-black uppercase tracking-widest text-center leading-tight">{passportBack ? 'Back Loaded' : 'Passport Back'}</span>
                     </label>

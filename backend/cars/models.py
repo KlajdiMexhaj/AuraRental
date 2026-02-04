@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.contrib.postgres.fields import JSONField
+import phonenumbers
 # Create your models here.
 
 class Car(models.Model):
@@ -65,6 +66,25 @@ class Reservation(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def clean(self):
+        super().clean()
+
+        if self.phone_number:
+            try:
+                parsed = phonenumbers.parse(self.phone_number, None)
+                if not phonenumbers.is_valid_number(parsed):
+                    raise ValidationError({
+                        'phone_number': 'Invalid phone number.'
+                    })
+                
+                self.phone_number = phonenumbers.format_number(
+                    parsed,
+                    phonenumbers.PhoneNumberFormat.E164
+                )
+
+            except phonenumbers.NumberParseException:
+                raise ValidationError({
+                    'phone_number': 'Invalid phone number format.'
+                })
         # Allow pending reservations without date/time
         if self.status == self.STATUS_PENDING:
             return

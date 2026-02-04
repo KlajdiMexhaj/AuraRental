@@ -33,7 +33,7 @@
       };
     </script>
 
-    <style>
+       <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #011111;
@@ -70,8 +70,47 @@
             filter: invert(1);
             cursor: pointer;
         }
-    </style>
 
+        /* Custom Phone Input Styling to match Aura theme */
+        .phone-input-aura {
+            display: flex !important;
+            align-items: center !important;
+            background: rgba(255, 255, 255, 0.04) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            border-radius: 1rem !important;
+            padding: 0 1.25rem !important;
+            transition: all 0.3s ease !important;
+        }
+        .phone-input-aura:focus-within {
+            border-color: #8ecd24 !important;
+            background: rgba(255, 255, 255, 0.07) !important;
+            box-shadow: 0 0 15px rgba(142, 205, 36, 0.1) !important;
+        }
+        .phone-input-aura input {
+            background: transparent !important;
+            border: none !important;
+            color: white !important;
+            font-size: 0.875rem !important;
+            padding: 1.125rem 0 !important;
+            outline: none !important;
+            width: 100% !important;
+            margin-left: 0.75rem !important;
+        }
+        .phone-input-error {
+            border-color: rgba(239, 68, 68, 0.5) !important;
+        }
+        /* Dark mode flag dropdown */
+        .PhoneInputCountrySelect {
+            background-color: #0b1c1c !important;
+            color: white !important;
+            cursor: pointer !important;
+        }
+        .PhoneInputCountryIcon {
+            width: 24px !important;
+            height: 18px !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.5) !important;
+        }
+    </style>
     <!-- Import map -->
     <script type="importmap">
       {
