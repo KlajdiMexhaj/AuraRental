@@ -1,1 +1,1 @@
-web: gunicorn backend.config.wsgi --log-file -
+gunicorn myproject.wsgi --bind 0.0.0.0:$PORT
