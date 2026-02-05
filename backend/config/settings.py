@@ -87,7 +87,7 @@ DATABASES = {
         'NAME': 'AuraRental',
         'USER': 'postgres',
         'PASSWORD': 'Klajdi12!',
-        'HOST': 'localhost',
+        'HOST': 'dpg-d61qmntactks73ctruh0-a',
         'PORT': '5432',
     }
 }
