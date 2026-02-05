@@ -1,6 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
-from django.contrib.postgres.fields import JSONField
+from django.db.models import JSONField
 import phonenumbers
 # Create your models here.
 
