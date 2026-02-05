@@ -81,15 +81,13 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # DATABASE
 # ===========================
 
+import dj_database_url
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'AuraRental',
-        'USER': 'postgres',
-        'PASSWORD': 'Klajdi12!',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL'),  # Railway sets this automatically
+        conn_max_age=600,
+        ssl_require=True
+    )
 }
 
 # ===========================
