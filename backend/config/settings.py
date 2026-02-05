@@ -84,9 +84,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'AuraRental',
-        'USER': 'postgres',
-        'PASSWORD': 'Klajdi12!',
+        'NAME': 'aurarental',
+        'USER': 'auto',
+        'PASSWORD': 'rXT1BJK0I0tJGDtEfxl5G7d5aBr9opt7',
         'HOST': 'dpg-d61qmntactks73ctruh0-a',
         'PORT': '5432',
     }
