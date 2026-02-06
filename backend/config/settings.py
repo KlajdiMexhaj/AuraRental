@@ -17,7 +17,6 @@ ALLOWED_HOSTS = ['*']  # change in production
 # CORS
 # ===========================
 
-CORS_ALLOW_ALL_ORIGINS = True
 
 # ===========================
 # APPLICATIONS
@@ -89,7 +88,6 @@ DATABASES = {
         ssl_require=True
     )
 }
-
 # ===========================
 # REST FRAMEWORK
 # ===========================
