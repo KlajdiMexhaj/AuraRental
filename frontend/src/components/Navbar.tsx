@@ -3,6 +3,26 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
+const isActive = (path: string) => {
+  const [pathname, hash] = path.split('#');
+
+  // Discover → ONLY when on "/" AND no hash
+  if (pathname === '/' && !hash) {
+    return location.pathname === '/' && location.hash === '';
+  }
+
+  // Hash sections (/ #about, / #contact)
+  if (hash) {
+    return (
+      location.pathname === pathname &&
+      location.hash === `#${hash}`
+    );
+  }
+
+  // Normal routes (/cars)
+  return location.pathname === pathname;
+};
+
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
@@ -37,20 +57,28 @@ const Navbar: React.FC = () => {
 
           {/* Desktop Links */}
           <div className="hidden md:flex items-center space-x-10">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.path.startsWith('/#') ? link.path : undefined}
-                className={`text-[11px] font-black uppercase tracking-widest transition-all hover:text-[#8ecd24] relative group/link ${location.pathname === link.path ? 'text-[#8ecd24]' : 'text-white/70'}`}
-              >
-                {!link.path.startsWith('/#') ? (
-                  <Link to={link.path}>{link.name}</Link>
-                ) : (
-                  link.name
-                )}
-                <span className={`absolute -bottom-1 left-0 w-0 h-[2px] bg-[#8ecd24] transition-all duration-300 group-hover/link:w-full ${location.pathname === link.path ? 'w-full' : ''}`}></span>
-              </a>
-            ))}
+{navLinks.map(link => (
+  <Link
+    key={link.name}
+    to={link.path}
+    className={`text-[11px] font-black uppercase tracking-widest transition-all relative group/link
+      ${
+        isActive(link.path)
+          ? 'text-[#8ecd24]'
+          : 'text-white/70 hover:text-[#8ecd24]'
+      }`}
+  >
+    {link.name}
+    <span
+      className={`absolute -bottom-1 left-0 h-[2px] bg-[#8ecd24] transition-all duration-300
+        ${
+          isActive(link.path)
+            ? 'w-full'
+            : 'w-0 group-hover/link:w-full'
+        }`}
+    />
+  </Link>
+))}
             <Link 
               to="/cars"
               className="bg-white text-[#011111] px-8 py-3 rounded-2xl font-black text-[11px] uppercase tracking-widest hover:bg-[#8ecd24] hover:scale-105 active:scale-95 transition-all shadow-xl"
@@ -78,20 +106,17 @@ const Navbar: React.FC = () => {
       {/* Mobile Menu */}
       <div className={`md:hidden fixed inset-0 bg-[#011111] z-[90] transition-all duration-500 ease-expo ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'}`}>
         <div className="flex flex-col items-center justify-center h-full space-y-12 px-6">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.path.startsWith('/#') ? link.path : undefined}
-              className="text-4xl font-black tracking-tighter hover:text-[#8ecd24] transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              {!link.path.startsWith('/#') ? (
-                <Link to={link.path}>{link.name}</Link>
-              ) : (
-                link.name
-              )}
-            </a>
-          ))}
+          {navLinks.map(link => (
+          <Link
+            key={link.name}
+            to={link.path}
+            className="text-4xl font-black tracking-tighter hover:text-[#8ecd24] transition-colors"
+            onClick={() => setIsOpen(false)}
+          >
+            {link.name}
+          </Link>
+        ))}
+
           <Link 
             to="/cars"
             className="w-full bg-[#8ecd24] text-[#011111] py-6 rounded-3xl font-black text-center text-xl shadow-[0_20px_40px_rgba(142,205,36,0.2)]"

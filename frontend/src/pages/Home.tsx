@@ -7,9 +7,21 @@ import Location from '../components/Location';
 import Footer from '../components/Footer';
 import { fetchCars } from '../services/api';
 import type { Car } from '../types';
-import { Link } from 'react-router-dom';
+import { Link,useLocation } from 'react-router-dom';
 
 const Home: React.FC = () => {
+  const location = useLocation();
+
+useEffect(() => {
+  if (location.hash) {
+    const el = document.getElementById(location.hash.replace('#', ''));
+    if (el) {
+      setTimeout(() => {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  }
+}, [location]);
   const [featuredCars, setFeaturedCars] = useState<Car[]>([]);
   const [loading, setLoading] = useState(true);
 

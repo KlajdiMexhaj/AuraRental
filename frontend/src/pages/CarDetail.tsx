@@ -138,20 +138,33 @@ data.append('extras', JSON.stringify(extrasPayload));
     if (passportBack) data.append('passport_back', passportBack);
 
     try {
-      await createReservation(data);
-      setSuccess(true);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      setTimeout(() => navigate('/'), 4000);
-    } catch (err: any) {
-      try {
+    await createReservation(data);
+    setSuccess(true);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(() => navigate('/'), 4000);
+} catch (err: any) {
+    console.error("Reservation Error:", err); // <-- log full error to console
+
+    // Default message
+    let userFriendlyErrors: Record<string, string[]> = {
+        non_field_errors: ['The phone number is not valid.'],
+    };
+
+    // Try to parse API errors if JSON
+    try {
         const parsedError = JSON.parse(err.message);
-        setSubmissionErrors(parsedError);
-      } catch {
-        setSubmissionErrors({ non_field_errors: [err.message || 'An unexpected error occurred.'] });
-      }
-    } finally {
-      setSubmitting(false);
+        userFriendlyErrors = parsedError;
+    } catch {
+        // If parsing fails, fallback to your own messages
+        if (!phone) {
+            userFriendlyErrors = { phone_number: ['The phone number is not valid.'] };
+        }
     }
+
+    setSubmissionErrors(userFriendlyErrors);
+} finally {
+    setSubmitting(false);
+}
   };
 
   if (loading) return (
@@ -162,7 +175,7 @@ data.append('extras', JSON.stringify(extrasPayload));
 
   if (!car) return <div className="min-h-screen pt-40 text-center text-xl font-bold text-white uppercase tracking-tighter italic">Vehicle Not Located</div>;
 
-  const imageUrl = car.image?.startsWith('http') ? car.image : car.image ? `http://192.168.10.215:8000${car.image}` : 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=1200';
+  const imageUrl = car.image?.startsWith('https') ? car.image : car.image ? `https://aurarental-production.up.railway.app/${car.image}` : 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=1200';
 
   const renderDetail = (detailText?: string) => {
     if (!detailText) return <p className="text-gray-400 italic">Curated details arriving soon.</p>;
@@ -309,12 +322,12 @@ data.append('extras', JSON.stringify(extrasPayload));
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
                       <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Pick-up</label>
-                      <input required name="pickup_datetime" value={formData.pickup_datetime} onChange={handleInputChange} type="datetime-local" className={`w-full bg-white/[0.03] border ${submissionErrors.pickup_datetime ? 'border-red-500/50' : 'border-white/10'} rounded-2xl px-5 py-4 focus:outline-none focus:border-[#8ecd24] text-white text-sm transition-all`} />
+                      <input required name="pickup_datetime" value={formData.pickup_datetime} onChange={handleInputChange} type="datetime-local" step={3600} className={`w-full bg-white/[0.03] border ${submissionErrors.pickup_datetime ? 'border-red-500/50' : 'border-white/10'} rounded-2xl px-5 py-4 focus:outline-none focus:border-[#8ecd24] text-white text-sm transition-all`} />
                       {submissionErrors.pickup_datetime && <p className="text-red-500 text-[10px] font-bold mt-1 ml-1">{submissionErrors.pickup_datetime[0]}</p>}
                     </div>
                     <div className="space-y-1.5">
                       <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Return</label>
-                      <input required name="return_datetime" value={formData.return_datetime} onChange={handleInputChange} type="datetime-local" className={`w-full bg-white/[0.03] border ${submissionErrors.return_datetime ? 'border-red-500/50' : 'border-white/10'} rounded-2xl px-5 py-4 focus:outline-none focus:border-[#8ecd24] text-white text-sm transition-all`} />
+                      <input required name="return_datetime" value={formData.return_datetime} onChange={handleInputChange} type="datetime-local" step={3600} className={`w-full bg-white/[0.03] border ${submissionErrors.return_datetime ? 'border-red-500/50' : 'border-white/10'} rounded-2xl px-5 py-4 focus:outline-none focus:border-[#8ecd24] text-white text-sm transition-all`} />
                       {submissionErrors.return_datetime && <p className="text-red-500 text-[10px] font-bold mt-1 ml-1">{submissionErrors.return_datetime[0]}</p>}
                     </div>
                   </div>

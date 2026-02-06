@@ -1,7 +1,7 @@
 
 import type { Car, Reservation, ApiResponse, CarExtra, Destination } from '../types';
 
-const BASE_URL = 'http://localhost:8000/api';
+const BASE_URL = 'https://aurarental-production.up.railway.app/api';
 
 const MOCK_CARS: Car[] = [
   {

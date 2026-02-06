@@ -50,8 +50,8 @@ const Footer: React.FC = () => {
             <h4 className="text-white font-black text-xs uppercase tracking-[0.2em] mb-8">Social Presence</h4>
             <div className="flex gap-4">
                {[
-                 { name: 'WhatsApp', icon: 'M12 2C6.48 2 2 6.48 2 12c0 1.94.57 3.75 1.55 5.27L2.1 21.9l4.75-1.45C8.25 21.43 10.06 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.74 0-3.37-.53-4.73-1.44l-.34-.23-2.82.86.87-2.75-.25-.37C3.53 14.88 3 13.49 3 12c0-4.96 4.04-9 9-9s9 4.04 9 9-4.04 9-9 9z', link: 'https://wa.me/355684720777' },
-                 { name: 'Instagram', icon: 'M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H7zm5 3a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6zm4.75-1a.75.75 0 110 1.5.75.75 0 010-1.5z', link: 'https://instagram.com/aura_rental' },
+                 { name: 'WhatsApp', icon: 'M12 2C6.48 2 2 6.48 2 12c0 1.94.57 3.75 1.55 5.27L2.1 21.9l4.75-1.45C8.25 21.43 10.06 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.74 0-3.37-.53-4.73-1.44l-.34-.23-2.82.86.87-2.75-.25-.37C3.53 14.88 3 13.49 3 12c0-4.96 4.04-9 9-9s9 4.04 9 9-4.04 9-9 9z', link: 'https://wa.me/+355698513954' },
+                 { name: 'Instagram', icon: 'M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H7zm5 3a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6zm4.75-1a.75.75 0 110 1.5.75.75 0 010-1.5z', link: 'https://www.instagram.com/makina_me_qera_aura?igsh=c3psYWo2bDIwajVr' },
                  { name: 'Facebook', icon: 'M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3V2z', link: 'https://facebook.com/aura_rental' }
                ].map((social) => (
                  <a 

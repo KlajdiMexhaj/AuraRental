@@ -50,7 +50,7 @@ const Hero: React.FC = () => {
                   <input 
                     type="datetime-local" 
                     min={now}
-                    step="3600"
+                    step={3600}
                     className="bg-transparent text-white w-full focus:outline-none text-sm font-medium"
                     value={dates.pickup}
                     onChange={(e) => setDates({...dates, pickup: e.target.value})}
@@ -65,7 +65,7 @@ const Hero: React.FC = () => {
                   <input 
                     type="datetime-local" 
                     min={dates.pickup || now}
-                    step="3600"
+                    step={3600}
                     className="bg-transparent text-white w-full focus:outline-none text-sm font-medium"
                     value={dates.return}
                     onChange={(e) => setDates({...dates, return: e.target.value})}

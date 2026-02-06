@@ -21,7 +21,7 @@ const Location: React.FC = () => {
                   <h4 className="text-white font-bold tracking-tight">Main Hub</h4>
                 </div>
                 <p className="text-gray-500 text-sm leading-relaxed ml-14">
-                  Rruga e Kavajës, Kompleksi Aura<br />
+                  Internation Airport<br />
                   Tirana, Albania 1001
                 </p>
               </div>
@@ -34,8 +34,7 @@ const Location: React.FC = () => {
                   <h4 className="text-white font-bold tracking-tight">Operating Hours</h4>
                 </div>
                 <p className="text-gray-500 text-sm leading-relaxed ml-14">
-                  Monday — Saturday: 08:00 - 20:00<br />
-                  Sunday: Concierge Only (Available 24/7)
+                  Monday — Sunday: Available 24/7
                 </p>
               </div>
 
@@ -46,7 +45,7 @@ const Location: React.FC = () => {
                   </div>
                   <h4 className="text-white font-bold tracking-tight">Direct Line</h4>
                 </div>
-                <p className="text-[#8ecd24] font-black text-lg ml-14">+355 68 472 0777</p>
+                <p className="text-[#8ecd24] font-black text-lg ml-14">+355 69 851 3954</p>
               </div>
             </div>
           </div>
@@ -57,7 +56,7 @@ const Location: React.FC = () => {
              <div className="absolute inset-0 pointer-events-none bg-[#011111]/10 mix-blend-multiply z-10"></div>
              <iframe 
                title="Aura Rental Location"
-               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2995.7891276088!2d19.8105749!3d41.3245465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x135031061c0f06cf%3A0x7d800160a33a571c!2sTirana%2C%20Albania!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s" 
+               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.8702730969403!2d74.7106926!3d19.0694405!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bdcb0e0a203d22b%3A0x2d1239ea8feabbd9!2ssucheata%20nagar%20107%20dnyanaraj%2C%20Kotkar%20Nagar%2C%20Sangram%20Ransingh%2C%20Ahilyanagar%2C%20Maharashtra%20414005%2C%20India!5e0!3m2!1sen!2s!4v1770415081276!5m2!1sen!2s" 
                width="100%" 
                height="100%" 
                style={{ border: 0, filter: 'grayscale(1) invert(1) contrast(1.2) brightness(0.9)' }} 

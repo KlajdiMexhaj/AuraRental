@@ -11,7 +11,7 @@ const CarCard: React.FC<CarCardProps> = ({ car }) => {
   const imageUrl = car.image?.startsWith('http') 
     ? car.image 
     : car.image 
-      ? `http://192.168.10.215:8000${car.image}`
+      ? `https://aurarental-production.up.railway.app/${car.image}`
       : 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=1200';
 
   return (
