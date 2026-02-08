@@ -9,9 +9,9 @@ interface CarCardProps {
 
 const CarCard: React.FC<CarCardProps> = ({ car }) => {
   const imageUrl = car.image
-  ? car.image.startsWith('http')
+  ? car.image.startsWith('https')
     ? car.image
-    : `http://127.0.0.1:8000/${car.image}`
+    : `https://rentalaura.pythonanywhere.com/${car.image}`
   : '/vite.svg';
 
   return (

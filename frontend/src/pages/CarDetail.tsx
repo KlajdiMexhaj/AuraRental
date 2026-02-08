@@ -175,7 +175,7 @@ data.append('extras', JSON.stringify(extrasPayload));
 
   if (!car) return <div className="min-h-screen pt-40 text-center text-xl font-bold text-white uppercase tracking-tighter italic">Vehicle Not Located</div>;
 
-  const imageUrl = car.image?.startsWith('http') ? car.image : car.image ? `http://127.0.0.1:8000/${car.image}` : 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=1200';
+  const imageUrl = car.image?.startsWith('https') ? car.image : car.image ? `https://rentalaura.pythonanywhere.com/${car.image}` : 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=1200';
 
   const renderDetail = (detailText?: string) => {
     if (!detailText) return <p className="text-gray-400 italic">Curated details arriving soon.</p>;
