@@ -11,23 +11,36 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'unsafe-secret-key'  # change this for production
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']  # change in production
+ALLOWED_HOSTS = [
+    '*'
+]
 
 # ===========================
 # CORS
 # ===========================
-CSRF_TRUSTED_ORIGINS = [
-    "https://aurarental-production.up.railway.app",
+CORS_ALLOW_ALL_ORIGINS = True   # dev only
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "http://192.168.100.11:5173",
 ]
 
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "authorization",
+    "content-type",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]
 
-CSRF_COOKIE_SAMESITE = 'None'
-SESSION_COOKIE_SAMESITE = 'None'
-
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = True
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "http://192.168.100.11:5173",
+]
 # ===========================
 # APPLICATIONS
 # ===========================
@@ -90,14 +103,14 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # DATABASE
 # ===========================
 
-import dj_database_url
+
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL'),  # Railway sets this automatically
-        conn_max_age=600,
-        ssl_require=True
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
+
 # ===========================
 # REST FRAMEWORK
 # ===========================
