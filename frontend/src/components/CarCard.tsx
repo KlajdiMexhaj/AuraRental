@@ -8,10 +8,10 @@ interface CarCardProps {
 }
 
 const CarCard: React.FC<CarCardProps> = ({ car }) => {
-  const imageUrl = car.image?.startsWith('https') 
+  const imageUrl = car.image?.startsWith('http') 
     ? car.image 
     : car.image 
-      ? `https://rentalaura.pythonanywhere.com/${car.image}`
+      ? `http://localhost:8000/${car.image}`
       : 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=1200';
 
   return (
