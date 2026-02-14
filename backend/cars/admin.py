@@ -6,6 +6,9 @@ from django import forms
 @admin.register(Car)
 class CarAdmin(admin.ModelAdmin):
     list_display = ("name", "price")
+@admin.register(ImgCarExtra)
+class ImgCarExtraAdmin(admin.ModelAdmin):
+    list_display = ("name", "car")
 @admin.register(Destination)
 class DestinationAdmin(admin.ModelAdmin):
     list_display = ("name",)

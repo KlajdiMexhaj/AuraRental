@@ -14,7 +14,7 @@ class Car(models.Model):
     image = models.ImageField(upload_to='cars/', blank=True, null=True)
     detail = models.TextField(blank=True, null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
-
+    fuel_type = models.CharField(max_length=50,blank=True,null=True)
     seats = models.PositiveSmallIntegerField(blank=True, null=True)
     transmission = models.CharField(
         max_length=10,
@@ -30,6 +30,19 @@ class Destination(models.Model):
 
     def __str__(self):
         return self.name
+
+class ImgCarExtra(models.Model):
+    car = models.ForeignKey(
+        Car,
+        on_delete=models.CASCADE,
+        related_name="extra_images"
+    )
+    name = models.CharField(max_length=150, blank=True, null=True)
+    image = models.ImageField(upload_to='cars/extras/')
+
+    def __str__(self):
+        return f"{self.car.name} - {self.name or 'Extra Image'}"
+
 class Reservation(models.Model):
     STATUS_PENDING = 'pending'
     STATUS_APPROVED = 'approved'

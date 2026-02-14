@@ -52,7 +52,7 @@ const CarCard: React.FC<CarCardProps> = ({ car }) => {
              <div className="w-8 h-8 rounded-lg bg-[#8ecd24]/10 flex items-center justify-center">
                 <svg className="w-4 h-4 text-[#8ecd24]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
              </div>
-             <span className="text-gray-400 text-[11px] font-bold uppercase">{car.fuel || 'Hybrid'}</span>
+             <span className="text-gray-400 text-[11px] font-bold uppercase">{car.fuel_type || 'Hybrid'}</span>
           </div>
         </div>
 

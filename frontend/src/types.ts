@@ -1,4 +1,8 @@
-
+export interface CarImageExtra {
+  id: number;
+  name: string | null;
+  image: string;
+}
 export interface Car {
   id: number;
   name: string;
@@ -6,11 +10,12 @@ export interface Car {
   image: string | null;
   detail?: string;
   category?: string;
-  fuel?: string;
   transmission?: string;
   seats?: number;
   air_conditioning?: boolean;
   doors?: number;
+  fuel_type?: string;
+  extra_images: CarImageExtra[]; 
 }
 
 export interface Destination {

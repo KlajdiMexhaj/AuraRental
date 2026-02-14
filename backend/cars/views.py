@@ -9,11 +9,14 @@ from rest_framework.parsers import MultiPartParser, FormParser
 # Create your views here.
 
 class CarListAPIView(generics.ListAPIView):
-    serializer_class = CarListSerializer
+    serializer_class = CarSerializer
 
     def get_queryset(self):
-        # Only fetch necessary fields
-        return Car.objects.only("id", "name", "price", "image").order_by("id")
+        # prefetch related extra images for efficiency
+        return Car.objects.prefetch_related("extra_images").order_by("id")
+
+    def get_serializer_context(self):
+        return {"request": self.request}
 
 class ReservationCreateAPIView(generics.ListCreateAPIView):
     queryset = Reservation.objects.all()
@@ -36,8 +39,13 @@ class CarAvailabilityAPIView(APIView):
         return Response({"available": is_available})
     
 class CarDetailAPIView(generics.RetrieveAPIView):
-    queryset = Car.objects.all()
-    serializer_class = CarDetailSerializer
+    serializer_class = CarSerializer
+
+    def get_queryset(self):
+        return Car.objects.prefetch_related("extra_images")
+
+    def get_serializer_context(self):
+        return {"request": self.request}
 
 class CarExtraListAPIView(generics.ListAPIView):
     queryset = CarExtra.objects.all().order_by("id")

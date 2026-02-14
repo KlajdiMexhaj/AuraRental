@@ -1,16 +1,37 @@
 from rest_framework import serializers
-from .models import Car, Reservation, CarExtra, Destination
+from .models import Car, Reservation, CarExtra, Destination,ImgCarExtra
 
-
-class CarListSerializer(serializers.ModelSerializer):
+class ImgCarExtraSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField()
 
     class Meta:
-        model = Car
-        fields = ("id", "name", "price", "image","detail","seats","transmission","air_conditioning","doors")
+        model = ImgCarExtra
+        fields = ("id", "name", "image")
 
     def get_image(self, obj):
-        return obj.image.url if obj.image else None
+        request = self.context.get("request")
+        if obj.image and request:
+            return request.build_absolute_uri(obj.image.url)
+        return None
+
+class CarSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+    extra_images = ImgCarExtraSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Car
+        fields = (
+            "id", "name", "price", "image", "detail",
+            "seats", "transmission", "air_conditioning", 
+            "doors", "fuel_type", "extra_images"
+        )
+
+    def get_image(self, obj):
+        request = self.context.get("request")
+        if obj.image and request:
+            return request.build_absolute_uri(obj.image.url)
+        return None
+
 
 
 class CarDetailSerializer(serializers.ModelSerializer):

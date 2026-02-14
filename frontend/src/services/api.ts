@@ -1,7 +1,7 @@
 
 import type { Car, Reservation, ApiResponse, CarExtra, Destination } from '../types';
 
-const BASE_URL = 'http://localhost:8000/api';
+const BASE_URL = 'https://rentalaura.pythonanywhere.com/api';
 
 const MOCK_CARS: Car[] = [
   {
@@ -9,13 +9,23 @@ const MOCK_CARS: Car[] = [
     name: "Mercedes AMG GT",
     price: "1230.00",
     image: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=1200",
-    detail: "Experience the pinnacle of luxury and performance.\n- 0 to 100 in 3.2s\n- Hand-built engine\n- Panoramic sunroof",
+    detail: `Experience the pinnacle of luxury and performance.
+- 0 to 100 in 3.2s
+- Hand-built engine
+- Panoramic sunroof`,
     category: "Luxury",
-    fuel: "Petrol",
+    fuel_type: "Petrol",
     transmission: "Automatic",
     seats: 2,
     air_conditioning: true,
-    doors: 2
+    doors: 2,
+    extra_images: [
+      {
+        id: 1,
+        name: "test1" ,
+        image: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=1200"
+      }
+    ]
   }
 ];
 

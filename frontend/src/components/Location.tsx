@@ -45,18 +45,17 @@ const Location: React.FC = () => {
                   </div>
                   <h4 className="text-white font-bold tracking-tight">Direct Line</h4>
                 </div>
-                <p className="text-[#8ecd24] font-black text-lg ml-14">+355 69 851 3954</p>
+                <p className="text-[#8ecd24] font-black text-lg ml-14">+355 69 211 6666</p>
               </div>
             </div>
           </div>
-
           {/* Map Side */}
           <div className="lg:w-2/3 h-[500px] relative rounded-[3rem] overflow-hidden border border-white/5 shadow-2xl group">
              {/* Map Iframe Overlay for Dark Theme Effect */}
              <div className="absolute inset-0 pointer-events-none bg-[#011111]/10 mix-blend-multiply z-10"></div>
              <iframe 
                title="Aura Rental Location"
-               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.8702730969403!2d74.7106926!3d19.0694405!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bdcb0e0a203d22b%3A0x2d1239ea8feabbd9!2ssucheata%20nagar%20107%20dnyanaraj%2C%20Kotkar%20Nagar%2C%20Sangram%20Ransingh%2C%20Ahilyanagar%2C%20Maharashtra%20414005%2C%20India!5e0!3m2!1sen!2s!4v1770415081276!5m2!1sen!2s" 
+               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2991.896046951935!2d19.708131976853387!3d41.41977519398429!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13502d931ceea409%3A0xbc1de6dbff543ef0!2sAura%20Rental%20Car!5e0!3m2!1sen!2s!4v1771082154464!5m2!1sen!2s" 
                width="100%" 
                height="100%" 
                style={{ border: 0, filter: 'grayscale(1) invert(1) contrast(1.2) brightness(0.9)' }} 
@@ -67,7 +66,7 @@ const Location: React.FC = () => {
              />
              <div className="absolute bottom-6 right-6 z-20">
                 <a 
-                  href="https://maps.google.com" 
+                  href="https://maps.app.goo.gl/8JpuEQK7h8PPvLQr6" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="bg-[#8ecd24] text-[#011111] px-6 py-3 rounded-2xl font-black text-[10px] uppercase tracking-widest flex items-center gap-2 hover:scale-105 transition-all shadow-2xl"
