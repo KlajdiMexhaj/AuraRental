@@ -62,8 +62,8 @@ const About: React.FC = () => {
               />
 
               <Feature
-                title="Fast Reservation"
-                text="Quick booking process with clear pricing and no surprises."
+                title="Optional warranty"
+                text="The guarantee is optional by card or cash (200 euros)."
               />
 
             </div>

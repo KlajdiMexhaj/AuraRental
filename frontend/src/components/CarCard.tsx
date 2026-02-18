@@ -11,7 +11,7 @@ const CarCard: React.FC<CarCardProps> = ({ car }) => {
   const imageUrl = car.image?.startsWith('http') 
     ? car.image 
     : car.image 
-      ? `https://rentalaura.pythonanywhere.com/${car.image}`
+      ? `http://127.0.0.1:8000/${car.image}`
       : 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=1200';
 
   return (
@@ -43,7 +43,7 @@ const CarCard: React.FC<CarCardProps> = ({ car }) => {
       </h3>
       <p className="text-[10px] text-gray-500 font-bold uppercase tracking-[0.2em] mt-2 flex items-center gap-2">
         <span className="w-4 h-[1px] bg-gray-700"></span>
-        {car.category || 'Luxury Class'}
+        {car.category || 'or Same car of this category'}
       </p>
     </div>
     

@@ -1,24 +1,34 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Hero: React.FC = () => {
   const navigate = useNavigate();
-  const [dates, setDates] = useState({ pickup: '', return: '' });
-  const now = new Date().toISOString().slice(0, 16);
+  
+  // Initialize with today's date
+  const today = new Date().toISOString().split('T')[0];
+  
+  const [formData, setFormData] = useState({
+    pickupDate: today,
+    pickupTime: '10:00',
+    returnDate: today,
+    returnTime: '10:00',
+  });
+
+  // Generate hours from 01:00 to 24:00
+  const hours = Array.from({ length: 24 }, (_, i) => {
+    const h = i + 1;
+    return `${h.toString().padStart(2, '0')}:00`;
+  });
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (dates.pickup && dates.return) {
-      navigate(`/cars?pickup=${dates.pickup}&return=${dates.return}`);
-    } else {
-      navigate('/cars');
-    }
+    const pickup = `${formData.pickupDate}T${formData.pickupTime}`;
+    const returnDt = `${formData.returnDate}T${formData.returnTime}`;
+    navigate(`/cars?pickup=${pickup}&return=${returnDt}`);
   };
 
   return (
     <section className="relative min-h-[90vh] flex items-center pt-28 overflow-hidden bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-[#0b1c1c] via-[#011111] to-[#011111]">
-      {/* Background Accents */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#8ecd24]/10 blur-[150px] rounded-full -translate-y-1/2 translate-x-1/2"></div>
       
       <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
@@ -32,70 +42,77 @@ const Hero: React.FC = () => {
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8ecd24] via-white to-[#8ecd24] bg-[length:200%_auto] animate-gradient">REDEFINED</span>
           </h1>
           <p className="text-gray-400 text-lg md:text-xl max-w-2xl leading-relaxed">
-            Don't just arrive. Make an entrance with our curated collection of high-performance and luxury vehicles.
+            Don’t just arrive. Make an entrance with our curated collection of high-performance and economical vehicles.
           </p>
         </div>
 
-        {/* Search Widget */}
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <form 
             onSubmit={handleSearch} 
-            className="glass p-2 md:p-3 rounded-3xl border border-white/10 flex flex-col md:flex-row gap-3 shadow-2xl relative"
+            className="glass p-3 rounded-[32px] border border-white/10 flex flex-col lg:flex-row gap-4 shadow-2xl relative"
           >
-            <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-3 px-2">
-              <div className="relative group p-3 rounded-2xl bg-white/5 border border-transparent focus-within:border-[#8ecd24]/30 transition-all">
-                <label className="block text-[10px] uppercase font-black text-gray-500 mb-1 tracking-widest group-focus-within:text-[#8ecd24]">Pick-up</label>
-                <div className="flex items-center gap-3">
-                  <svg className="w-4 h-4 text-[#8ecd24]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+            <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Pick-up Group */}
+              <div className="group p-4 rounded-2xl bg-white/5 border border-transparent focus-within:border-[#8ecd24]/30 transition-all">
+                <label className="block text-[10px] uppercase font-black text-gray-500 mb-2 tracking-widest group-focus-within:text-[#8ecd24]">Pick-up date & time</label>
+                <div className="flex items-center gap-2">
                   <input 
-                    type="datetime-local" 
-                    min={now}
-                    step={3600}
-                    className="bg-transparent text-white w-full focus:outline-none text-sm font-medium"
-                    value={dates.pickup}
-                    onChange={(e) => setDates({...dates, pickup: e.target.value})}
+                    type="date" 
+                    min={today}
+                    className="bg-transparent text-white w-full focus:outline-none text-sm font-medium [color-scheme:dark]"
+                    value={formData.pickupDate}
+                    onChange={(e) => setFormData({...formData, pickupDate: e.target.value})}
                   />
+                  <div className="h-4 w-[1px] bg-white/10 mx-2"></div>
+                  <select 
+                    className="bg-transparent text-white focus:outline-none text-sm font-medium cursor-pointer"
+                    value={formData.pickupTime}
+                    onChange={(e) => setFormData({...formData, pickupTime: e.target.value})}
+                  >
+                    {hours.map(h => <option key={h} value={h} className="bg-[#0b1c1c] text-white">{h}</option>)}
+                  </select>
                 </div>
               </div>
 
-              <div className="relative group p-3 rounded-2xl bg-white/5 border border-transparent focus-within:border-[#8ecd24]/30 transition-all">
-                <label className="block text-[10px] uppercase font-black text-gray-500 mb-1 tracking-widest group-focus-within:text-[#8ecd24]">Return</label>
-                <div className="flex items-center gap-3">
-                  <svg className="w-4 h-4 text-[#8ecd24]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+              {/* Return Group */}
+              <div className="group p-4 rounded-2xl bg-white/5 border border-transparent focus-within:border-[#8ecd24]/30 transition-all">
+                <label className="block text-[10px] uppercase font-black text-gray-500 mb-2 tracking-widest group-focus-within:text-[#8ecd24]">Return date & time</label>
+                <div className="flex items-center gap-2">
                   <input 
-                    type="datetime-local" 
-                    min={dates.pickup || now}
-                    step={3600}
-                    className="bg-transparent text-white w-full focus:outline-none text-sm font-medium"
-                    value={dates.return}
-                    onChange={(e) => setDates({...dates, return: e.target.value})}
+                    type="date" 
+                    min={formData.pickupDate || today}
+                    className="bg-transparent text-white w-full focus:outline-none text-sm font-medium [color-scheme:dark]"
+                    value={formData.returnDate}
+                    onChange={(e) => setFormData({...formData, returnDate: e.target.value})}
                   />
+                  <div className="h-4 w-[1px] bg-white/10 mx-2"></div>
+                  <select 
+                    className="bg-transparent text-white focus:outline-none text-sm font-medium cursor-pointer"
+                    value={formData.returnTime}
+                    onChange={(e) => setFormData({...formData, returnTime: e.target.value})}
+                  >
+                    {hours.map(h => <option key={h} value={h} className="bg-[#0b1c1c] text-white">{h}</option>)}
+                  </select>
                 </div>
               </div>
             </div>
 
             <button 
               type="submit"
-              className="bg-[#8ecd24] text-[#011111] px-10 py-5 rounded-2xl font-black text-sm hover:bg-white hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3 shadow-[0_0_20px_rgba(142,205,36,0.3)]"
+              className="bg-[#8ecd24] text-[#011111] px-12 py-5 lg:py-0 rounded-2xl font-black text-sm hover:bg-white hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3 shadow-[0_0_20px_rgba(142,205,36,0.3)]"
             >
-              <span>Explore Fleet</span>
+              <span>EXPLORE FLEET</span>
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
             </button>
           </form>
           
-          <div className="mt-8 flex justify-center gap-12">
-            <div className="flex items-center gap-3 opacity-60 grayscale hover:grayscale-0 transition-all cursor-default">
-              <span className="w-2 h-2 rounded-full bg-[#8ecd24]"></span>
-              <span className="text-[10px] font-bold uppercase tracking-widest">Instant Booking</span>
-            </div>
-            <div className="flex items-center gap-3 opacity-60 grayscale hover:grayscale-0 transition-all cursor-default">
-              <span className="w-2 h-2 rounded-full bg-[#8ecd24]"></span>
-              <span className="text-[10px] font-bold uppercase tracking-widest">24/7 Support</span>
-            </div>
-            <div className="flex items-center gap-3 opacity-60 grayscale hover:grayscale-0 transition-all cursor-default">
-              <span className="w-2 h-2 rounded-full bg-[#8ecd24]"></span>
-              <span className="text-[10px] font-bold uppercase tracking-widest">Free Cancellation</span>
-            </div>
+          <div className="mt-8 flex flex-wrap justify-center gap-8 md:gap-12">
+            {['Instant Booking', '24/7 Support', 'Free Cancellation'].map((text) => (
+              <div key={text} className="flex items-center gap-3 opacity-60 grayscale hover:grayscale-0 transition-all cursor-default">
+                <span className="w-2 h-2 rounded-full bg-[#8ecd24]"></span>
+                <span className="text-[10px] font-bold uppercase tracking-widest">{text}</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>

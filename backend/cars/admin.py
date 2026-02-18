@@ -66,6 +66,9 @@ class ReservationAdmin(admin.ModelAdmin):
         "extras_select",   # 👈 visible extras UI
         "status",          # 👈 LAST field
         "created_at",
+        "total_days",
+        "car_price_total",
+        "total_price"
     )
 
     readonly_fields = ("created_at",)
@@ -86,3 +89,7 @@ class ReservationAdmin(admin.ModelAdmin):
 @admin.register(CarExtra)
 class CarExtraAdmin(admin.ModelAdmin):
     list_display = ("name", "price")
+
+@admin.register(CarPricePeriod)
+class CarPricePeriodAdmin(admin.ModelAdmin):
+    list_display = ("car", "price_per_day")

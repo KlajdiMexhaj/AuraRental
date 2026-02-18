@@ -3,6 +3,13 @@ export interface CarImageExtra {
   name: string | null;
   image: string;
 }
+export interface PricePeriod {
+  id: number;
+  start_date: string;
+  end_date: string;
+  price_per_day: string;
+}
+
 export interface Car {
   id: number;
   name: string;
@@ -15,7 +22,8 @@ export interface Car {
   air_conditioning?: boolean;
   doors?: number;
   fuel_type?: string;
-  extra_images: CarImageExtra[]; 
+  extra_images: CarImageExtra[];
+  price_periods: PricePeriod[]; // Add this
 }
 
 export interface Destination {

@@ -1,7 +1,7 @@
 
 import type { Car, Reservation, ApiResponse, CarExtra, Destination } from '../types';
 
-const BASE_URL = 'https://rentalaura.pythonanywhere.com/api';
+const BASE_URL = 'http://127.0.0.1:8000/api';
 
 const MOCK_CARS: Car[] = [
   {

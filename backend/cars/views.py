@@ -13,7 +13,10 @@ class CarListAPIView(generics.ListAPIView):
 
     def get_queryset(self):
         # prefetch related extra images for efficiency
-        return Car.objects.prefetch_related("extra_images").order_by("id")
+        return Car.objects.prefetch_related(
+            "extra_images",
+            "price_periods"
+        ).order_by("id")
 
     def get_serializer_context(self):
         return {"request": self.request}

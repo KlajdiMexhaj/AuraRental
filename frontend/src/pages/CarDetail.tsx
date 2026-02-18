@@ -15,9 +15,9 @@ const CarDetail: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [showReview, setShowReview] = useState(false); 
   const [submissionErrors, setSubmissionErrors] = useState<Record<string, string[]>>({});
   
-  // Slider State
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const [formData, setFormData] = useState({
@@ -52,16 +52,50 @@ const CarDetail: React.FC = () => {
     loadData();
   }, [id]);
 
-  // Combine Main Image + Extra Images into one array
+  // Dynamic Seasonal Pricing & Total Logic - FIXED FOR EXACT 24H DAYS
+  const priceBreakdown = useMemo(() => {
+    if (!car) return { days: 1, carTotal: 0, extrasTotal: 0, total: 0 };
+    
+    let days = 1;
+    let carTotal = 0;
+
+    if (formData.pickup_datetime && formData.return_datetime) {
+      const start = new Date(formData.pickup_datetime);
+      const end = new Date(formData.return_datetime);
+      const diffInMs = end.getTime() - start.getTime();
+      const diffInHours = diffInMs / (1000 * 60 * 60);
+      days = Math.max(1, Math.ceil(diffInHours / 24));
+
+      for (let i = 0; i < days; i++) {
+        const currentDay = new Date(start);
+        currentDay.setDate(start.getDate() + i);
+        const dateStr = currentDay.toISOString().split('T')[0];
+        
+        const period = car.price_periods?.find((p: any) => 
+          dateStr >= p.start_date && dateStr < p.end_date
+        );
+
+        carTotal += period ? parseFloat(period.price_per_day) : parseFloat(car.price);
+      }
+    } else {
+      carTotal = parseFloat(car.price);
+    }
+
+    const selectedExtrasObj = extras.filter(e => selectedExtras.includes(e.id));
+    const extrasPricePerDay = selectedExtrasObj.reduce((acc, curr) => acc + parseFloat(curr.price), 0);
+    const extrasTotal = extrasPricePerDay * days;
+
+    return { days, carTotal, extrasTotal, total: carTotal + extrasTotal };
+  }, [car, extras, selectedExtras, formData.pickup_datetime, formData.return_datetime]);
+
+
   const allImages = useMemo(() => {
     if (!car) return [];
     const images: string[] = [];
-    const baseUrl = "https://rentalaura.pythonanywhere.com/";
-
+    const baseUrl = "http://127.0.0.1:8000/";
     if (car.image) {
       images.push(car.image.startsWith('http') ? car.image : `${baseUrl}${car.image}`);
     }
-
     if (car.extra_images && car.extra_images.length > 0) {
       car.extra_images.forEach((imgObj) => {
         images.push(imgObj.image.startsWith('http') ? imgObj.image : `${baseUrl}${imgObj.image}`);
@@ -70,37 +104,17 @@ const CarDetail: React.FC = () => {
     return images;
   }, [car]);
 
-  const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % allImages.length);
-  };
-
-  const prevImage = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + allImages.length) % allImages.length);
-  };
-
-  // Dynamic Date Calculation
-  const daysCount = useMemo(() => {
-    if (!formData.pickup_datetime || !formData.return_datetime) return 1;
-    const start = new Date(formData.pickup_datetime).getTime();
-    const end = new Date(formData.return_datetime).getTime();
-    const diff = end - start;
-    if (diff <= 0) return 1;
-    return Math.ceil(diff / (1000 * 60 * 60 * 24));
-  }, [formData.pickup_datetime, formData.return_datetime]);
-
-  // Dynamic Total Price Calculation
-  const totalPrice = useMemo(() => {
-    if (!car) return 0;
-    const basePrice = parseFloat(car.price);
-    const extrasPricePerDay = extras
-      .filter(e => selectedExtras.includes(e.id))
-      .reduce((acc, curr) => acc + parseFloat(curr.price), 0);
-    
-    return (basePrice + extrasPricePerDay) * daysCount;
-  }, [car, extras, selectedExtras, daysCount]);
+  const nextImage = () => { setCurrentImageIndex((prev) => (prev + 1) % allImages.length); };
+  const prevImage = () => { setCurrentImageIndex((prev) => (prev - 1 + allImages.length) % allImages.length); };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    let value = e.target.value;
+    
+    if (e.target.type === 'datetime-local' && value) {
+        value = value.split(':')[0] + ':00';
+    }
+
+    setFormData({ ...formData, [e.target.name]: value });
     if (submissionErrors[e.target.name]) {
       const newErrors = { ...submissionErrors };
       delete newErrors[e.target.name];
@@ -124,57 +138,57 @@ const CarDetail: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!car) return;
+
+    if (!showReview) {
+      const errors: Record<string, string[]> = {};
+      
+      if (!formData.name_surname.trim()) errors.name_surname = ['Please enter your full name.'];
+      if (!formData.email.trim() || !formData.email.includes('@')) errors.email = ['Please enter a valid email address.'];
+      if (!phone) errors.phone_number = ['A valid phone number is required.'];
+      if (!formData.pickup_datetime) errors.pickup_datetime = ['Please select a pick-up date.'];
+      if (!formData.return_datetime) errors.return_datetime = ['Please select a return date.'];
+      
+      if (formData.pickup_datetime && formData.return_datetime) {
+        if (new Date(formData.return_datetime) <= new Date(formData.pickup_datetime)) {
+            errors.return_datetime = ['Return date must be after pick-up date.'];
+        }
+      }
+
+      if (Object.keys(errors).length > 0) {
+        setSubmissionErrors(errors);
+        // User Friendly: Scroll to the form start so they see the errors
+        const formElement = document.getElementById('booking-form');
+        formElement?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+      }
+      
+      setSubmissionErrors({}); 
+      setShowReview(true);
+      return;
+    }
+
     setSubmissionErrors({});
-
-    const pickupDate = new Date(formData.pickup_datetime);
-    const returnDate = new Date(formData.return_datetime);
-    
-    if (returnDate <= pickupDate) {
-      setSubmissionErrors({ return_datetime: ["Return date must be after pickup date."] });
-      return;
-    }
-    if (!phone) {
-      setSubmissionErrors({ phone_number: ['Phone number is required'] });
-      return;
-    }
-
     setSubmitting(true);
     const data = new FormData();
-    data.append('name_surname', formData.name_surname);
-    data.append('phone_number', phone);
-    data.append('email', formData.email);
-    data.append('pickup_datetime', pickupDate.toISOString());
-    data.append('return_datetime', returnDate.toISOString());
     data.append('car', car.id.toString());
-    data.append('status', 'pending');
-
-    if (formData.destination) {
-      data.append('destination', formData.destination);
-    }
-
-    const extrasPayload = extras
-      .filter(e => selectedExtras.includes(e.id))
-      .map(e => ({ name: e.name, price: e.price }));
-
-    data.append('extras', JSON.stringify(extrasPayload));
-
+    data.append('name_surname', formData.name_surname);
+    data.append('email', formData.email);
+    data.append('phone_number', phone || '');
+    data.append('pickup_datetime', formData.pickup_datetime);
+    data.append('return_datetime', formData.return_datetime);
+    data.append('total_price', priceBreakdown.total.toString());
+    selectedExtras.forEach(id => data.append('extras', id.toString()));
     if (passportFront) data.append('passport_front', passportFront);
     if (passportBack) data.append('passport_back', passportBack);
-
+    
     try {
       await createReservation(data);
       setSuccess(true);
       window.scrollTo({ top: 0, behavior: 'smooth' });
       setTimeout(() => navigate('/'), 4000);
     } catch (err: any) {
-      let userFriendlyErrors: Record<string, string[]> = { non_field_errors: ['The phone number is not valid.'] };
-      try {
-        const parsedError = JSON.parse(err.message);
-        userFriendlyErrors = parsedError;
-      } catch {
-        if (!phone) userFriendlyErrors = { phone_number: ['The phone number is not valid.'] };
-      }
-      setSubmissionErrors(userFriendlyErrors);
+      setSubmissionErrors({ non_field_errors: ['Invalid phone number check you phone .'] });
+      setShowReview(false);
     } finally {
       setSubmitting(false);
     }
@@ -208,14 +222,12 @@ const CarDetail: React.FC = () => {
     <div className="min-h-screen pt-24 pb-20 px-4 sm:px-6 max-w-7xl mx-auto">
       <div className="flex flex-col lg:grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
         
-        {/* Car Info - Left Column */}
         <div className="w-full lg:col-span-7 space-y-6 md:space-y-8 animate-reveal">
           <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-gray-400 hover:text-[#8ecd24] transition-colors font-black text-[10px] md:text-xs uppercase tracking-widest">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M15 19l-7-7 7-7" /></svg>
             Back to fleet
           </button>
 
-          {/* IMAGE SLIDER */}
           <div className="space-y-4">
             <div className="group relative rounded-2xl md:rounded-[3rem] overflow-hidden border border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.5)] bg-[#0b1c1c]">
               <img 
@@ -226,33 +238,19 @@ const CarDetail: React.FC = () => {
               
               {allImages.length > 1 && (
                 <>
-                  <button 
-                    onClick={prevImage} 
-                    className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-14 md:h-14 bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-[#8ecd24] hover:text-black transition-all opacity-0 group-hover:opacity-100"
-                  >
+                  <button onClick={prevImage} className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-14 md:h-14 bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-[#8ecd24] hover:text-black transition-all opacity-0 group-hover:opacity-100">
                     <svg className="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M15 19l-7-7 7-7" /></svg>
                   </button>
-                  <button 
-                    onClick={nextImage} 
-                    className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-14 md:h-14 bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-[#8ecd24] hover:text-black transition-all opacity-0 group-hover:opacity-100"
-                  >
+                  <button onClick={nextImage} className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-14 md:h-14 bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-[#8ecd24] hover:text-black transition-all opacity-0 group-hover:opacity-100">
                     <svg className="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M9 5l7 7-7 7" /></svg>
                   </button>
                 </>
               )}
             </div>
-
-            {/* Thumbnail Navigation */}
             {allImages.length > 1 && (
               <div className="flex gap-2 md:gap-4 overflow-x-auto pb-2 no-scrollbar">
                 {allImages.map((img, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setCurrentImageIndex(idx)}
-                    className={`relative flex-shrink-0 w-20 h-14 md:w-28 md:h-20 rounded-xl overflow-hidden border-2 transition-all ${
-                      idx === currentImageIndex ? 'border-[#8ecd24] scale-105' : 'border-white/10 opacity-40 hover:opacity-100'
-                    }`}
-                  >
+                  <button key={idx} onClick={() => setCurrentImageIndex(idx)} className={`relative flex-shrink-0 w-20 h-14 md:w-28 md:h-20 rounded-xl overflow-hidden border-2 transition-all ${idx === currentImageIndex ? 'border-[#8ecd24] scale-105' : 'border-white/10 opacity-40 hover:opacity-100'}`}>
                     <img src={img} className="w-full h-full object-cover" alt={`preview ${idx}`} />
                   </button>
                 ))}
@@ -275,7 +273,6 @@ const CarDetail: React.FC = () => {
               </div>
             </div>
 
-            {/* FIXED SPECS GRID - 5 COLUMNS */}
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
               {[
                 { label: 'Seats', value: car.seats || 5, icon: 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' },
@@ -306,31 +303,101 @@ const CarDetail: React.FC = () => {
           </div>
         </div>
 
-        {/* Booking Sidebar - Right Column */}
-        <div className="w-full lg:col-span-5 lg:sticky lg:top-32">
+        <div className="w-full lg:col-span-5 lg:sticky lg:top-32" id="booking-form">
           <div className="bg-[#0b1c1c] rounded-[2.5rem] p-6 md:p-10 border border-white/10 shadow-[0_40px_80px_rgba(0,0,0,0.6)] relative overflow-hidden group/form">
             <div className="absolute top-0 right-0 w-32 h-32 bg-[#8ecd24]/5 blur-[60px] rounded-full -translate-y-1/2 translate-x-1/2 group-hover/form:bg-[#8ecd24]/10 transition-colors"></div>
             
             {success ? (
               <div className="py-20 text-center animate-reveal relative z-10">
-                <div className="w-20 h-20 bg-[#8ecd24] rounded-[2rem] flex items-center justify-center mx-auto mb-8 shadow-[0_0_30px_rgba(142,205,36,0.4)]">
+                <div className="w-20 h-20 bg-[#8ecd24] rounded-[2rem] flex items-center justify-center mx-auto mb-8 shadow-xl">
                   <svg className="w-10 h-10 text-[#011111]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" /></svg>
                 </div>
                 <h2 className="text-3xl font-black mb-4 uppercase italic text-white tracking-tighter">Request Received</h2>
-                <p className="text-gray-400 text-sm leading-relaxed">Our concierge team is reviewing your selection. We'll contact you within 15 minutes to confirm availability.</p>
               </div>
+            ) : showReview ? (
+                <div className="space-y-6 relative z-10 animate-reveal">
+                    <div className="flex justify-between items-center border-b border-white/10 pb-4">
+                        <div className="flex flex-col">
+                            <h2 className="text-2xl font-black text-white uppercase italic tracking-tighter">Reservation Bill</h2>
+                            <p className="text-[10px] text-[#8ecd24] font-bold uppercase tracking-widest">Review your elite booking</p>
+                        </div>
+                        <button onClick={() => setShowReview(false)} className="text-gray-500 text-[10px] font-black uppercase tracking-widest border border-white/10 px-3 py-1.5 rounded-full hover:bg-white hover:text-black transition-all">Edit Info</button>
+                    </div>
+
+                    <div className="space-y-4">
+                        <div className="grid grid-cols-2 gap-4 bg-white/[0.03] p-4 rounded-2xl border border-white/5">
+                            <div className="col-span-2">
+                                <p className="text-[9px] text-gray-500 font-black uppercase mb-1">Driver Information</p>
+                                <p className="text-white font-bold text-sm uppercase">{formData.name_surname}</p>
+                            </div>
+                            <div>
+                                <p className="text-[9px] text-gray-500 font-black uppercase mb-1">Phone</p>
+                                <p className="text-white text-xs font-bold">{phone}</p>
+                            </div>
+                            <div>
+                                <p className="text-[9px] text-gray-500 font-black uppercase mb-1">Email</p>
+                                <p className="text-white text-xs font-bold truncate">{formData.email}</p>
+                            </div>
+                        </div>
+
+                        <div className="bg-white/[0.03] p-4 rounded-2xl border border-white/5">
+                             <p className="text-[9px] text-gray-500 font-black uppercase mb-2">Schedule & Period</p>
+                             <div className="flex justify-between items-center">
+                                <div className="text-left">
+                                    <p className="text-white font-black text-xs">{new Date(formData.pickup_datetime).toLocaleDateString()}</p>
+                                    <p className="text-[#8ecd24] text-[10px] font-bold uppercase">{new Date(formData.pickup_datetime).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</p>
+                                </div>
+                                <div className="h-[1px] flex-1 mx-4 bg-white/10 relative">
+                                    <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#0b1c1c] px-2 text-[8px] text-gray-500 font-black">{priceBreakdown.days}D</span>
+                                </div>
+                                <div className="text-right">
+                                    <p className="text-white font-black text-xs">{new Date(formData.return_datetime).toLocaleDateString()}</p>
+                                    <p className="text-[#8ecd24] text-[10px] font-bold uppercase">{new Date(formData.return_datetime).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</p>
+                                </div>
+                             </div>
+                        </div>
+
+                        {selectedExtras.length > 0 && (
+                            <div className="bg-white/[0.03] p-4 rounded-2xl border border-white/5">
+                                <p className="text-[9px] text-gray-500 font-black uppercase mb-2">Curated Extras</p>
+                                <div className="flex flex-wrap gap-2">
+                                    {extras.filter(e => selectedExtras.includes(e.id)).map(extra => (
+                                        <span key={extra.id} className="bg-[#8ecd24]/10 text-[#8ecd24] text-[9px] font-black uppercase px-2 py-1 rounded-md border border-[#8ecd24]/20">
+                                            {extra.name}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        <div className="space-y-3 px-1 pt-2">
+                            <div className="flex justify-between text-xs">
+                                <span className="text-gray-500 font-bold uppercase tracking-widest">Car Rental ({priceBreakdown.days} Days)</span>
+                                <span className="text-white font-black">€{priceBreakdown.carTotal.toFixed(2)}</span>
+                            </div>
+                            {selectedExtras.length > 0 && (
+                                <div className="flex justify-between text-xs">
+                                    <span className="text-gray-500 font-bold uppercase tracking-widest">Selected Extras ({priceBreakdown.days} Days)</span>
+                                    <span className="text-white font-black">€{priceBreakdown.extrasTotal.toFixed(2)}</span>
+                                </div>
+                            )}
+                            <div className="flex justify-between items-end pt-4 border-t border-white/10">
+                                <span className="text-xl font-black text-[#8ecd24] uppercase italic tracking-tighter">Grand Total</span>
+                                <div className="text-right">
+                                    <p className="text-[8px] text-gray-500 font-black uppercase tracking-widest mb-1">Pay on Pickup</p>
+                                    <p className="text-4xl font-black text-[#8ecd24] leading-none">€{priceBreakdown.total.toFixed(0)}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onClick={handleSubmit} disabled={submitting} className="w-full bg-[#8ecd24] text-[#011111] py-6 rounded-[1.5rem] font-black uppercase text-sm tracking-[0.2em] hover:bg-white hover:scale-[1.02] active:scale-[0.98] transition-all shadow-[0_20px_40px_rgba(142,205,36,0.3)]">
+                        {submitting ? 'Confirming with Concierge...' : 'Complete Reservation'}
+                    </button>
+                </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
-                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 border-b border-white/10 pb-6 mb-2">
-                  <h2 className="text-2xl font-black text-white uppercase italic tracking-tighter">Book Now</h2>
-                  <div className="text-left sm:text-right">
-                    <p className="text-[10px] font-black text-gray-600 uppercase tracking-widest">Estimated Total</p>
-                    <div className="flex items-center sm:justify-end gap-2">
-                      <p className="text-3xl font-black text-[#8ecd24] tracking-tight">€{totalPrice.toFixed(0)}</p>
-                      <span className="text-[10px] text-white/20 font-bold uppercase">EURO</span>
-                    </div>
-                  </div>
-                </div>
+                <h2 className="text-2xl font-black text-white uppercase italic tracking-tighter border-b border-white/10 pb-6 mb-2">Book Now</h2>
 
                 {submissionErrors.non_field_errors && (
                   <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-2xl text-red-400 text-xs font-bold flex items-center gap-3">
@@ -343,77 +410,46 @@ const CarDetail: React.FC = () => {
                   <div className="space-y-1.5">
                     <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Full Name</label>
                     <input required name="name_surname" value={formData.name_surname} onChange={handleInputChange} type="text" placeholder="FULL NAME" className={`w-full bg-white/[0.03] border ${submissionErrors.name_surname ? 'border-red-500/50' : 'border-white/10'} rounded-2xl px-5 py-4 focus:outline-none focus:border-[#8ecd24] text-white text-sm transition-all`} />
+                    {submissionErrors.name_surname && <p className="text-red-500 text-[10px] mt-1 font-bold italic ml-2">{submissionErrors.name_surname[0]}</p>}
                   </div>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
                       <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Email</label>
                       <input required name="email" value={formData.email} onChange={handleInputChange} type="email" placeholder="client@aurarental.com" className={`w-full bg-white/[0.03] border ${submissionErrors.email ? 'border-red-500/50' : 'border-white/10'} rounded-2xl px-5 py-4 focus:outline-none focus:border-[#8ecd24] text-white text-sm transition-all`} />
+                      {submissionErrors.email && <p className="text-red-500 text-[10px] mt-1 font-bold italic ml-2">{submissionErrors.email[0]}</p>}
                     </div>
                     <div className="space-y-1.5">
                       <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Direct Line</label>
-                      <PhoneInput
-                        international
-                        defaultCountry="AL"
-                        value={phone}
-                        onChange={setPhone}
-                        className={`phone-input-aura ${submissionErrors.phone_number ? 'phone-input-error' : ''}`}
-                      />
+                      <PhoneInput required international defaultCountry="AL" value={phone} onChange={setPhone} className={`phone-input-aura ${submissionErrors.phone_number ? 'phone-input-error' : ''}`} />
+                      {submissionErrors.phone_number && <p className="text-red-500 text-[10px] mt-1 font-bold italic ml-2">{submissionErrors.phone_number[0]}</p>}
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
-                      <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Pick-up</label>
-                      <input required name="pickup_datetime" value={formData.pickup_datetime} onChange={handleInputChange} type="datetime-local" step={3600} className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-[#8ecd24] text-white text-sm transition-all" />
+                      <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Pick-up (Hourly)</label>
+                      <input required name="pickup_datetime" value={formData.pickup_datetime} onChange={handleInputChange} step={60} type="datetime-local" className={`w-full bg-white/[0.03] border ${submissionErrors.pickup_datetime ? 'border-red-500/50' : 'border-white/10'} rounded-2xl px-5 py-4 text-white text-sm focus:border-[#8ecd24] outline-none transition-all [color-scheme:dark]`} />
+                      {submissionErrors.pickup_datetime && <p className="text-red-500 text-[10px] mt-1 font-bold italic ml-2">{submissionErrors.pickup_datetime[0]}</p>}
                     </div>
                     <div className="space-y-1.5">
-                      <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Return</label>
-                      <input required name="return_datetime" value={formData.return_datetime} onChange={handleInputChange} type="datetime-local" step={3600} className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-[#8ecd24] text-white text-sm transition-all" />
+                      <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Return (Hourly)</label>
+                      <input required name="return_datetime" value={formData.return_datetime} onChange={handleInputChange} step={3600} type="datetime-local" className={`w-full bg-white/[0.03] border ${submissionErrors.return_datetime ? 'border-red-500/50' : 'border-white/10'} rounded-2xl px-5 py-4 text-white text-sm focus:border-[#8ecd24] outline-none transition-all [color-scheme:dark]`} />
+                      {submissionErrors.return_datetime && <p className="text-red-500 text-[10px] mt-1 font-bold italic ml-2">{submissionErrors.return_datetime[0]}</p>}
                     </div>
                   </div>
 
-                  {destinations.length > 0 && (
-                    <div className="space-y-1.5">
-                      <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Final Destination</label>
-                      <div className="relative">
-                        <select
-                          name="destination"
-                          value={formData.destination}
-                          onChange={handleInputChange}
-                          required
-                          className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-5 py-4 pr-12 focus:outline-none focus:border-[#8ecd24] text-white text-sm transition-all appearance-none cursor-pointer"
-                        >
-                          <option value="" className="bg-[#011111] text-gray-400">Select Destination</option>
-                          {destinations.map(dest => (
-                            <option key={dest.id} value={dest.id} className="bg-[#011111] text-white">{dest.name}</option>
-                          ))}
-                        </select>
-                        <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none">
-                          <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M19 9l-7 7-7-7" /></svg>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
                   {extras.length > 0 && (
                     <div className="pt-2 space-y-4">
-                      <div className="flex justify-between items-center">
-                        <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Curated Extras</label>
-                        <span className="text-[9px] font-bold text-[#8ecd24] bg-[#8ecd24]/10 px-2 py-0.5 rounded-full">Per Day</span>
-                      </div>
+                      <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Curated Extras (Per Day)</label>
                       <div className="grid grid-cols-1 gap-3">
                         {extras.map(extra => (
-                          <div 
-                            key={extra.id} 
-                            onClick={() => handleExtraToggle(extra.id)}
-                            className={`flex justify-between items-center p-4 rounded-2xl border transition-all cursor-pointer group ${selectedExtras.includes(extra.id) ? 'bg-[#8ecd24]/10 border-[#8ecd24]/50 text-white' : 'bg-white/[0.02] border-white/10 text-gray-500 hover:border-white/20'}`}
-                          >
+                          <div key={extra.id} onClick={() => handleExtraToggle(extra.id)} className={`flex justify-between items-center p-4 rounded-2xl border transition-all cursor-pointer ${selectedExtras.includes(extra.id) ? 'bg-[#8ecd24]/10 border-[#8ecd24]/50' : 'bg-white/[0.02] border-white/10 hover:border-white/20'}`}>
                             <div className="flex items-center gap-4">
-                              <div className={`w-6 h-6 rounded-lg flex items-center justify-center border transition-all ${selectedExtras.includes(extra.id) ? 'bg-[#8ecd24] border-[#8ecd24]' : 'bg-transparent border-gray-700'}`}>
-                                {selectedExtras.includes(extra.id) && <svg className="w-4 h-4 text-[#011111]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" d="M5 13l4 4L19 7" /></svg>}
+                              <div className={`w-5 h-5 rounded flex items-center justify-center border transition-all ${selectedExtras.includes(extra.id) ? 'bg-[#8ecd24] border-[#8ecd24]' : 'bg-transparent border-gray-700'}`}>
+                                {selectedExtras.includes(extra.id) && <svg className="w-3 h-3 text-[#011111]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" d="M5 13l4 4L19 7" /></svg>}
                               </div>
-                              <span className={`text-xs font-bold uppercase tracking-tight ${selectedExtras.includes(extra.id) ? 'text-white' : 'group-hover:text-gray-300'}`}>{extra.name}</span>
+                              <span className={`text-xs font-bold uppercase ${selectedExtras.includes(extra.id) ? 'text-white' : 'text-gray-500'}`}>{extra.name}</span>
                             </div>
                             <span className="text-[#8ecd24] font-black text-xs">€{extra.price}</span>
                           </div>
@@ -423,35 +459,23 @@ const CarDetail: React.FC = () => {
                   )}
 
                   <div className="pt-4 grid grid-cols-2 gap-4">
-                    <label className={`relative cursor-pointer p-6 rounded-[2rem] border-2 border-dashed transition-all flex flex-col items-center gap-2 group/upload ${passportFront ? 'bg-[#8ecd24]/5 border-[#8ecd24]/40' : 'bg-white/[0.03] border-white/10 hover:border-white/30'}`}>
-                      <input required type="file" accept="image/*" onChange={(e) => handleFileChange(e, 'front')} className="absolute inset-0 opacity-0 cursor-pointer" />
-                      <svg className="w-6 h-6 text-gray-600 group-hover/upload:text-[#8ecd24] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" /></svg>
-                      <span className="text-[9px] font-black uppercase tracking-widest text-center leading-tight">{passportFront ? 'Front Loaded' : 'Driver License Front'}</span>
+                    <label className={`relative cursor-pointer p-6 rounded-[2rem] border-2 border-dashed transition-all flex flex-col items-center gap-2 ${passportFront ? 'bg-[#8ecd24]/5 border-[#8ecd24]/40' : 'bg-white/[0.03] border-white/10'}`}>
+                      <input required type="file" onChange={(e) => handleFileChange(e, 'front')} className="absolute opacity-0 w-0 h-0"/>
+                      <span className="text-[9px] font-black uppercase tracking-widest text-center text-gray-500">{passportFront ? 'Front Loaded' : 'Front Driver License'}</span>
                     </label>
-                    <label className={`relative cursor-pointer p-6 rounded-[2rem] border-2 border-dashed transition-all flex flex-col items-center gap-2 group/upload ${passportBack ? 'bg-[#8ecd24]/5 border-[#8ecd24]/40' : 'bg-white/[0.03] border-white/10 hover:border-white/30'}`}>
-                      <input required type="file" accept="image/*" onChange={(e) => handleFileChange(e, 'back')} className="absolute inset-0 opacity-0 cursor-pointer" />
-                      <svg className="w-6 h-6 text-gray-600 group-hover/upload:text-[#8ecd24] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" /></svg>
-                      <span className="text-[9px] font-black uppercase tracking-widest text-center leading-tight">{passportBack ? 'Back Loaded' : 'Driver License  Back'}</span>
+                    <label className={`relative cursor-pointer p-6 rounded-[2rem] border-2 border-dashed transition-all flex flex-col items-center gap-2 ${passportBack ? 'bg-[#8ecd24]/5 border-[#8ecd24]/40' : 'bg-white/[0.03] border-white/10'}`}>
+                      <input required type="file" onChange={(e) => handleFileChange(e, 'back')} className="absolute opacity-0 w-0 h-0" />
+                      <span className="text-[9px] font-black uppercase tracking-widest text-center text-gray-500">{passportBack ? 'Back Loaded' : 'Back Driver License'}</span>
                     </label>
                   </div>
                 </div>
 
                 <div className="pt-6 border-t border-white/10">
-                   <button 
-                    disabled={submitting}
-                    className="w-full bg-[#8ecd24] text-[#011111] py-5 rounded-[1.5rem] font-black uppercase text-sm tracking-widest hover:bg-white hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 shadow-[0_20px_40px_rgba(142,205,36,0.3)] group/btn"
-                  >
-                    {submitting ? (
-                      <span className="flex items-center justify-center gap-3">
-                        <div className="w-5 h-5 border-2 border-[#011111] border-t-transparent rounded-full animate-spin"></div>
-                        Syncing...
-                      </span>
-                    ) : (
+                   <button disabled={submitting} className="w-full bg-[#8ecd24] text-[#011111] py-5 rounded-[1.5rem] font-black uppercase text-sm tracking-widest hover:bg-white transition-all shadow-lg group/btn">
                       <span className="flex items-center justify-center gap-2">
-                        Confirm Reservation
+                        {submitting ? 'Syncing...' : `Review Reservation — €${priceBreakdown.total.toFixed(0)}`}
                         <svg className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                       </span>
-                    )}
                   </button>
                   <div className="flex items-center justify-center gap-3 mt-6">
                     <div className="w-1.5 h-1.5 rounded-full bg-[#8ecd24] animate-pulse"></div>
