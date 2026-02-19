@@ -92,13 +92,13 @@ const CarDetail: React.FC = () => {
   const allImages = useMemo(() => {
     if (!car) return [];
     const images: string[] = [];
-    const baseUrl = "http://aurarental.pythonanywhere.com/";
+    const baseUrl = "https://aurarental.pythonanywhere.com/";
     if (car.image) {
-      images.push(car.image.startsWith('http') ? car.image : `${baseUrl}${car.image}`);
+      images.push(car.image.startsWith('https') ? car.image : `${baseUrl}${car.image}`);
     }
     if (car.extra_images && car.extra_images.length > 0) {
       car.extra_images.forEach((imgObj) => {
-        images.push(imgObj.image.startsWith('http') ? imgObj.image : `${baseUrl}${imgObj.image}`);
+        images.push(imgObj.image.startsWith('https') ? imgObj.image : `${baseUrl}${imgObj.image}`);
       });
     }
     return images;
