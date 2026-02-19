@@ -8,7 +8,7 @@ import Footer from '../components/Footer';
 import { fetchCars } from '../services/api';
 import type { Car } from '../types';
 import { Link,useLocation } from 'react-router-dom';
-
+import Reviews from '../components/REviews';
 const Home: React.FC = () => {
   const location = useLocation();
 
@@ -73,6 +73,7 @@ useEffect(() => {
       </section>
 
       <About />
+      <Reviews />
       <Location />
       <Footer />
     </div>

@@ -170,8 +170,8 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-EMAIL_HOST_USER = 'mexhajklajdi@gmail.com'
-EMAIL_HOST_PASSWORD = 'ajmohrupvpsubryl'
+EMAIL_HOST_USER = 'rentalcaraura@gmail.com'
+EMAIL_HOST_PASSWORD = 'kirqrpnyzqcaxtia'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-BUSINESS_EMAIL = 'mexhajklajdi@gmail.com'
+BUSINESS_EMAIL = 'rentalcaraura@gmail.com'

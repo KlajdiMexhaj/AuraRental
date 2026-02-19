@@ -88,6 +88,7 @@ const Feature: React.FC<{ title: string; text: string }> = ({ title, text }) => 
     </div>
     <h4 className="text-white font-bold">{title}</h4>
     <p className="text-gray-500 text-sm">{text}</p>
+    
   </div>
 );
 
