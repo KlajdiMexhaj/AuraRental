@@ -11,7 +11,7 @@ const CarCard: React.FC<CarCardProps> = ({ car }) => {
   const imageUrl = car.image
   ? car.image.startsWith('https')
     ? car.image
-    : `https://rentalaura.pythonanywhere.com/${car.image}`
+    : `https://aurarental.pythonanywhere.com/${car.image}`
   : '/vite.svg';
 
   return (

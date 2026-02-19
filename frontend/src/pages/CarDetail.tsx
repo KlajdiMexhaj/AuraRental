@@ -92,7 +92,7 @@ const CarDetail: React.FC = () => {
   const allImages = useMemo(() => {
     if (!car) return [];
     const images: string[] = [];
-    const baseUrl = "http://127.0.0.1:8000/";
+    const baseUrl = "http://aurarental.pythonanywhere.com/";
     if (car.image) {
       images.push(car.image.startsWith('http') ? car.image : `${baseUrl}${car.image}`);
     }
