@@ -58,41 +58,77 @@ const CarDetail: React.FC = () => {
     loadData();
   }, [id]);
 
-  const priceBreakdown = useMemo(() => {
-    if (!car) return { days: 1, carTotal: 0, extrasTotal: 0, total: 0 };
-    
-    let days = 1;
-    let carTotal = 0;
+const priceBreakdown = useMemo(() => {
+  if (!car) return { days: 1, carTotal: 0, extrasTotal: 0, total: 0 };
+  
+  let days = 1;
+  let carTotal = 0;
 
-    if (formData.pickup_datetime && formData.return_datetime) {
-      const start = new Date(formData.pickup_datetime);
-      const end = new Date(formData.return_datetime);
-      const diffInMs = end.getTime() - start.getTime();
-      const diffInHours = diffInMs / (1000 * 60 * 60);
-      days = Math.max(1, Math.ceil(diffInHours / 24));
+  if (formData.pickup_datetime && formData.return_datetime) {
+    const start = new Date(formData.pickup_datetime);
+    const end = new Date(formData.return_datetime);
 
+    if (end > start) {
+      // ---------- DAY CALCULATION (3-HOUR RULE) ----------
+      const baseDays =
+        Math.floor(
+          (new Date(end.toDateString()).getTime() -
+            new Date(start.toDateString()).getTime()) /
+            (1000 * 60 * 60 * 24)
+        );
+
+      const comparisonDate = new Date(start);
+      comparisonDate.setDate(comparisonDate.getDate() + baseDays);
+
+      const extraHours =
+        (end.getTime() - comparisonDate.getTime()) /
+        (1000 * 60 * 60);
+
+      if (extraHours >= 3) {
+        days = baseDays + 1;
+      } else {
+        days = baseDays;
+      }
+
+      if (days <= 0) days = 1;
+
+      // ---------- CAR PRICE CALCULATION ----------
       for (let i = 0; i < days; i++) {
         const currentDay = new Date(start);
         currentDay.setDate(start.getDate() + i);
         const dateStr = currentDay.toISOString().split('T')[0];
-        
-        const period = car.price_periods?.find((p: any) => 
+
+        const period = car.price_periods?.find((p: any) =>
           dateStr >= p.start_date && dateStr < p.end_date
         );
 
-        carTotal += period ? parseFloat(period.price_per_day) : parseFloat(car.price);
+        carTotal += period
+          ? parseFloat(period.price_per_day)
+          : parseFloat(car.price);
       }
-    } else {
-      carTotal = parseFloat(car.price);
     }
+  } else {
+    carTotal = parseFloat(car.price);
+  }
 
-    const selectedExtrasObj = extras.filter(e => selectedExtras.includes(e.id));
-    const extrasPricePerDay = selectedExtrasObj.reduce((acc, curr) => acc + parseFloat(curr.price), 0);
-    const extrasTotal = extrasPricePerDay * days;
+  const selectedExtrasObj = extras.filter(e =>
+    selectedExtras.includes(e.id)
+  );
 
-    return { days, carTotal, extrasTotal, total: carTotal + extrasTotal };
-  }, [car, extras, selectedExtras, formData.pickup_datetime, formData.return_datetime]);
+  const extrasPricePerDay = selectedExtrasObj.reduce(
+    (acc, curr) => acc + parseFloat(curr.price),
+    0
+  );
 
+  const extrasTotal = extrasPricePerDay * days;
+
+  return {
+    days,
+    carTotal,
+    extrasTotal,
+    total: carTotal + extrasTotal
+  };
+}, [car, extras, selectedExtras, formData.pickup_datetime, formData.return_datetime]);
 
   const allImages = useMemo(() => {
     if (!car) return [];

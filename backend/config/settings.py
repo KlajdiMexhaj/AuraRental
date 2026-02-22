@@ -25,7 +25,9 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
     "http://192.168.100.11:5173",
-    "https://aura-rental.vercel.app"
+    "https://aura-rental.vercel.app",
+    "https://www.rentalaura.al/",
+    "https://rentalaura.al/",
 ]
 
 CORS_ALLOW_HEADERS = [
@@ -41,7 +43,9 @@ CSRF_TRUSTED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
     "http://192.168.100.11:5173",
-    "https://aura-rental.vercel.app"
+    "https://aura-rental.vercel.app",
+    "https://www.rentalaura.al/",
+    "https://rentalaura.al/",
 ]
 # ===========================
 # APPLICATIONS

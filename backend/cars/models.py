@@ -112,18 +112,36 @@ class Reservation(models.Model):
         if not self.pickup_datetime or not self.return_datetime:
             return 0, Decimal("0.00"), Decimal("0.00")
 
+        if self.return_datetime <= self.pickup_datetime:
+            return 0, Decimal("0.00"), Decimal("0.00")
+
         car_total = Decimal("0.00")
         extras_total = Decimal("0.00")
-        days = 0
 
-        current = self.pickup_datetime.date()
-        end = self.return_datetime.date()
+        # -------- DAY CALCULATION WITH 3-HOUR RULE --------
+        pickup = self.pickup_datetime
+        dropoff = self.return_datetime
 
-        # Load all periods once (performance fix)
+        base_days = (dropoff.date() - pickup.date()).days
+
+        # Calculate hour difference between pickup hour and dropoff hour
+        time_difference = dropoff - (pickup + timedelta(days=base_days))
+        extra_hours = time_difference.total_seconds() / 3600
+
+        if extra_hours >= 3:
+            days = base_days + 1
+        else:
+            days = base_days
+
+        # Safety: minimum 1 day
+        if days <= 0:
+            days = 1
+
+        # -------- CAR PRICE CALCULATION --------
+        current = pickup.date()
         periods = list(self.car.price_periods.all())
 
-        while current < end:
-            # Find matching seasonal period
+        for _ in range(days):
             period = next(
                 (p for p in periods if p.start_date <= current < p.end_date),
                 None
@@ -137,7 +155,6 @@ class Reservation(models.Model):
                 price = Decimal(self.car.price)
 
             car_total += price
-            days += 1
             current += timedelta(days=1)
 
         # -------- EXTRAS --------
