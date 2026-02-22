@@ -1,8 +1,8 @@
 
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { fetchCars, fetchReservations } from '../services/api';
-import type { Car, Reservation } from '../types';
+import { fetchCars } from '../services/api';
+import type { Car} from '../types';
 import CarCard from '../components/CarCard';
 
 const CarList: React.FC = () => {
@@ -15,36 +15,12 @@ const CarList: React.FC = () => {
     const loadData = async () => {
       setLoading(true);
       try {
-        const [carsData, reservationsData] = await Promise.all([
-          fetchCars(),
-          fetchReservations()
+        const [carsData] = await Promise.all([
+          fetchCars()
         ]);
 
-        let filteredCars = carsData.results;
-        
-        const pickupParam = searchParams.get('pickup');
-        const returnParam = searchParams.get('return');
-
-        if (pickupParam && returnParam) {
-          const searchStart = new Date(pickupParam).getTime();
-          const searchEnd = new Date(returnParam).getTime();
-
-          if (!isNaN(searchStart) && !isNaN(searchEnd)) {
-            // Logic: Hide car if any approved/pending reservation overlaps
-            // Overlap: (resStart < searchEnd) && (resEnd > searchStart)
-            filteredCars = filteredCars.filter(car => {
-              const carReservations = reservationsData.results.filter(res => res.car === car.id && res.status !== 'rejected');
-              const hasConflict = carReservations.some(res => {
-                const resStart = new Date(res.pickup_datetime).getTime();
-                const resEnd = new Date(res.return_datetime).getTime();
-                return (resStart < searchEnd) && (resEnd > searchStart);
-              });
-              return !hasConflict;
-            });
-          }
-        }
-
-        setCars(filteredCars);
+        // No filtering: show all cars
+        setCars(carsData.results);
       } catch (err) {
         setError('Failed to load fleet. Please try again later.');
       } finally {
@@ -53,6 +29,7 @@ const CarList: React.FC = () => {
     };
     loadData();
   }, [searchParams]);
+
 
   return (
     <div className="min-h-screen pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">

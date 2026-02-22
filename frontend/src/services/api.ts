@@ -93,17 +93,18 @@ export async function createReservation(reservation: FormData): Promise<any> {
       method: 'POST',
       body: reservation,
     });
+
     if (!response.ok) {
-        const errData = await response.json();
-        throw new Error(JSON.stringify(errData));
+      const text = await response.text();
+      throw new Error(text);
     }
+
     return await response.json();
   } catch (error) {
     console.error("Reservation Error:", error);
     throw error;
   }
 }
-
 export async function fetchReservations(): Promise<ApiResponse<Reservation>> {
   try {
     const response = await fetch(`${BASE_URL}/reservations/`);

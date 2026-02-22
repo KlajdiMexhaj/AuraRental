@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Car, Reservation, CarExtra, Destination, ImgCarExtra,CarPricePeriod
-
+import json
 
 class ImgCarExtraSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField()
@@ -61,29 +61,54 @@ class DestinationSerializer(serializers.ModelSerializer):
 
 
 class ReservationSerializer(serializers.ModelSerializer):
-    extras = serializers.JSONField(required=False, allow_null=True)
+    passport_front = serializers.ImageField(required=False, allow_null=True)
+    passport_back = serializers.ImageField(required=False, allow_null=True)
+
+    extras = serializers.JSONField(required=False)
+
     preview_days = serializers.SerializerMethodField(read_only=True)
     preview_total_price = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Reservation
         fields = "__all__"
-        read_only_fields = ("status", "total_days", "car_price_total", "total_price")
+        read_only_fields = (
+            "status",
+            "total_days",
+            "car_price_total",
+            "total_price",
+        )
 
+    def validate_extras(self, value):
+        if not isinstance(value, list):
+            return []
+
+        extras_data = []
+        for item in value:
+            try:
+                extra = CarExtra.objects.get(id=item.get("id"))
+                extras_data.append({
+                    "id": extra.id,
+                    "name": extra.name,
+                    "price": str(extra.price)
+                })
+            except:
+                continue
+
+        return extras_data
     def get_preview_days(self, obj):
         try:
-            days, _ = obj.calculate_price()
+            days, _, _ = obj.calculate_price()
             return days
         except:
             return None
 
     def get_preview_total_price(self, obj):
         try:
-            _, total = obj.calculate_price()
+            _, _, total = obj.calculate_price()
             return total
         except:
             return None
-
 
 class CarExtraSerializer(serializers.ModelSerializer):
     class Meta:

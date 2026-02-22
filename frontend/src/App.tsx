@@ -6,7 +6,9 @@ import Home from './pages/Home';
 import CarList from './pages/CarList';
 import CarDetail from './pages/CarDetail';
 import SocialFloating from './components/SocialFloating';
-
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
+import Cookies from './pages/Cookies';
 // Wrapper to handle scroll to top on navigation
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -28,6 +30,9 @@ const App: React.FC = () => {
             <Route path="/" element={<Home />} />
             <Route path="/cars" element={<CarList />} />
             <Route path="/car/:id" element={<CarDetail />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/cookies" element={<Cookies />} />
           </Routes>
         </main>
       </div>

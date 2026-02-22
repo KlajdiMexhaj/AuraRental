@@ -174,15 +174,7 @@ class Reservation(models.Model):
         if self.pickup_datetime >= self.return_datetime:
             raise ValidationError("Return must be after pickup")
 
-        overlapping = Reservation.objects.filter(
-            car=self.car,
-            status=self.STATUS_APPROVED,
-            pickup_datetime__lt=self.return_datetime,
-            return_datetime__gt=self.pickup_datetime,
-        ).exclude(pk=self.pk).exists()
-
-        if overlapping:
-            raise ValidationError("Car already booked for selected period")
+        
 
     # ---------- SAVE ----------
     def save(self, *args, **kwargs):
