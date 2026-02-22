@@ -51,7 +51,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <a
-                  href="/#about"
+                  href="/#/#about"
                   className="text-gray-500 hover:text-[#8ecd24] transition-colors text-sm font-medium"
                 >
                   About
@@ -59,7 +59,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <a
-                  href="/#contact"
+                  href="/#/#contact"
                   className="text-gray-500 hover:text-[#8ecd24] transition-colors text-sm font-medium"
                 >
                   Contact
