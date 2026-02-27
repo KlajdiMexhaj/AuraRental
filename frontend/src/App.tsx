@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import CarList from './pages/CarList';
@@ -9,12 +8,15 @@ import SocialFloating from './components/SocialFloating';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 import Cookies from './pages/Cookies';
-// Wrapper to handle scroll to top on navigation
+
+// Scroll to top on route change
 const ScrollToTop = () => {
   const { pathname } = useLocation();
+
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
+
   return null;
 };
 
@@ -25,6 +27,7 @@ const App: React.FC = () => {
         <ScrollToTop />
         <Navbar />
         <SocialFloating />
+
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
