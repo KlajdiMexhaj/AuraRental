@@ -26,8 +26,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5173",
     "http://192.168.100.11:5173",
     "https://aura-rental.vercel.app",
-    "https://www.rentalaura.al/",
-    "https://rentalaura.al/",
+    "https://www.rentalaura.al",
+    "https://rentalaura.al",
 ]
 
 CORS_ALLOW_HEADERS = [
