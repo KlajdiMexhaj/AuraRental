@@ -89,7 +89,7 @@ const Navbar: React.FC = () => {
             ))}
 
             <Link
-              to="/cars"
+              to="/cars-rental"
               className="bg-white text-[#011111] px-8 py-3 rounded-2xl font-black text-[11px] uppercase tracking-widest hover:bg-[#8ecd24] hover:scale-105 active:scale-95 transition-all shadow-xl"
             >
               Reserve
@@ -138,7 +138,7 @@ const Navbar: React.FC = () => {
           ))}
 
           <Link
-            to="/cars"
+            to="/cars-rental"
             onClick={() => setIsOpen(false)}
             className="w-full bg-[#8ecd24] text-[#011111] py-6 rounded-3xl font-black text-center text-xl shadow-[0_20px_40px_rgba(142,205,36,0.2)]"
           >
