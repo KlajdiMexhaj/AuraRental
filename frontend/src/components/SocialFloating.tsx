@@ -1,12 +1,19 @@
 import React from 'react';
 
 const SocialFloating: React.FC = () => {
+  const message = `Hello Rental Aura 
+I’m interested in renting a car.
+Please let me know availability and the best price.
+Thank you!
+`;
+
+const whatsappUrl = `https://wa.me/355692116666?text=${encodeURIComponent(message)}`;
   return (
     <div className="fixed right-6 bottom-6 z-[200] flex flex-col gap-3">
 
       {/* WhatsApp */}
       <a
-        href="https://wa.me/+355692116666"
+        href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
         className="w-14 h-14 rounded-[20px] flex items-center justify-center text-white shadow-2xl transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 group relative bg-[#25D366]"
