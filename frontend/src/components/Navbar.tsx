@@ -15,23 +15,7 @@ const Navbar: React.FC = () => {
   }, []);
 
   const isActive = (path: string) => {
-    const [pathname, hash] = path.split('#');
-
-    // Discover → always active on home when no hash
-    if (pathname === '/' && !hash) {
-      return location.pathname === '/' && location.hash === '';
-    }
-
-    // Hash sections (about, contact)
-    if (hash) {
-      return (
-        location.pathname === pathname &&
-        location.hash === `#${hash}`
-      );
-    }
-
-    // Normal routes (e.g. /cars)
-    return location.pathname === pathname;
+    return location.pathname === path;
   };
 
   const handleDiscoverClick = () => {
@@ -42,8 +26,8 @@ const Navbar: React.FC = () => {
   const navLinks = [
     { name: 'Discover', path: '/', onClick: handleDiscoverClick },
     { name: 'Our Fleet', path: '/cars-rental' },
-    { name: 'About', path: '/#about' },
-    { name: 'Contact', path: '/#contact' },
+    { name: 'About', path: '/about' },
+    { name: 'Contact', path: '/contact' },
   ];
 
   return (

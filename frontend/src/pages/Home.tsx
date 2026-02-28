@@ -13,15 +13,26 @@ const Home: React.FC = () => {
   const location = useLocation();
 
 useEffect(() => {
-  if (location.hash) {
-    const el = document.getElementById(location.hash.replace('#', ''));
+  const path = location.pathname;
+
+  if (path === '/about') {
+    const el = document.getElementById('about');
     if (el) {
       setTimeout(() => {
         el.scrollIntoView({ behavior: 'smooth' });
       }, 100);
     }
   }
-}, [location]);
+
+  if (path === '/contact') {
+    const el = document.getElementById('contact');
+    if (el) {
+      setTimeout(() => {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  }
+}, [location.pathname]);
   const [featuredCars, setFeaturedCars] = useState<Car[]>([]);
   const [loading, setLoading] = useState(true);
 
