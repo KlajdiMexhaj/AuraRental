@@ -3,7 +3,6 @@ import React from 'react';
 const SocialFloating: React.FC = () => {
   const message = `Hello Rental Aura 
 I’m interested in renting a car.
-Please let me know availability and the best price.
 Thank you!
 `;
 
