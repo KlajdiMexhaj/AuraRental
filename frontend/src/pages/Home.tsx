@@ -61,7 +61,7 @@ useEffect(() => {
             <span className="text-[#8ecd24] text-[10px] font-black tracking-[0.4em] uppercase mb-4 block animate-fade-in">Exclusive Collection</span>
             <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tighter uppercase">Our Featured Fleet</h2>
           </div>
-          <Link to="/cars" className="text-[#8ecd24] font-black text-xs uppercase tracking-[0.2em] flex items-center gap-3 group">
+          <Link to="/cars-rental" className="text-[#8ecd24] font-black text-xs uppercase tracking-[0.2em] flex items-center gap-3 group">
             <span>View Full Collection</span>
             <div className="w-10 h-10 rounded-full border border-[#8ecd24]/30 flex items-center justify-center group-hover:bg-[#8ecd24] group-hover:text-[#011111] transition-all">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>

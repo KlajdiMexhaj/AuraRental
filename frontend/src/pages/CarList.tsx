@@ -66,7 +66,7 @@ const CarList: React.FC = () => {
               <h3 className="text-2xl font-bold text-white mb-2">No Cars Available</h3>
               <p className="text-gray-500">Try adjusting your dates or browsing our full collection.</p>
               <button 
-                onClick={() => window.history.pushState({}, '', '/#/cars')} 
+                onClick={() => window.history.pushState({}, '', '/#/car-rental')} 
                 className="mt-8 text-[#8ecd24] font-bold underline"
               >
                 Clear Filters

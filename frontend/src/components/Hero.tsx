@@ -24,7 +24,7 @@ const Hero: React.FC = () => {
     e.preventDefault();
     const pickup = `${formData.pickupDate}T${formData.pickupTime}`;
     const returnDt = `${formData.returnDate}T${formData.returnTime}`;
-    navigate(`/cars?pickup=${pickup}&return=${returnDt}`);
+    navigate(`/cars-rental?pickup=${pickup}&return=${returnDt}`);
   };
 
   return (

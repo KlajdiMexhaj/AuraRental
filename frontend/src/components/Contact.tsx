@@ -57,7 +57,7 @@ const CarCard: React.FC<CarCardProps> = ({ car }) => {
         </div>
 
         <Link 
-          to={`/car/${car.id}`}
+          to={`/car-rental/${car.id}`}
           className="group/btn relative overflow-hidden bg-white/5 border border-white/10 text-white py-5 rounded-[1.25rem] text-center font-bold text-sm transition-all hover:bg-[#8ecd24] hover:text-[#011111] hover:border-[#8ecd24] overflow-hidden"
         >
           <span className="relative z-10 flex items-center justify-center gap-2">

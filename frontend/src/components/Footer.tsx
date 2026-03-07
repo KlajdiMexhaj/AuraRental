@@ -43,7 +43,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <Link
-                  to="/cars"
+                  to="/car-rental"
                   className="text-gray-500 hover:text-[#8ecd24] transition-colors text-sm font-medium"
                 >
                   Our Fleet
