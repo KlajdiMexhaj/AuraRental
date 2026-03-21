@@ -8,26 +8,34 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY
 # ===========================
 
-SECRET_KEY = 'unsafe-secret-key'  # change this for production
-DEBUG = True
+
+SECRET_KEY = 'your-very-long-random-secret-key' # change this for production
+DEBUG = False
 
 ALLOWED_HOSTS = [
-    '*'
+    'aurarental.pythonanywhere.com'
 ]
+
+# Security settings (added, other fields unchanged)
+SECURE_SSL_REDIRECT = True
+
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+SECURE_HSTS_SECONDS = 31536000  # 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
 
 # ===========================
 # CORS
 # ===========================
-CORS_ALLOW_ALL_ORIGINS = True   # dev only
+CORS_ALLOW_ALL_ORIGINS = False   # dev only
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-    "http://192.168.100.11:5173",
-    "https://aura-rental.vercel.app",
     "https://www.rentalaura.al",
     "https://rentalaura.al",
+    "http://192.168.100.11:5173",
 ]
 
 CORS_ALLOW_HEADERS = [
@@ -40,13 +48,11 @@ CORS_ALLOW_HEADERS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
+    "https://www.rentalaura.al",
+    "https://rentalaura.al",
     "http://192.168.100.11:5173",
-    "https://aura-rental.vercel.app",
-    "https://www.rentalaura.al/",
-    "https://rentalaura.al/",
 ]
+
 # ===========================
 # APPLICATIONS
 # ===========================
@@ -61,7 +67,6 @@ INSTALLED_APPS = [
 
     'cars.apps.CarsConfig',
 
-    # third-party
     'rest_framework',
     'corsheaders',
 ]
@@ -84,10 +89,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'config.urls'
 
-# ===========================
-# TEMPLATES
-# ===========================
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -109,7 +110,6 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # DATABASE
 # ===========================
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -123,7 +123,7 @@ DATABASES = {
 
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
-    "PAGE_SIZE": 100,
+    "PAGE_SIZE": 150,
 }
 
 # ===========================
@@ -168,6 +168,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# ===========================
+# EMAIL
+# ===========================
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
