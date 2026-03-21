@@ -61,8 +61,9 @@ class ReservationAdmin(admin.ModelAdmin):
         "email",
         "pickup_datetime",
         "return_datetime",
-        "passport_front",
-        "passport_back",
+        "driver_licence_front",
+        "driver_licence_back",
+        "passport",
         "extras_select",   # 👈 visible extras UI
         "status",          # 👈 LAST field
         "created_at",

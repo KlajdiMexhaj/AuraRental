@@ -99,6 +99,7 @@ def notify_customer_approved(sender, instance, **kwargs):
 
     previous = Reservation.objects.get(pk=instance.pk)
 
+    # ---------- APPROVED ----------
     if previous.status != Reservation.STATUS_APPROVED and instance.status == Reservation.STATUS_APPROVED:
 
         if not instance.email:
@@ -148,6 +149,48 @@ Thank you for choosing us.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 """
 
+        send_mail(
+            subject,
+            message,
+            settings.DEFAULT_FROM_EMAIL,
+            [instance.email],
+            fail_silently=False,
+        )
+
+    # ---------- REJECTED ----------
+    if previous.status != Reservation.STATUS_REJECTED and instance.status == Reservation.STATUS_REJECTED:
+        
+        if not instance.email:
+            return
+        pickup = format_datetime(instance.pickup_datetime)
+        return_date = format_datetime(instance.return_datetime)
+
+        subject = f"Reservation Refused | ID #{instance.id}"
+
+        message = f"""
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+RESERVATION REQUEST REFUSED
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Hello {instance.name_surname},
+
+We regret to inform you that your reservation request has been declined.
+
+Reservation ID: #{instance.id}
+
+DETAILS
+----------------------------------
+Car: {instance.car.name if instance.car else "-"}
+Pickup: {pickup}
+Return: {return_date}
+
+This may be due to availability or other constraints.
+
+You are welcome to try another date or contact us for assistance.
+
+Thank you for your understanding.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+"""
         send_mail(
             subject,
             message,

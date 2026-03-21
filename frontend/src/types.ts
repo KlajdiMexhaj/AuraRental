@@ -44,8 +44,9 @@ export interface Reservation {
   email: string;
   pickup_datetime: string;
   return_datetime: string;
-  passport_front?: File | string | null;
-  passport_back?: File | string | null;
+  driver_licence_front?: File | string | null;
+  driver_licence_back?: File | string | null;
+  passport?: File | string | null;
   status: 'pending' | 'approved' | 'rejected';
   created_at?: string;
   car: number;

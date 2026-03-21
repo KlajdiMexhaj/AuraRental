@@ -78,10 +78,12 @@ class ImgCarExtra(models.Model):
 class Reservation(models.Model):
     STATUS_PENDING = 'pending'
     STATUS_APPROVED = 'approved'
+    STATUS_REJECTED = 'rejected'
 
     STATUS_CHOICES = [
         (STATUS_PENDING, 'Pending'),
         (STATUS_APPROVED, 'Approved'),
+        (STATUS_REJECTED, 'Rejected'),
     ]
 
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='reservations')
@@ -94,8 +96,9 @@ class Reservation(models.Model):
     pickup_datetime = models.DateTimeField(blank=True, null=True)
     return_datetime = models.DateTimeField(blank=True, null=True)
 
-    passport_front = models.ImageField(upload_to='passports/', blank=True, null=True)
-    passport_back = models.ImageField(upload_to='passports/', blank=True, null=True)
+    driver_licence_front = models.ImageField(upload_to='passports/', blank=True, null=True)
+    driver_licence_back = models.ImageField(upload_to='passports/', blank=True, null=True)
+    passport = models.ImageField(upload_to='passports/', blank=True, null=True)
 
     extras = models.JSONField(default=list, blank=True)
 

@@ -36,6 +36,7 @@ const CarDetail: React.FC = () => {
   const [phone, setPhone] = useState<string | undefined>();
   const [passportFront, setPassportFront] = useState<File | null>(null);
   const [passportBack, setPassportBack] = useState<File | null>(null);
+  const [passport, setPassport ] = useState<File | null>(null);
 
   useEffect(() => {
     const loadData = async () => {
@@ -187,9 +188,9 @@ const handleSubmit = async (e: React.FormEvent) => {
     if (!formData.pickup_datetime) errors.pickup_datetime = ['Pick-up time is required.'];
     if (!formData.return_datetime) errors.return_datetime = ['Return time is required.'];
     if (!formData.destination) errors.destination = ['Please select a destination.'];
-    if (!passportFront) errors.passport_front = ['Driver License Front is required.'];
-    if (!passportBack) errors.passport_back = ['Driver License Back is required.'];
-
+    if (!passportFront) errors.driver_licence_front = ['Driver License Front is required.'];
+    if (!passportBack) errors.driver_licence_back = ['Driver License Back is required.'];
+    if (!passport) errors.passport = ['Passport or ID is required.']
     if (formData.pickup_datetime && formData.return_datetime) {
       if (new Date(formData.return_datetime) <= new Date(formData.pickup_datetime)) {
         errors.return_datetime = ['Return must be after pick-up.'];
@@ -222,8 +223,9 @@ const handleSubmit = async (e: React.FormEvent) => {
   data.append('destination', formData.destination);
 
   // files
-  if (passportFront) data.append('passport_front', passportFront);
-  if (passportBack) data.append('passport_back', passportBack);
+  if (passportFront) data.append('driver_licence_front', passportFront);
+  if (passportBack) data.append('driver_licence_back', passportBack);
+  if (passport) data.append('passport', passport);
 
   // extras -> send multiple fields (ListField<IntegerField>)
   const extrasPayload = selectedExtras.map(id => {
@@ -687,9 +689,9 @@ if (extrasPayload.length > 0) {
       </span>
     </label>
 
-    {!passportFront && submissionErrors.passport_front && (
+    {!passportFront && submissionErrors.driver_licence_front && (
       <p className="text-red-500 text-[10px] mt-2 font-bold uppercase tracking-widest">
-        {submissionErrors.passport_front[0]}
+        {submissionErrors.driver_licence_front[0]}
       </p>
     )}
   </div>
@@ -737,13 +739,66 @@ if (extrasPayload.length > 0) {
       </span>
     </label>
 
-    {!passportBack && submissionErrors.passport_back && (
+    {!passportBack && submissionErrors.driver_licence_back && (
       <p className="text-red-500 text-[10px] mt-2 font-bold uppercase tracking-widest">
-        {submissionErrors.passport_back[0]}
+        {submissionErrors.driver_licence_back[0]}
       </p>
     )}
   </div>
 
+</div>
+{/* PASSPORT / ID */}
+<div className="mt-4">
+  <label
+    className={`flex flex-col items-center justify-center p-5 rounded-2xl border transition-all cursor-pointer
+      ${passport
+        ? 'bg-[#8ecd24]/10 border-[#8ecd24]/50'
+        : 'bg-white/[0.02] border-white/10 hover:border-white/20'
+      }`}
+  >
+    <input
+      type="file"
+      accept="image/jpeg,image/png"
+      onChange={(e) => {
+        const file = e.target.files?.[0];
+        if (file) setPassport(file);
+      }}
+      className="hidden"
+    />
+
+    <div
+      className={`w-6 h-6 mb-3 rounded flex items-center justify-center border transition-all
+        ${passport
+          ? 'bg-[#8ecd24] border-[#8ecd24]'
+          : 'bg-transparent border-gray-700'
+        }`}
+    >
+      {passport && (
+        <svg
+          className="w-4 h-4 text-[#011111]"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" d="M5 13l4 4L19 7" />
+        </svg>
+      )}
+    </div>
+
+    <span
+      className={`text-xs font-bold uppercase tracking-wide
+        ${passport ? 'text-white' : 'text-gray-500'}
+      `}
+    >
+      {passport ? 'Passport Uploaded' : 'Upload Passport / ID'}
+    </span>
+  </label>
+
+  {!passport && submissionErrors.passport && (
+    <p className="text-red-500 text-[10px] mt-2 font-bold uppercase tracking-widest">
+      {submissionErrors.passport[0]}
+    </p>
+  )}
 </div>
                 </div>
 

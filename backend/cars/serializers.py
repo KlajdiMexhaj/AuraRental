@@ -61,9 +61,9 @@ class DestinationSerializer(serializers.ModelSerializer):
 
 
 class ReservationSerializer(serializers.ModelSerializer):
-    passport_front = serializers.ImageField(required=False, allow_null=True)
-    passport_back = serializers.ImageField(required=False, allow_null=True)
-
+    driver_licence_front = serializers.ImageField(required=False, allow_null=True)
+    driver_licence_back = serializers.ImageField(required=False, allow_null=True)
+    passport = serializers.ImageField(required=False, allow_null=True)
     extras = serializers.JSONField(required=False)
 
     preview_days = serializers.SerializerMethodField(read_only=True)
