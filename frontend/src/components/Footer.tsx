@@ -51,7 +51,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <a
-                  href="/#/#about"
+                  href="/about"
                   className="text-gray-500 hover:text-[#8ecd24] transition-colors text-sm font-medium"
                 >
                   About
@@ -59,7 +59,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <a
-                  href="/#/#contact"
+                  href="/contact"
                   className="text-gray-500 hover:text-[#8ecd24] transition-colors text-sm font-medium"
                 >
                   Contact
@@ -73,12 +73,40 @@ const Footer: React.FC = () => {
             <h4 className="text-white font-black text-xs uppercase tracking-[0.2em] mb-8">
               Client Services
             </h4>
-            <ul className="space-y-4">
-              <li><span className="text-gray-500 transition-colors text-sm font-medium">Policies</span></li>
-              <li><span className="text-gray-500 transition-colors text-sm font-medium">Insurance</span></li>
-              <li><span className="text-gray-500 transition-colors text-sm font-medium">Concierge</span></li>
-              <li><span className="text-gray-500 transition-colors text-sm font-medium">Fleet</span></li>
-            </ul>
+<ul className="space-y-4">
+  <li>
+    <Link
+      to="/privacy"
+      className="text-gray-500 hover:text-[#8ecd24] transition-colors text-sm font-medium"
+    >
+      Policies
+    </Link>
+  </li>
+  <li>
+    <Link
+      to="/terms"
+      className="text-gray-500 hover:text-[#8ecd24] transition-colors text-sm font-medium"
+    >
+      Insurance
+    </Link>
+  </li>
+  <li>
+    <Link
+      to="/contact"
+      className="text-gray-500 hover:text-[#8ecd24] transition-colors text-sm font-medium"
+    >
+      Concierge
+    </Link>
+  </li>
+  <li>
+    <Link
+      to="/cars-rental"
+      className="text-gray-500 hover:text-[#8ecd24] transition-colors text-sm font-medium"
+    >
+      Fleet
+    </Link>
+  </li>
+</ul>
           </div>
 
           {/* Social Presence */}
