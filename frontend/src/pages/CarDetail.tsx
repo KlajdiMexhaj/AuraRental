@@ -245,6 +245,11 @@ if (extrasPayload.length > 0) {
     await createReservation(data);
 
     setSuccess(true);
+    if (typeof (window as any).gtag !== 'undefined') {
+      (window as any).gtag('event', 'conversion', {
+        send_to: 'AW-11333582314'
+      });
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     setTimeout(() => navigate('/'), 6000);
