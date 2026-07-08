@@ -1,8 +1,11 @@
 import React, { useEffect, useRef } from 'react';
+import { useTranslation } from "react-i18next";
+
 
 const Review: React.FC = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
-
+  const { t } = useTranslation(); 
+  
   useEffect(() => {
     const old = document.querySelector('script[data-taggbox]');
     if (old) old.remove();
@@ -37,7 +40,7 @@ const Review: React.FC = () => {
       text-[10px] sm:text-xs md:text-sm lg:text-base
       mb-2 sm:mb-3
     ">
-      Community Feedback
+      {t("reviews.subtitle")}
     </h2>
 
     <h1 className="
@@ -46,7 +49,7 @@ const Review: React.FC = () => {
       mb-3 sm:mb-4 md:mb-6
       max-w-[20ch] sm:max-w-[24ch] md:max-w-none
     ">
-      Real Stories, Real Results
+      {t("reviews.title")}
     </h1>
 
     <p className="
@@ -55,8 +58,7 @@ const Review: React.FC = () => {
       leading-relaxed
       max-w-[32ch] sm:max-w-[48ch] md:max-w-2xl lg:max-w-3xl
     ">
-      We take pride in our service. See what our customers have to say about
-      their experience with us.
+      {t("reviews.description")}
     </p>
 
   </div>

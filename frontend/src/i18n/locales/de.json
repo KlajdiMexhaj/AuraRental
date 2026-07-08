@@ -1,0 +1,200 @@
+{
+  "exclusive": "Ekskluzywna Kolekcja",
+  "featuredFleet": "Nasza Flota",
+  "viewCollection": "Zobacz całą flotę",
+  "accessing": "Łączenie z systemem...",
+
+  "privacy": {
+    "title": "Datenschutzrichtlinie",
+    "paragraph1": "Ihre Privatsphäre ist uns wichtig. Bei Aura Rental erfassen wir nur die Informationen, die erforderlich sind, um eine reibungslose Fahrzeugreservierung und einen personalisierten Service anzubieten. Dazu gehören Angaben wie Ihr Name, Ihre Kontaktdaten, Reservierungspräferenzen und Zahlungsdaten bei einer Buchung.",
+    "paragraph2": "Alle Daten werden sicher gespeichert und gemäß modernen Sicherheitsstandards verarbeitet. Wir verkaufen oder teilen Ihre persönlichen Daten nicht mit Dritten zu Marketingzwecken. Informationen können nur mit vertrauenswürdigen Dienstleistern geteilt werden, die für Reservierungen, Zahlungsabwicklung oder gesetzliche Anforderungen erforderlich sind.",
+    "paragraph3": "Durch die Nutzung unserer Website stimmen Sie der Sammlung und Nutzung der beschriebenen Informationen zu. Sie haben das Recht, Zugriff auf Ihre Daten, Korrekturen oder Löschung gemäß den geltenden Datenschutzbestimmungen zu verlangen."
+  },
+  
+  "cookies": {
+    "title": "Cookie-Richtlinie",
+    "paragraph1": "Aura Rental verwendet Cookies und ähnliche Technologien, um Ihr Surferlebnis zu verbessern, Einstellungen zu speichern und die Leistung der Website zu analysieren. Cookies helfen uns zu verstehen, wie Nutzer mit der Plattform interagieren, damit wir unsere Dienste kontinuierlich verbessern können.",
+    "paragraph2": "Einige Cookies sind für die Funktionalität der Website erforderlich, beispielsweise zur Aufrechterhaltung von Anmeldesitzungen und zur Verarbeitung von Reservierungen. Andere werden für Analysen und Optimierungen verwendet. Sie können Cookies über die Einstellungen Ihres Browsers kontrollieren oder deaktivieren, dies kann jedoch bestimmte Funktionen beeinflussen.",
+    "paragraph3": "Wir legen Wert auf Transparenz und die Wahl der Nutzer. Ohne Ihre Zustimmung werden keine personenbezogenen Daten in Cookies gespeichert, und für Analysen gesammelte Daten werden ausschließlich zur Verbesserung der Plattform verwendet."
+  },
+
+  "terms": {
+    "title": "Allgemeine Geschäftsbedingungen",
+    "paragraph1": "Willkommen bei Aura Rental. Durch den Zugriff auf oder die Nutzung dieser Website stimmen Sie zu, diese Bedingungen und alle geltenden Gesetze einzuhalten. Unsere Plattform bietet Mietwagen-Reservierungsdienste an, vorbehaltlich Verfügbarkeit und Überprüfung der Voraussetzungen.",
+    "paragraph2": "Reservierungen werden erst nach erfolgreicher Zahlung und Annahme der Buchungsbedingungen bestätigt. Stornierungen und Änderungen können gemäß unseren Mietrichtlinien Gebühren unterliegen. Nutzer sind dafür verantwortlich, während des Buchungsvorgangs genaue Informationen bereitzustellen.",
+    "paragraph3": "Aura Rental behält sich das Recht vor, Dienstleistungen, Preise und Bedingungen jederzeit zu ändern. Die weitere Nutzung der Plattform nach Änderungen gilt als Zustimmung zu den aktualisierten Bedingungen.",
+    "paragraph4": "Wir bemühen uns, ein hochwertiges Mobilitätserlebnis anzubieten, jedoch werden Dienstleistungen ohne Garantien über die gesetzlich vorgeschriebenen hinaus bereitgestellt. Nutzer verpflichten sich, die Plattform verantwortungsvoll und gemäß allen geltenden Vorschriften zu nutzen."
+  },
+
+  "collection": {
+    "title": "UNSERE KOLLEKTION",
+    "availableDates": "Fahrzeuge anzeigen, die für Ihre ausgewählten Daten verfügbar sind.",
+    "description": "Von leistungsstarken Sportwagen bis hin zu luxuriösen Limousinen – entdecken Sie das perfekte Fahrzeug für Ihre Reise.",
+    "scanning": "Unsere Flotte wird durchsucht...",
+    "tryAgain": "Erneut versuchen",
+    "noCars": "Keine Fahrzeuge verfügbar",
+    "adjustDates": "Versuchen Sie, Ihre Daten anzupassen oder unsere komplette Kollektion zu durchsuchen.",
+    "clearFilters": "Filter löschen"
+  },
+
+  "carDetail": {
+    "backFleet": "Zurück zur Fahrzeugflotte",
+    "eliteCollection": "Elite-Kollektion",
+    "startingFrom": "Ab",
+    "day": "/TAG",
+    "seats": "Sitze",
+    "trans": "Getriebe",
+    "doors": "Türen",
+    "ac": "Klimaanlage",
+    "fuel": "Kraftstoff",
+    "yes": "Ja",
+    "no": "Nein",
+    "detailsBenefits": "Details & Vorteile",
+    "reservationSubmitted": "Reservierung übermittelt",
+    "contactSoon": "Wir werden Sie so schnell wie möglich kontaktieren.",
+    "reservationBill": "Reservierungsübersicht",
+    "reviewBooking": "Überprüfen Sie Ihre Elite-Buchung",
+    "editInfo": "Informationen bearbeiten",
+    "driverInformation": "Fahrerinformationen",
+    "phone": "Telefon",
+    "email": "E-Mail",
+    "schedulePeriod": "Zeitplan & Zeitraum",
+    "destination": "Zielort",
+    "notSelected": "Nicht ausgewählt",
+    "curatedExtras": "Ausgewählte Extras",
+    "carRental": "Mietwagen",
+    "selectedExtras": "Ausgewählte Extras",
+    "grandTotal": "Gesamtsumme",
+    "payPickup": "Bei Abholung bezahlen",
+    "completeReservation": "Reservierung abschließen",
+    "confirming": "Bestätigung durch den Concierge...",
+    "bookNow": "Jetzt buchen",
+    "fullName": "Vollständiger Name",
+    "phoneNumber": "Telefonnummer",
+    "pickupDestination": "Abholort",
+    "chooseDestination": "Ziel auswählen",
+    "pickupTime": "Abholzeit",
+    "returnTime": "Rückgabezeit",
+    "extras": "Ausgewählte Extras (pro Tag)",
+    "frontUploaded": "Vorderseite hochgeladen",
+    "frontLicense": "Führerschein Vorderseite",
+    "backUploaded": "Rückseite hochgeladen",
+    "backLicense": "Führerschein Rückseite",
+    "passportUploaded": "Reisepass hochgeladen",
+    "uploadPassport": "Reisepass / Personalausweis hochladen",
+    "syncing": "Synchronisierung...",
+    "reviewReservation": "Reservierung überprüfen",
+    "securePayment": "Sichere Zahlung bei Abholung"
+  },
+
+  "about": {
+    "label": "Über Aura Rental",
+    "title": "EINFACHE • TRANSPARENTE AUTO-MIETE",
+    "description": "Aura Rental ist ein moderner Autovermietungsservice, der sich auf Einfachheit und Transparenz konzentriert. Unser Ziel ist es, komplexe Verfahren, die normalerweise für die Miete eines Fahrzeugs erforderlich sind, zu eliminieren und jedem Kunden einen schnellen Reservierungsprozess zu bieten.",
+    "badgeTitle": "Schnell",
+    "badgeSubtitle": "Reservierungsprozess",
+    "features": {
+      "noCreditCard": {
+        "title": "Keine Kreditkarte erforderlich",
+        "text": "Sie können ein Fahrzeug reservieren und mieten, ohne eine Kreditkarte anzugeben."
+      },
+      "unlimitedKm": {
+        "title": "Unbegrenzte Kilometer im Preis enthalten",
+        "text": "Alle Mietverträge beinhalten die Kilometer im Preis — keine versteckten Kosten."
+      },
+      "flexiblePayment": {
+        "title": "Flexible Zahlungsmöglichkeiten",
+        "text": "Zahlen Sie bar, mit Visa oder MasterCard bei der Abholung."
+      },
+      "warranty": {
+        "title": "Optionale Kaution",
+        "text": "Die Kaution ist optional mit Karte oder bar (200 Euro)."
+      }
+    }
+  },
+
+  "car": {
+    "perDay": "/ Tag",
+    "defaultCategory": "Gleiche Fahrzeugkategorie",
+    "auto": "Automatik",
+    "hybrid": "Hybrid",
+    "seats": "Sitze",
+    "doors": "Türen",
+    "acOn": "Klimaanlage",
+    "acOff": "Ohne Klimaanlage",
+    "bookNow": "JETZT BUCHEN",
+    "currency": "$",
+    "availableNow": "Jetzt verfügbar",
+    "automatic": "Automatik",
+    "viewReservation": "Reservierung anzeigen"
+  },
+
+  "footer": {
+    "brand": "Rental",
+    "description": "Wir definieren luxuriöse Mobilität neu. Wir bieten eine exklusive Fahrzeugflotte für alle, die Leistung, Stil und Perfektion auf jeder Fahrt erwarten.",
+    "navigation": "Navigation",
+    "discover": "Entdecken",
+    "fleet": "Unsere Flotte",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "clientServices": "Kundenservice",
+    "policies": "Richtlinien",
+    "insurance": "Versicherung",
+    "concierge": "Concierge-Service",
+    "fleet2": "Flotte",
+    "social": "Soziale Netzwerke",
+    "follow": "Folgen Sie uns für tägliche exklusive Flotten-Updates",
+    "copyright": "© 2024 Aura Rental. Prestige Mobility Group.",
+    "privacy": "Datenschutz",
+    "terms": "Nutzungsbedingungen",
+    "cookies": "Cookies"
+  },
+
+  "hero": {
+    "badge": "Jetzt in Ihrer Stadt verfügbar",
+    "title1": "PRESTIGE-FAHRZEUGVERMIETUNG",
+    "title2": "NEU DEFINIERT",
+    "description": "Kommen Sie nicht einfach an. Hinterlassen Sie Eindruck mit unserer sorgfältig ausgewählten Flotte aus leistungsstarken und wirtschaftlichen Fahrzeugen.",
+    "pickup": "Abholdatum und -uhrzeit",
+    "return": "Rückgabedatum und -uhrzeit",
+    "cta": "FLOTTE ENTDECKEN",
+    "feature1": "Sofortige Buchung",
+    "feature2": "24/7-Support",
+    "feature3": "Kostenlose Stornierung"
+  },
+
+  "location": {
+    "subtitle": "Besuchen Sie unseren Showroom",
+    "title": "Unser Hauptsitz",
+    "mainHubTitle": "Hauptstandort",
+    "address": "Internationaler Flughafen, Tirana, Albanien 1001",
+    "hoursTitle": "Öffnungszeiten",
+    "hours": "Montag — Sonntag: Rund um die Uhr verfügbar",
+    "phoneTitle": "Direktleitung",
+    "phone": "+355 69 211 6666",
+    "directions": "Route anzeigen"
+  },
+
+  "nav": {
+    "brand": "Rental",
+    "discover": "Entdecken",
+    "fleet": "Unsere Flotte",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "reserve": "Reservieren",
+    "startBooking": "Buchung starten"
+  },
+
+  "social": {
+    "whatsappMessage": "Hallo Rental Aura,\nich interessiere mich für die Anmietung eines Autos.\nVielen Dank!",
+    "whatsapp": "WhatsApp",
+    "instagram": "Instagram",
+    "facebook": "Facebook"
+  },
+
+  "reviews": {
+    "subtitle": "Feedback unserer Kunden",
+    "title": "Echte Geschichten, echte Ergebnisse",
+    "description": "Wir sind stolz auf unseren Service. Erfahren Sie, was unsere Kunden über ihre Erfahrungen mit uns sagen."
+  }
+}

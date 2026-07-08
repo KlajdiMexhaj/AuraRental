@@ -1,11 +1,14 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const About: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <section id="about" className="py-24 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          
+
           {/* Image */}
           <div className="relative">
             <div className="absolute -top-10 -left-10 w-40 h-40 bg-[#8ecd24]/20 blur-3xl rounded-full"></div>
@@ -18,10 +21,10 @@ const About: React.FC = () => {
 
             <div className="absolute -bottom-6 -right-6 bg-[#8ecd24] p-8 rounded-3xl z-20 hidden md:block">
               <span className="block text-4xl font-black text-[#011111]">
-                Fast
+                {t("about.badgeTitle")}
               </span>
               <span className="text-xs uppercase font-bold text-[#011111]/70">
-                Reservation Process
+                {t("about.badgeSubtitle")}
               </span>
             </div>
           </div>
@@ -29,41 +32,38 @@ const About: React.FC = () => {
           {/* Content */}
           <div>
             <span className="text-[#8ecd24] text-xs font-bold tracking-widest uppercase mb-4 block">
-              About Aura Rental
+              {t("about.label")}
             </span>
 
             <h2 className="text-4xl md:text-5xl font-black text-white mb-8 leading-tight">
-              SIMPLE • TRANSPARENT <br /> CAR RENTAL SERVICE
+              {t("about.title")}
             </h2>
 
             <p className="text-gray-400 text-lg mb-8 leading-relaxed">
-              Aura Rental is a modern car rental reservation service focused on
-              simplicity and honesty. Our goal is to remove the complicated
-              procedures usually required when renting a vehicle and provide a
-              fast booking experience for every customer.
+              {t("about.description")}
             </p>
 
             {/* Features */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              
+
               <Feature
-                title="No Credit Card Required"
-                text="You can reserve and rent a vehicle without providing a credit card."
+                title={t("about.features.noCreditCard.title")}
+                text={t("about.features.noCreditCard.text")}
               />
 
               <Feature
-                title="Unlimited Kilometers Included"
-                text="All rentals include kilometers in the price — no hidden distance fees."
+                title={t("about.features.unlimitedKm.title")}
+                text={t("about.features.unlimitedKm.text")}
               />
 
               <Feature
-                title="Flexible Payment"
-                text="Pay with cash, Visa or MasterCard at pickup."
+                title={t("about.features.flexiblePayment.title")}
+                text={t("about.features.flexiblePayment.text")}
               />
 
               <Feature
-                title="Optional warranty"
-                text="The guarantee is optional by card or cash (200 euros)."
+                title={t("about.features.warranty.title")}
+                text={t("about.features.warranty.text")}
               />
 
             </div>
@@ -88,7 +88,6 @@ const Feature: React.FC<{ title: string; text: string }> = ({ title, text }) => 
     </div>
     <h4 className="text-white font-bold">{title}</h4>
     <p className="text-gray-500 text-sm">{text}</p>
-    
   </div>
 );
 

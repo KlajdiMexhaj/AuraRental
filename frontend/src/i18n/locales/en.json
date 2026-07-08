@@ -1,0 +1,204 @@
+{
+  "exclusive": "Exclusive Collection",
+  "featuredFleet": "Our Featured Fleet",
+  "viewCollection": "View Full Collection",
+  "accessing": "Accessing Vault...",
+
+  "privacy": {
+    "title": "Privacy Policy",
+    "paragraph1": "Your privacy is important to us. At Aura Rental, we collect only the information necessary to provide a seamless car reservation experience and deliver personalized service. This includes details such as your name, contact information, reservation preferences, and payment data when making a booking.",
+    "paragraph2": "All data is securely stored and processed in accordance with modern security standards. We do not sell or share your personal information with third parties for marketing purposes. Information may be shared only with trusted service providers necessary to complete reservations, payment processing, or legal compliance.",
+    "paragraph3": "By using our website, you consent to the collection and use of information as described. You have the right to request access to your data, corrections, or deletion in accordance with applicable privacy regulations."
+  },
+
+  "cookies": {
+    "title": "Cookies Policy",
+    "paragraph1": "Aura Rental uses cookies and similar technologies to enhance your browsing experience, remember preferences, and analyze site performance. Cookies help us understand how users interact with the platform so we can continually improve our services.",
+    "paragraph2": "Some cookies are essential for website functionality, such as maintaining login sessions and processing reservations. Others are used for analytics and optimization. You can control or disable cookies through your browser settings, though this may affect certain features.",
+    "paragraph3": "We value transparency and user choice. No personally identifiable information is stored in cookies without your consent, and data collected for analytics is used solely to improve the platform."
+  },
+
+  "terms": {
+    "title": "Terms & Conditions",
+    "paragraph1": "Welcome to Aura Rental. By accessing or using this website, you agree to comply with these terms and all applicable laws. Our platform provides car reservation services on a rental basis, subject to availability and verification of eligibility.",
+    "paragraph2": "Reservations are confirmed only after successful payment and acceptance of booking conditions. Cancellations and modifications may be subject to fees according to our rental policies. Users are responsible for providing accurate information during the booking process.",
+    "paragraph3": "Aura Rental reserves the right to modify services, pricing, and terms at any time. Continued use of the platform after changes constitutes acceptance of the updated conditions.",
+    "paragraph4": "We strive to provide a premium mobility experience, but services are offered without warranties beyond those required by law. Users agree to use the platform responsibly and in accordance with all applicable regulations."
+  },
+
+    "collection": {
+    "title": "OUR COLLECTION",
+    "availableDates": "Showing cars available for your selected dates.",
+    "description": "From high-performance sports cars to luxurious sedans, discover the perfect vehicle for your journey.",
+    "scanning": "Scanning our fleet...",
+    "tryAgain": "Try Again",
+    "noCars": "No Cars Available",
+    "adjustDates": "Try adjusting your dates or browsing our full collection.",
+    "clearFilters": "Clear Filters"
+  },
+
+    "carDetail": {
+    "backFleet": "Back to fleet",
+    "eliteCollection": "Elite Collection",
+    "startingFrom": "Starting from",
+    "day": "/DAY",
+    "seats": "Seats",
+    "trans": "Trans",
+    "doors": "Doors",
+    "ac": "A/C",
+    "fuel": "Fuel",
+    "yes": "Yes",
+    "no": "No",
+    "detailsBenefits": "Details & Benefits",
+    "reservationSubmitted": "Reservation Submitted",
+    "contactSoon": "We will contact you as soon as possible.",
+    "reservationBill": "Reservation Bill",
+    "reviewBooking": "Review your elite booking",
+    "editInfo": "Edit Info",
+    "driverInformation": "Driver Information",
+    "phone": "Phone",
+    "email": "Email",
+    "schedulePeriod": "Schedule & Period",
+    "destination": "Destination",
+    "notSelected": "Not Selected",
+    "curatedExtras": "Curated Extras",
+    "carRental": "Car Rental",
+    "selectedExtras": "Selected Extras",
+    "grandTotal": "Grand Total",
+    "payPickup": "Pay on Pickup",
+    "completeReservation": "Complete Reservation",
+    "confirming": "Confirming with Concierge...",
+    "bookNow": "Book Now",
+    "fullName": "Full Name",
+    "phoneNumber": "Phone number",
+    "pickupDestination": "Pickup Destination",
+    "chooseDestination": "Choose Destination",
+    "pickupTime": "Pick-up time",
+    "returnTime": "Return time",
+    "extras": "Curated Extras (Per Day)",
+    "frontUploaded": "Front Uploaded",
+    "frontLicense": "Front Driver License",
+    "backUploaded": "Back Uploaded",
+    "backLicense": "Back Driver License",
+    "passportUploaded": "Passport Uploaded",
+    "uploadPassport": "Upload Passport / ID",
+    "syncing": "Syncing...",
+    "reviewReservation": "Review Reservation",
+    "securePayment": "Secure Payment on Pickup"
+  },
+    
+  
+  "about": {
+    "label": "About Aura Rental",
+    "title": "SIMPLE • TRANSPARENT CAR RENTAL SERVICE",
+    "description": "Aura Rental is a modern car rental reservation service focused on simplicity and honesty. Our goal is to remove the complicated procedures usually required when renting a vehicle and provide a fast booking experience for every customer.",
+    "badgeTitle": "Fast",
+    "badgeSubtitle": "Reservation Process",
+    "features": {
+      "noCreditCard": {
+        "title": "No Credit Card Required",
+        "text": "You can reserve and rent a vehicle without providing a credit card."
+      },
+      "unlimitedKm": {
+        "title": "Unlimited Kilometers Included",
+        "text": "All rentals include kilometers in the price — no hidden distance fees."
+      },
+      "flexiblePayment": {
+        "title": "Flexible Payment",
+        "text": "Pay with cash, Visa or MasterCard at pickup."
+      },
+      "warranty": {
+        "title": "Optional Warranty",
+        "text": "The guarantee is optional by card or cash (200 euros)."
+      }
+    }
+  },
+
+    "car": {
+    "perDay": "/ Day",
+    "defaultCategory": "Same car category",
+    "auto": "Auto",
+    "hybrid": "Hybrid",
+    "seats": "Seats",
+    "doors": "Doors",
+    "acOn": "A/C Active",
+    "acOff": "No A/C",
+    "bookNow": "BOOK NOW",
+    "currency": "$",
+    "availableNow": "Available Now",
+    "automatic": "Automatic",
+    "viewReservation": "View Reservation"
+    },
+
+    "footer": {
+    "brand": "Rental",
+    "description": "Redefining luxury mobility. We provide an exclusive fleet for those who demand performance, style, and perfection in every mile.",
+    "navigation": "Navigation",
+    "discover": "Discover",
+    "fleet": "Our Fleet",
+    "about": "About",
+    "contact": "Contact",
+    "clientServices": "Client Services",
+    "policies": "Policies",
+    "insurance": "Insurance",
+    "concierge": "Concierge",
+    "fleet2": "Fleet",
+    "social": "Social Presence", 
+    "follow": "Follow for daily exclusive fleet drops",
+    "copyright": "© 2024 Aura Rental. Prestige Mobility Group.",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "cookies": "Cookies"
+    },
+
+    "hero": {
+    "badge": "Now Available in your city",
+    "title1": "PRESTIGE RENTALS",
+    "title2": "REDEFINED",
+    "description": "Don’t just arrive. Make an entrance with our curated collection of high-performance and economical vehicles.",
+    "pickup": "Pick-up date & time",
+    "return": "Return date & time",
+    "cta": "EXPLORE FLEET",
+    "feature1": "Instant Booking",
+    "feature2": "24/7 Support",
+    "feature3": "Free Cancellation"
+    },
+
+    "location": {
+    "subtitle": "Visit Our Showroom",
+    "title": "Our Headquarters",
+    "mainHubTitle": "Main Hub",
+    "address": "International Airport, Tirana, Albania 1001",
+    "hoursTitle": "Operating Hours",
+    "hours": "Monday — Sunday: Available 24/7",
+    "phoneTitle": "Direct Line",
+    "phone": "+355 69 211 6666",
+    "directions": "Get Directions"
+    },
+
+    "nav": {
+    "brand": "Rental",
+    "discover": "Discover",
+    "fleet": "Our Fleet",
+    "about": "About",
+    "contact": "Contact",
+    "reserve": "Reserve",
+    "startBooking": "Start Booking"
+    },
+
+    "social": {
+    "whatsappMessage": "Hello Rental Aura\nI’m interested in renting a car.\nThank you!",
+    "whatsapp": "WhatsApp",
+    "instagram": "Instagram",
+    "facebook": "Facebook"
+    },
+
+    "reviews": {
+    "subtitle": "Community Feedback",
+    "title": "Real Stories, Real Results",
+    "description": "We take pride in our service. See what our customers have to say about their experience with us."
+    }
+
+
+}
+

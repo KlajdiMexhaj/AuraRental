@@ -1,0 +1,203 @@
+{
+  "exclusive": "Collezione Esclusiva",
+  "featuredFleet": "La Nostra Flotta",
+  "viewCollection": "Vedi tutta la flotta",
+  "accessing": "Accesso al sistema...",
+
+  "privacy": {
+    "title": "Informativa sulla Privacy",
+    "paragraph1": "La tua privacy è importante per noi. In Aura Rental raccogliamo solo le informazioni necessarie per offrire un'esperienza di prenotazione auto semplice e un servizio personalizzato. Questo include dettagli come nome, informazioni di contatto, preferenze di prenotazione e dati di pagamento durante una prenotazione.",
+    "paragraph2": "Tutti i dati vengono archiviati ed elaborati in modo sicuro secondo gli standard moderni di sicurezza. Non vendiamo né condividiamo le tue informazioni personali con terze parti per scopi di marketing. Le informazioni possono essere condivise solo con fornitori di servizi affidabili necessari per completare prenotazioni, elaborare pagamenti o rispettare obblighi legali.",
+    "paragraph3": "Utilizzando il nostro sito web, acconsenti alla raccolta e all'utilizzo delle informazioni descritte. Hai il diritto di richiedere l'accesso ai tuoi dati, correzioni o cancellazioni in conformità con le normative sulla privacy applicabili."
+  },
+
+  "cookies": {
+    "title": "Politica sui Cookie",
+    "paragraph1": "Aura Rental utilizza cookie e tecnologie simili per migliorare la tua esperienza di navigazione, ricordare le preferenze e analizzare le prestazioni del sito. I cookie ci aiutano a capire come gli utenti interagiscono con la piattaforma per migliorare continuamente i nostri servizi.",
+    "paragraph2": "Alcuni cookie sono essenziali per il funzionamento del sito, come il mantenimento delle sessioni di accesso e l'elaborazione delle prenotazioni. Altri vengono utilizzati per analisi e ottimizzazione. Puoi controllare o disabilitare i cookie tramite le impostazioni del browser, anche se ciò potrebbe influire su alcune funzionalità.",
+    "paragraph3": "Diamo valore alla trasparenza e alla scelta degli utenti. Nessuna informazione personale identificabile viene memorizzata nei cookie senza il tuo consenso e i dati raccolti per analisi vengono utilizzati esclusivamente per migliorare la piattaforma."
+  },
+
+  "terms": {
+    "title": "Termini e Condizioni",
+    "paragraph1": "Benvenuto in Aura Rental. Accedendo o utilizzando questo sito web, accetti di rispettare questi termini e tutte le leggi applicabili. La nostra piattaforma fornisce servizi di prenotazione auto a noleggio, soggetti alla disponibilità e alla verifica dei requisiti.",
+    "paragraph2": "Le prenotazioni vengono confermate solo dopo il pagamento completato e l'accettazione delle condizioni di prenotazione. Cancellazioni e modifiche possono essere soggette a costi secondo le nostre politiche di noleggio. Gli utenti sono responsabili di fornire informazioni accurate durante il processo di prenotazione.",
+    "paragraph3": "Aura Rental si riserva il diritto di modificare servizi, prezzi e condizioni in qualsiasi momento. L'utilizzo continuato della piattaforma dopo le modifiche costituisce accettazione delle condizioni aggiornate.",
+    "paragraph4": "Ci impegniamo a fornire un'esperienza di mobilità premium, ma i servizi vengono offerti senza garanzie oltre a quelle previste dalla legge. Gli utenti accettano di utilizzare la piattaforma in modo responsabile e conforme alle normative applicabili."
+  },
+
+  "collection": {
+    "title": "LA NOSTRA COLLEZIONE",
+    "availableDates": "Mostra le auto disponibili per le date selezionate.",
+    "description": "Dalle auto sportive ad alte prestazioni alle berline di lusso, scopri il veicolo perfetto per il tuo viaggio.",
+    "scanning": "Scansione della nostra flotta...",
+    "tryAgain": "Riprova",
+    "noCars": "Nessuna auto disponibile",
+    "adjustDates": "Prova a modificare le date o esplora la nostra collezione completa.",
+    "clearFilters": "Cancella filtri"
+  },
+
+  "carDetail": {
+    "backFleet": "Torna alla flotta",
+    "eliteCollection": "Collezione Elite",
+    "startingFrom": "A partire da",
+    "day": "/GIORNO",
+    "seats": "Posti",
+    "trans": "Cambio",
+    "doors": "Porte",
+    "ac": "A/C",
+    "fuel": "Carburante",
+    "yes": "Sì",
+    "no": "No",
+    "detailsBenefits": "Dettagli e vantaggi",
+    "reservationSubmitted": "Prenotazione inviata",
+    "contactSoon": "Ti contatteremo il prima possibile.",
+    "reservationBill": "Riepilogo prenotazione",
+    "reviewBooking": "Controlla la tua prenotazione Elite",
+    "editInfo": "Modifica informazioni",
+    "driverInformation": "Informazioni del conducente",
+    "phone": "Telefono",
+    "email": "Email",
+    "schedulePeriod": "Programma e periodo",
+    "destination": "Destinazione",
+    "notSelected": "Non selezionato",
+    "curatedExtras": "Extra selezionati",
+    "carRental": "Noleggio auto",
+    "selectedExtras": "Extra selezionati",
+    "grandTotal": "Totale",
+    "payPickup": "Paga al ritiro",
+    "completeReservation": "Completa la prenotazione",
+    "confirming": "Conferma con il concierge...",
+    "bookNow": "Prenota ora",
+    "fullName": "Nome completo",
+    "phoneNumber": "Numero di telefono",
+    "pickupDestination": "Luogo di ritiro",
+    "chooseDestination": "Scegli una destinazione",
+    "pickupTime": "Orario di ritiro",
+    "returnTime": "Orario di riconsegna",
+    "extras": "Extra selezionati (al giorno)",
+    "frontUploaded": "Fronte caricato",
+    "frontLicense": "Patente di guida (fronte)",
+    "backUploaded": "Retro caricato",
+    "backLicense": "Patente di guida (retro)",
+    "passportUploaded": "Passaporto caricato",
+    "uploadPassport": "Carica passaporto / documento d'identità",
+    "syncing": "Sincronizzazione...",
+    "reviewReservation": "Controlla la prenotazione",
+    "securePayment": "Pagamento sicuro al ritiro"
+  },
+
+  "about": {
+    "label": "Chi siamo - Aura Rental",
+    "title": "SERVIZIO DI NOLEGGIO AUTO SEMPLICE • TRASPARENTE",
+    "description": "Aura Rental è un moderno servizio di prenotazione auto focalizzato su semplicità e trasparenza. Il nostro obiettivo è eliminare le procedure complesse solitamente richieste per il noleggio di un veicolo e offrire un’esperienza di prenotazione veloce per ogni cliente.",
+    "badgeTitle": "Veloce",
+    "badgeSubtitle": "Processo di prenotazione",
+    "features": {
+      "noCreditCard": {
+        "title": "Nessuna carta di credito richiesta",
+        "text": "Puoi prenotare e noleggiare un veicolo senza fornire una carta di credito."
+      },
+      "unlimitedKm": {
+        "title": "Chilometri illimitati inclusi",
+        "text": "Tutti i noleggi includono i chilometri nel prezzo — nessun costo nascosto."
+      },
+      "flexiblePayment": {
+        "title": "Pagamento flessibile",
+        "text": "Paga in contanti, Visa o MasterCard al ritiro."
+      },
+      "warranty": {
+        "title": "Garanzia opzionale",
+        "text": "La cauzione è opzionale con carta o contanti (200 euro)."
+      }
+    }
+  },
+
+  "car": {
+    "perDay": "/ Giorno",
+    "defaultCategory": "Stessa categoria di auto",
+    "auto": "Automatico",
+    "hybrid": "Ibrida",
+    "seats": "Posti",
+    "doors": "Porte",
+    "acOn": "Aria condizionata",
+    "acOff": "Senza aria condizionata",
+    "bookNow": "PRENOTA ORA",
+    "currency": "$",
+    "availableNow": "Disponibile ora",
+    "automatic": "Automatico",
+    "viewReservation": "Visualizza prenotazione"
+  },
+
+  "footer": {
+    "brand": "Rental",
+    "description": "Ridefiniamo la mobilità di lusso. Offriamo una flotta esclusiva per chi pretende prestazioni, stile e perfezione in ogni chilometro.",
+    "navigation": "Navigazione",
+    "discover": "Scopri",
+    "fleet": "La nostra flotta",
+    "about": "Chi siamo",
+    "contact": "Contatti",
+    "clientServices": "Servizi per i clienti",
+    "policies": "Politiche",
+    "insurance": "Assicurazione",
+    "concierge": "Servizio Concierge",
+    "fleet2": "Flotta",
+    "social": "Presenza sui social",
+    "follow": "Seguici per le esclusive novità sulla flotta",
+    "copyright": "© 2024 Aura Rental. Prestige Mobility Group.",
+    "privacy": "Privacy",
+    "terms": "Termini",
+    "cookies": "Cookie"
+  },
+
+  "hero": {
+    "badge": "Ora disponibile nella tua città",
+    "title1": "NOLEGGI DI PRESTIGIO",
+    "title2": "RIDEFINITI",
+    "description": "Non limitarti ad arrivare. Fatti notare con la nostra selezione di veicoli ad alte prestazioni ed economici.",
+    "pickup": "Data e ora del ritiro",
+    "return": "Data e ora della riconsegna",
+    "cta": "SCOPRI LA FLOTTA",
+    "feature1": "Prenotazione immediata",
+    "feature2": "Assistenza 24/7",
+    "feature3": "Cancellazione gratuita"
+  },
+
+  "location": {
+    "subtitle": "Visita il nostro showroom",
+    "title": "La nostra sede",
+    "mainHubTitle": "Sede principale",
+    "address": "Aeroporto Internazionale, Tirana, Albania 1001",
+    "hoursTitle": "Orari di apertura",
+    "hours": "Lunedì — Domenica: Disponibili 24/7",
+    "phoneTitle": "Linea diretta",
+    "phone": "+355 69 211 6666",
+    "directions": "Ottieni indicazioni"
+  },
+
+  "nav": {
+    "brand": "Rental",
+    "discover": "Scopri",
+    "fleet": "La nostra flotta",
+    "about": "Chi siamo",
+    "contact": "Contatti",
+    "reserve": "Prenota",
+    "startBooking": "Inizia la prenotazione"
+  },
+
+  "social": {
+    "whatsappMessage": "Ciao Rental Aura,\nSono interessato/a a noleggiare un'auto.\nGrazie!",
+    "whatsapp": "WhatsApp",
+    "instagram": "Instagram",
+    "facebook": "Facebook"
+  },
+
+  "reviews": {
+    "subtitle": "Feedback della community",
+    "title": "Storie vere, risultati reali",
+    "description": "Siamo orgogliosi del nostro servizio. Scopri cosa dicono i nostri clienti della loro esperienza con noi."
+  }
+
+
+
+}

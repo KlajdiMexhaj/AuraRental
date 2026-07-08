@@ -4,6 +4,9 @@ import { fetchCarDetail, createReservation, fetchCarExtras, fetchDestinations } 
 import type { Car, CarExtra, Destination } from '../types';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
+import { useTranslation } from "react-i18next";
+
+
 
 const CarDetail: React.FC = () => {
   const today = new Date().toISOString().split("T")[0];
@@ -23,7 +26,7 @@ const CarDetail: React.FC = () => {
   const [success, setSuccess] = useState(false);
   const [showReview, setShowReview] = useState(false); 
   const [submissionErrors, setSubmissionErrors] = useState<Record<string, string[]>>({});
-  
+  const { t } = useTranslation();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const [formData, setFormData] = useState({
@@ -304,7 +307,7 @@ if (extrasPayload.length > 0) {
         <div className="w-full lg:col-span-7 space-y-6 md:space-y-8 animate-reveal">
           <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-gray-400 hover:text-[#8ecd24] transition-colors font-black text-[10px] md:text-xs uppercase tracking-widest">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M15 19l-7-7 7-7" /></svg>
-            Back to fleet
+            {t("carDetail.backFleet")}
           </button>
 
           <div className="space-y-4">
@@ -329,12 +332,12 @@ if (extrasPayload.length > 0) {
           <div className="space-y-8">
             <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-6">
               <div className="space-y-2">
-                <span className="text-[#8ecd24] font-black text-[10px] tracking-[0.4em] uppercase block">{car.category || 'Elite Collection'}</span>
+                <span className="text-[#8ecd24] font-black text-[10px] tracking-[0.4em] uppercase block">{car.category || t("carDetail.eliteCollection")}</span>
                 <h1 className="text-4xl md:text-6xl font-bold text-white tracking-tighter uppercase italic leading-none">{car.name}</h1>
               </div>
               <div className="bg-[#8ecd24]/5 border border-[#8ecd24]/20 p-4 md:p-6 rounded-[2rem] text-left md:text-right backdrop-blur-xl">
   <p className="text-gray-500 text-[10px] font-black uppercase tracking-[0.2em] mb-1">
-    Starting from
+    {t("carDetail.startingFrom")}
   </p>
 
   <div className="flex items-baseline gap-1 md:justify-end">
@@ -343,18 +346,18 @@ if (extrasPayload.length > 0) {
         ? (priceBreakdown.carTotal / priceBreakdown.days).toFixed(2)
         : parseFloat(car.price).toFixed(2)}
     </span>
-    <span className="text-white/40 text-xs font-bold">/DAY</span>
+    <span className="text-white/40 text-xs font-bold">/{t("carDetail.day")}</span>
   </div>
 </div>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
               {[
-                { label: 'Seats', value: car.seats || 5, icon: 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' },
-                { label: 'Trans', value: car.transmission || 'Manual', icon: 'M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4' },
-                { label: 'Doors', value: car.doors || 4, icon: 'M3 12l9-9 9 9M5 10v10a1 1 0 001 1h12a1 1 0 001-1V10' },
-                { label: 'A/C', value: car.air_conditioning ? 'Yes' : 'No', icon: 'M13 10V3L4 14h7v7l9-11h-7z' },
-                { label: 'Fuel', value: car.fuel_type || 'Petrol', icon: 'M3 3h13v10h2l2 3v5h-5v-5H8v5H3V3z' }
+                { label: t("carDetail.seats"), value: car.seats || 5, icon: 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' },
+                { label: t("carDetail.trans"), value: car.transmission || 'Manual', icon: 'M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4' },
+                { label: t("carDetail.doors"), value: car.doors || 4, icon: 'M3 12l9-9 9 9M5 10v10a1 1 0 001 1h12a1 1 0 001-1V10' },
+                { label: t("carDetail.ac"), value: car.air_conditioning ? t("carDetail.yes") : t("carDetail.no"), icon: 'M13 10V3L4 14h7v7l9-11h-7z' },
+                { label: t("carDetail.fuel"), value: car.fuel_type || 'Petrol', icon: 'M3 3h13v10h2l2 3v5h-5v-5H8v5H3V3z' }
               ].map(spec => (
                 <div key={spec.label} className="bg-white/[0.03] border border-white/5 p-4 rounded-3xl flex flex-col items-center group hover:border-[#8ecd24]/30 transition-colors">
                   <div className="w-8 h-8 rounded-xl bg-[#8ecd24]/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform"><svg className="w-4 h-4 text-[#8ecd24]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={spec.icon} /></svg></div>
@@ -365,7 +368,7 @@ if (extrasPayload.length > 0) {
             </div>
 
             <div className="bg-[#0b1c1c]/50 p-6 md:p-8 rounded-[2.5rem] border border-white/5">
-              <h3 className="text-xs font-black text-[#8ecd24] uppercase tracking-[0.3em] mb-6 flex items-center gap-3"><span className="w-8 h-[1px] bg-[#8ecd24]/30"></span>Details & Benefits</h3>
+              <h3 className="text-xs font-black text-[#8ecd24] uppercase tracking-[0.3em] mb-6 flex items-center gap-3"><span className="w-8 h-[1px] bg-[#8ecd24]/30"></span>{t("carDetail.detailsBenefits")}</h3>
               <div className="prose prose-invert max-w-none text-lg">{renderDetail(car.detail)}</div>
             </div>
           </div>
@@ -379,37 +382,37 @@ if (extrasPayload.length > 0) {
             {success ? (
               <div className="py-20 text-center animate-reveal relative z-10">
                 <div className="w-20 h-20 bg-[#8ecd24] rounded-[2rem] flex items-center justify-center mx-auto mb-8 shadow-xl"><svg className="w-10 h-10 text-[#011111]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" /></svg></div>
-                <h2 className="text-3xl font-black mb-4 uppercase italic text-white tracking-tighter leading-tight">Reservation Submitted</h2>
-                <p className="text-gray-400 font-bold text-sm tracking-widest uppercase">We will contact you as soon as possible.</p>
+                <h2 className="text-3xl font-black mb-4 uppercase italic text-white tracking-tighter leading-tight">{t("carDetail.reservationSubmitted")}</h2>
+                <p className="text-gray-400 font-bold text-sm tracking-widest uppercase">{t("carDetail.contactSoon")}</p>
               </div>
             ) : showReview ? (
                 <div className="space-y-6 relative z-10 animate-reveal">
                     <div className="flex justify-between items-center border-b border-white/10 pb-4">
                         <div className="flex flex-col">
-                            <h2 className="text-2xl font-black text-white uppercase italic tracking-tighter">Reservation Bill</h2>
-                            <p className="text-[10px] text-[#8ecd24] font-bold uppercase tracking-widest">Review your elite booking</p>
+                            <h2 className="text-2xl font-black text-white uppercase italic tracking-tighter">{t("carDetail.reservationBill")}</h2>
+                            <p className="text-[10px] text-[#8ecd24] font-bold uppercase tracking-widest">{t("carDetail.reviewBooking")}</p>
                         </div>
-                        <button onClick={() => setShowReview(false)} className="text-gray-500 text-[10px] font-black uppercase tracking-widest border border-white/10 px-3 py-1.5 rounded-full hover:bg-white hover:text-black transition-all">Edit Info</button>
+                        <button onClick={() => setShowReview(false)} className="text-gray-500 text-[10px] font-black uppercase tracking-widest border border-white/10 px-3 py-1.5 rounded-full hover:bg-white hover:text-black transition-all">{t("carDetail.editInfo")}</button>
                     </div>
 
                     <div className="space-y-4">
                         <div className="grid grid-cols-2 gap-4 bg-white/[0.03] p-4 rounded-2xl border border-white/5">
                             <div className="col-span-2">
-                                <p className="text-[9px] text-gray-500 font-black uppercase mb-1">Driver Information</p>
+                                <p className="text-[9px] text-gray-500 font-black uppercase mb-1">{t("carDetail.driverInformation")}</p>
                                 <p className="text-white font-bold text-sm uppercase">{formData.name_surname}</p>
                             </div>
                             <div>
-                                <p className="text-[9px] text-gray-500 font-black uppercase mb-1">Phone</p>
+                                <p className="text-[9px] text-gray-500 font-black uppercase mb-1">{t("carDetail.phone")}</p>
                                 <p className="text-white text-xs font-bold">{phone}</p>
                             </div>
                             <div>
-                                <p className="text-[9px] text-gray-500 font-black uppercase mb-1">Email</p>
+                                <p className="text-[9px] text-gray-500 font-black uppercase mb-1">{t("carDetail.email")}</p>
                                 <p className="text-white text-xs font-bold truncate">{formData.email}</p>
                             </div>
                         </div>
 
                         <div className="bg-white/[0.03] p-4 rounded-2xl border border-white/5">
-                             <p className="text-[9px] text-gray-500 font-black uppercase mb-2">Schedule & Period</p>
+                             <p className="text-[9px] text-gray-500 font-black uppercase mb-2">{t("carDetail.schedulePeriod")}</p>
                              <div className="flex justify-between items-center">
                                 <div className="text-left">
                                     <p className="text-white font-black text-xs">{new Date(formData.pickup_datetime).toLocaleDateString()}</p>
@@ -426,15 +429,15 @@ if (extrasPayload.length > 0) {
                         </div>
 
                         <div className="bg-white/[0.03] p-4 rounded-2xl border border-white/5">
-                            <p className="text-[9px] text-gray-500 font-black uppercase mb-1">Destination</p>
+                            <p className="text-[9px] text-gray-500 font-black uppercase mb-1">{t("carDetail.destination")}</p>
                             <p className="text-white font-bold text-xs uppercase">
-                                {destinations.find(d => d.id.toString() === formData.destination)?.name || 'Not Selected'}
+                                {destinations.find(d => d.id.toString() === formData.destination)?.name || t("carDetail.notSelected")}
                             </p>
                         </div>
 
                         {selectedExtras.length > 0 && (
                             <div className="bg-white/[0.03] p-4 rounded-2xl border border-white/5">
-                                <p className="text-[9px] text-gray-500 font-black uppercase mb-2">Curated Extras</p>
+                                <p className="text-[9px] text-gray-500 font-black uppercase mb-2">{t("carDetail.curatedExtras")}</p>
                                 <div className="flex flex-wrap gap-2">
                                     {extras.filter(e => selectedExtras.includes(e.id)).map(extra => (
                                         <span key={extra.id} className="bg-[#8ecd24]/10 text-[#8ecd24] text-[9px] font-black uppercase px-2 py-1 rounded-md border border-[#8ecd24]/20">{extra.name}</span>
@@ -444,14 +447,14 @@ if (extrasPayload.length > 0) {
                         )}
 
                         <div className="space-y-3 px-1 pt-2">
-                            <div className="flex justify-between text-xs"><span className="text-gray-500 font-bold uppercase tracking-widest">Car Rental ({priceBreakdown.days} Days)</span><span className="text-white font-black">€{priceBreakdown.carTotal.toFixed(2)}</span></div>
+                            <div className="flex justify-between text-xs"><span className="text-gray-500 font-bold uppercase tracking-widest">{t("carDetail.carRental")} ({priceBreakdown.days} Days)</span><span className="text-white font-black">€{priceBreakdown.carTotal.toFixed(2)}</span></div>
                             {selectedExtras.length > 0 && (
-                                <div className="flex justify-between text-xs"><span className="text-gray-500 font-bold uppercase tracking-widest">Selected Extras ({priceBreakdown.days} Days)</span><span className="text-white font-black">€{priceBreakdown.extrasTotal.toFixed(2)}</span></div>
+                                <div className="flex justify-between text-xs"><span className="text-gray-500 font-bold uppercase tracking-widest">{t("carDetail.selectedExtras")} ({priceBreakdown.days} Days)</span><span className="text-white font-black">€{priceBreakdown.extrasTotal.toFixed(2)}</span></div>
                             )}
                             <div className="flex justify-between items-end pt-4 border-t border-white/10">
-                                <span className="text-xl font-black text-[#8ecd24] uppercase italic tracking-tighter">Grand Total</span>
+                                <span className="text-xl font-black text-[#8ecd24] uppercase italic tracking-tighter">{t("carDetail.grandTotal")}</span>
                                 <div className="text-right">
-                                    <p className="text-[8px] text-gray-500 font-black uppercase tracking-widest mb-1">Pay on Pickup</p>
+                                    <p className="text-[8px] text-gray-500 font-black uppercase tracking-widest mb-1">{t("carDetail.payPickup")}</p>
                                     <p className="text-4xl font-black text-[#8ecd24] leading-none">€{priceBreakdown.total.toFixed(0)}</p>
                                 </div>
                             </div>
@@ -459,12 +462,12 @@ if (extrasPayload.length > 0) {
                     </div>
 
                     <button onClick={handleSubmit} disabled={submitting} className="w-full bg-[#8ecd24] text-[#011111] py-6 rounded-[1.5rem] font-black uppercase text-sm tracking-[0.2em] hover:bg-white hover:scale-[1.02] active:scale-[0.98] transition-all shadow-[0_20px_40px_rgba(142,205,36,0.3)]">
-                        {submitting ? 'Confirming with Concierge...' : 'Complete Reservation'}
+                        {submitting ? 'Confirming with Concierge...' : t("carDetail.completeReservation")}
                     </button>
                 </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
-                <h2 className="text-2xl font-black text-white uppercase italic tracking-tighter border-b border-white/10 pb-6 mb-2">Book Now</h2>
+                <h2 className="text-2xl font-black text-white uppercase italic tracking-tighter border-b border-white/10 pb-6 mb-2">{t("carDetail.bookNow")}</h2>
 
                 {submissionErrors.non_field_errors && (
                   <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-2xl text-red-400 text-xs font-bold flex items-center gap-3">
@@ -475,19 +478,19 @@ if (extrasPayload.length > 0) {
 
                 <div className="space-y-5">
                   <div className="space-y-1.5">
-                    <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Full Name</label>
-                    <input required name="name_surname" value={formData.name_surname} onChange={handleInputChange} type="text" placeholder="FULL NAME" className={`w-full bg-white/[0.03] border ${submissionErrors.name_surname ? 'border-red-500/50' : 'border-white/10'} rounded-2xl px-5 py-4 focus:outline-none focus:border-[#8ecd24] text-white text-sm transition-all`} />
+                    <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">{t("carDetail.fullName")}</label>
+                    <input required name="name_surname" value={formData.name_surname} onChange={handleInputChange} type="text" placeholder={t("carDetail.fullNamePlaceholder")} className={`w-full bg-white/[0.03] border ${submissionErrors.name_surname ? 'border-red-500/50' : 'border-white/10'} rounded-2xl px-5 py-4 focus:outline-none focus:border-[#8ecd24] text-white text-sm transition-all`} />
                     {submissionErrors.name_surname && <p className="text-red-500 text-[10px] mt-1 font-bold italic ml-2">{submissionErrors.name_surname[0]}</p>}
                   </div>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
-                      <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Email</label>
-                      <input required name="email" value={formData.email} onChange={handleInputChange} type="email" placeholder="client@aurarental.com" className={`w-full bg-white/[0.03] border ${submissionErrors.email ? 'border-red-500/50' : 'border-white/10'} rounded-2xl px-5 py-4 focus:outline-none focus:border-[#8ecd24] text-white text-sm transition-all`} />
+                      <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">{t("carDetail.email")}</label>
+                      <input required name="email" value={formData.email} onChange={handleInputChange} type="email" placeholder={t("carDetail.emailPlaceholder")} className={`w-full bg-white/[0.03] border ${submissionErrors.email ? 'border-red-500/50' : 'border-white/10'} rounded-2xl px-5 py-4 focus:outline-none focus:border-[#8ecd24] text-white text-sm transition-all`} />
                       {submissionErrors.email && <p className="text-red-500 text-[10px] mt-1 font-bold italic ml-2">{submissionErrors.email[0]}</p>}
                     </div>
                     <div className="space-y-1.5">
-                      <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Phone number</label>
+                      <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">{t("carDetail.phoneNumber")}</label>
                       <PhoneInput required international defaultCountry="AL" value={phone} onChange={setPhone} className={`phone-input-aura ${submissionErrors.phone_number ? 'phone-input-error' : ''}`} />
                       {submissionErrors.phone_number && <p className="text-red-500 text-[10px] mt-1 font-bold italic ml-2">{submissionErrors.phone_number[0]}</p>}
                     </div>
@@ -495,7 +498,7 @@ if (extrasPayload.length > 0) {
 
                   {/* DESTINATION DROPDOWN ADDED HERE */}
                   <div className="space-y-1.5">
-                    <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Pickup Destination</label>
+                    <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">{t("carDetail.pickupDestination")}</label>
                     <select 
                         required 
                         name="destination" 
@@ -503,7 +506,7 @@ if (extrasPayload.length > 0) {
                         onChange={handleInputChange} 
                         className={`w-full bg-[#0b1c1c] border ${submissionErrors.destination ? 'border-red-500/50' : 'border-white/10'} rounded-2xl px-5 py-4 focus:outline-none focus:border-[#8ecd24] text-white text-sm transition-all appearance-none cursor-pointer`}
                     >
-                        <option value="" disabled className="text-gray-600">CHOOSE DESTINATION</option>
+                        <option value="" disabled className="text-gray-600">{t("carDetail.chooseDestination")}</option>
                         {destinations.map(dest => (
                             <option key={dest.id} value={dest.id} className="bg-[#0b1c1c] text-white">
                                 {dest.name}
@@ -518,7 +521,7 @@ if (extrasPayload.length > 0) {
   {/* PICKUP */}
   <div className="space-y-1.5">
     <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">
-      Pick-up time
+      {t("carDetail.pickupTime")}
     </label>
 
     <div className={`flex items-center bg-white/[0.03] border ${
@@ -575,7 +578,7 @@ if (extrasPayload.length > 0) {
   {/* RETURN */}
   <div className="space-y-1.5">
     <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">
-      Return time
+      {t("carDetail.returnTime")}
     </label>
 
     <div className={`flex items-center bg-white/[0.03] border ${
@@ -632,7 +635,7 @@ if (extrasPayload.length > 0) {
 
                   {extras.length > 0 && (
                     <div className="pt-2 space-y-4">
-                      <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Curated Extras (Per Day)</label>
+                      <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">{t("carDetail.extras")}</label>
                       <div className="grid grid-cols-1 gap-3">
                         {extras.map(extra => (
                           <div key={extra.id} onClick={() => handleExtraToggle(extra.id)} className={`flex justify-between items-center p-4 rounded-2xl border transition-all cursor-pointer ${selectedExtras.includes(extra.id) ? 'bg-[#8ecd24]/10 border-[#8ecd24]/50' : 'bg-white/[0.02] border-white/10 hover:border-white/20'}`}>
@@ -690,7 +693,7 @@ if (extrasPayload.length > 0) {
           ${passportFront ? 'text-white' : 'text-gray-500'}
         `}
       >
-        {passportFront ? 'Front Uploaded' : 'Front Driver License'}
+        {passportFront ? t("carDetail.frontUploaded") : t("carDetail.frontDriverLicense")}
       </span>
     </label>
 
@@ -740,7 +743,7 @@ if (extrasPayload.length > 0) {
           ${passportBack ? 'text-white' : 'text-gray-500'}
         `}
       >
-        {passportBack ? 'Back Uploaded' : 'Back Driver License'}
+        {passportBack ? t("carDetail.backUploaded") : t("carDetail.backDriverLicense")}
       </span>
     </label>
 
@@ -795,7 +798,7 @@ if (extrasPayload.length > 0) {
         ${passport ? 'text-white' : 'text-gray-500'}
       `}
     >
-      {passport ? 'Passport Uploaded' : 'Upload Passport / ID'}
+      {passport ? t("carDetail.passportUploaded") : t("carDetail.uploadPassportId")}
     </span>
   </label>
 
@@ -810,13 +813,13 @@ if (extrasPayload.length > 0) {
                 <div className="pt-6 border-t border-white/10">
                    <button disabled={submitting} className="w-full bg-[#8ecd24] text-[#011111] py-5 rounded-[1.5rem] font-black uppercase text-sm tracking-widest hover:bg-white transition-all shadow-lg group/btn">
                       <span className="flex items-center justify-center gap-2">
-                        {submitting ? 'Syncing...' : `Review Reservation — €${priceBreakdown.total.toFixed(0)}`}
+                        {submitting ? t("carDetail.syncing") : `${t("carDetail.reviewReservation")} — €${priceBreakdown.total.toFixed(0)}`}
                         <svg className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                       </span>
                   </button>
                   <div className="flex items-center justify-center gap-3 mt-6">
                     <div className="w-1.5 h-1.5 rounded-full bg-[#8ecd24] animate-pulse"></div>
-                    <p className="text-[10px] text-gray-600 uppercase tracking-widest font-black">Secure Payment on Pickup</p>
+                    <p className="text-[10px] text-gray-600 uppercase tracking-widest font-black">{t("carDetail.securePayment")}</p>
                   </div>
                 </div>
               </form>

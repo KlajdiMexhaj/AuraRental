@@ -1,0 +1,204 @@
+{
+  "exclusive": "Koleksion Ekskluziv",
+  "featuredFleet": "Flota Jonë",
+  "viewCollection": "Shiko të gjithë flotën",
+  "accessing": "Duke hyrë në sistem...",
+
+  "privacy": {
+    "title": "Politika e Privatësisë",
+    "paragraph1": "Privatësia juaj është e rëndësishme për ne. Në Aura Rental, ne mbledhim vetëm informacionin e nevojshëm për të ofruar një përvojë të thjeshtë rezervimi të makinave dhe shërbim të personalizuar. Kjo përfshin të dhëna si emri juaj, informacioni i kontaktit, preferencat e rezervimit dhe të dhënat e pagesës gjatë kryerjes së një rezervimi.",
+    "paragraph2": "Të gjitha të dhënat ruhen dhe përpunohen në mënyrë të sigurt në përputhje me standardet moderne të sigurisë. Ne nuk i shesim ose ndajmë të dhënat tuaja personale me palë të treta për qëllime marketingu. Informacioni mund të ndahet vetëm me ofrues të besuar të shërbimeve të nevojshme për përfundimin e rezervimeve, përpunimin e pagesave ose përputhjen me kërkesat ligjore.",
+    "paragraph3": "Duke përdorur faqen tonë të internetit, ju pranoni mbledhjen dhe përdorimin e informacionit siç përshkruhet. Ju keni të drejtë të kërkoni qasje në të dhënat tuaja, korrigjime ose fshirje në përputhje me rregulloret në fuqi për privatësinë."
+  },
+  
+  "cookies": {
+    "title": "Politika e Cookies",
+    "paragraph1": "Aura Rental përdor cookies dhe teknologji të ngjashme për të përmirësuar përvojën tuaj të shfletimit, për të kujtuar preferencat dhe për të analizuar performancën e faqes. Cookies na ndihmojnë të kuptojmë se si përdoruesit ndërveprojnë me platformën në mënyrë që të përmirësojmë vazhdimisht shërbimet tona.",
+    "paragraph2": "Disa cookies janë të domosdoshme për funksionimin e faqes, si ruajtja e sesioneve të hyrjes dhe përpunimi i rezervimeve. Të tjerat përdoren për analiza dhe optimizim. Ju mund të kontrolloni ose çaktivizoni cookies përmes cilësimeve të shfletuesit tuaj, megjithëse kjo mund të ndikojë në disa funksione.",
+    "paragraph3": "Ne vlerësojmë transparencën dhe zgjedhjen e përdoruesit. Asnjë informacion personal i identifikueshëm nuk ruhet në cookies pa pëlqimin tuaj dhe të dhënat e mbledhura për analiza përdoren vetëm për të përmirësuar platformën."
+  },
+
+  "terms": {
+    "title": "Kushtet dhe Termat",
+    "paragraph1": "Mirë se vini në Aura Rental. Duke hyrë ose duke përdorur këtë faqe interneti, ju pranoni të respektoni këto kushte dhe të gjitha ligjet në fuqi. Platforma jonë ofron shërbime rezervimi makinash me qira, në varësi të disponueshmërisë dhe verifikimit të përshtatshmërisë.",
+    "paragraph2": "Rezervimet konfirmohen vetëm pas pagesës së suksesshme dhe pranimit të kushteve të rezervimit. Anulimet dhe ndryshimet mund t'i nënshtrohen tarifave sipas politikave tona të qirasë. Përdoruesit janë përgjegjës për dhënien e informacionit të saktë gjatë procesit të rezervimit.",
+    "paragraph3": "Aura Rental rezervon të drejtën të ndryshojë shërbimet, çmimet dhe kushtet në çdo kohë. Vazhdimi i përdorimit të platformës pas ndryshimeve nënkupton pranimin e kushteve të përditësuara.",
+    "paragraph4": "Ne përpiqemi të ofrojmë një përvojë premium të transportit, por shërbimet ofrohen pa garanci përtej atyre të kërkuara nga ligji. Përdoruesit pranojnë ta përdorin platformën me përgjegjësi dhe në përputhje me të gjitha rregulloret në fuqi."
+  },
+
+  "collection": {
+    "title": "KOLEKSIONI YNË",
+    "availableDates": "Duke shfaqur makinat e disponueshme për datat tuaja të zgjedhura.",
+    "description": "Nga makinat sportive me performancë të lartë deri te sedanët luksozë, zbuloni automjetin perfekt për udhëtimin tuaj.",
+    "scanning": "Duke skanuar flotën tonë...",
+    "tryAgain": "Provo përsëri",
+    "noCars": "Nuk ka makina të disponueshme",
+    "adjustDates": "Provoni të ndryshoni datat ose shikoni të gjithë koleksionin tonë.",
+    "clearFilters": "Pastro filtrat"
+  },
+
+  "carDetail": {
+    "backFleet": "Kthehu te flota",
+    "eliteCollection": "Koleksioni Elite",
+    "startingFrom": "Duke filluar nga",
+    "day": "/DITË",
+    "seats": "Vende",
+    "trans": "Transmetimi",
+    "doors": "Dyert",
+    "ac": "Kondicioneri",
+    "fuel": "Karburanti",
+    "yes": "Po",
+    "no": "Jo",
+    "detailsBenefits": "Detaje & Përfitime",
+    "reservationSubmitted": "Rezervimi u dërgua",
+    "contactSoon": "Do t'ju kontaktojmë sa më shpejt.",
+    "reservationBill": "Fatura e Rezervimit",
+    "reviewBooking": "Kontrolloni rezervimin tuaj",
+    "editInfo": "Ndrysho të dhënat",
+    "driverInformation": "Informacioni i Shoferit",
+    "phone": "Telefon",
+    "email": "Email",
+    "schedulePeriod": "Orari dhe Periudha",
+    "destination": "Destinacioni",
+    "notSelected": "Nuk është zgjedhur",
+    "curatedExtras": "Shtesat",
+    "carRental": "Qira Makine",
+    "selectedExtras": "Shtesa të zgjedhura",
+    "grandTotal": "Totali",
+    "payPickup": "Pagesa në marrje",
+    "completeReservation": "Përfundo rezervimin",
+    "confirming": "Duke konfirmuar...",
+    "bookNow": "Rezervo tani",
+    "fullName": "Emri i plotë",
+    "phoneNumber": "Numri i telefonit",
+    "pickupDestination": "Destinacioni i marrjes",
+    "chooseDestination": "Zgjidh destinacionin",
+    "pickupTime": "Koha e marrjes",
+    "returnTime": "Koha e kthimit",
+    "extras": "Shtesa (në ditë)",
+    "frontUploaded": "Pjesa e përparme u ngarkua",
+    "frontLicense": "Patenta përpara",
+    "backUploaded": "Pjesa e pasme u ngarkua",
+    "backLicense": "Patenta mbrapa",
+    "passportUploaded": "Pasaporta u ngarkua",
+    "uploadPassport": "Ngarko Pasaportën / ID",
+    "syncing": "Duke sinkronizuar...",
+    "reviewReservation": "Kontrollo rezervimin",
+    "securePayment": "Pagesë e sigurt në marrje"
+  } ,
+
+  "about": {
+    "label": "Rreth Aura Rental",
+    "title": "SHËRBIM I THJESHTË • TRANSPARENT I QIRASË SË MAKINAVE",
+    "description": "Aura Rental është një shërbim modern për rezervimin e makinave me fokus në thjeshtësi dhe ndershmëri. Qëllimi ynë është të heqim procedurat e komplikuara që zakonisht kërkohen gjatë marrjes me qira të një makine dhe të ofrojmë një proces të shpejtë rezervimi për çdo klient.",
+    "badgeTitle": "I Shpejtë",
+    "badgeSubtitle": "Procesi i Rezervimit",
+    "features": {
+      "noCreditCard": {
+        "title": "Nuk kërkohet kartë krediti",
+        "text": "Mund të rezervoni dhe merrni një makinë pa dhënë kartë krediti."
+      },
+      "unlimitedKm": {
+        "title": "Kilometra të pakufizuar të përfshirë",
+        "text": "Të gjitha qiratë përfshijnë kilometrazhin në çmim — pa tarifa të fshehura."
+      },
+      "flexiblePayment": {
+        "title": "Pagesë fleksibile",
+        "text": "Paguani me cash, Visa ose MasterCard në momentin e marrjes."
+      },
+      "warranty": {
+        "title": "Garanci opsionale",
+        "text": "Garancia është opsionale me kartë ose cash (200 euro)."
+      }
+    }
+  },
+
+  "car": {
+    "perDay": "/ Ditë",
+    "defaultCategory": "E njëjta kategori makine",
+    "auto": "Automatik",
+    "hybrid": "Hibrid",
+    "seats": "Vende",
+    "doors": "Dyer",
+    "acOn": "Kondicioner",
+    "acOff": "Pa kondicioner",
+    "bookNow": "REZERVO TANI",
+    "currency": "$",
+    "availableNow": "Në dispozicion tani",
+    "automatic": "Automatik",
+    "viewReservation": "Shiko rezervimin"
+  },
+
+  "footer": {
+    "brand": "Rental",
+    "description": "Duke ripërcaktuar mobilitetin luksoz. Ne ofrojmë një flotë ekskluzive për ata që kërkojnë performancë, stil dhe përsosmëri në çdo kilometër.",
+    "navigation": "Navigimi",
+    "discover": "Zbulo",
+    "fleet": "Flota jonë",
+    "about": "Rreth nesh",
+    "contact": "Kontakt",
+    "clientServices": "Shërbimet për klientët",
+    "policies": "Politikat",
+    "insurance": "Sigurimi",
+    "concierge": "Shërbim Concierge",
+    "fleet2": "Flota",
+    "social": "Rrjetet sociale",
+    "follow": "Na ndiqni për flotën ekskluzive të ditës",
+    "copyright": "© 2024 Aura Rental. Prestige Mobility Group.",
+    "privacy": "Privatësia",
+    "terms": "Kushtet",
+    "cookies": "Cookies"
+  },
+
+  "hero": {
+    "badge": "Tani i disponueshëm në qytetin tuaj",
+    "title1": "MAKINA ME QIRA PRESTIGJIOZE",
+    "title2": "TË RIPËRCAKTUARA",
+    "description": "Mos mbërrini thjesht. Lini përshtypje me koleksionin tonë të kuruar të automjeteve me performancë të lartë dhe ekonomike.",
+    "pickup": "Data dhe ora e marrjes",
+    "return": "Data dhe ora e kthimit",
+    "cta": "EKSPLORO FLOTËN",
+    "feature1": "Rezervim i menjëhershëm",
+    "feature2": "Mbështetje 24/7",
+    "feature3": "Anulim falas"
+  },
+
+  "location": {
+    "subtitle": "Vizitoni showroom-in tonë",
+    "title": "Selia jonë",
+    "mainHubTitle": "Qendra kryesore",
+    "address": "Aeroporti Ndërkombëtar, Tiranë, Shqipëri 1001",
+    "hoursTitle": "Orari i punës",
+    "hours": "E hënë — E diel: Në dispozicion 24/7",
+    "phoneTitle": "Linja direkte",
+    "phone": "+355 69 211 6666",
+    "directions": "Merr udhëzimet"
+  },
+
+  "nav": {
+    "brand": "Rental",
+    "discover": "Zbulo",
+    "fleet": "Flota jonë",
+    "about": "Rreth nesh",
+    "contact": "Kontakt",
+    "reserve": "Rezervo",
+    "startBooking": "Fillo rezervimin"
+  },
+
+  "social": {
+    "whatsappMessage": "Përshëndetje Rental Aura,\nJam i/e interesuar të marr një makinë me qira.\nFaleminderit!",
+    "whatsapp": "WhatsApp",
+    "instagram": "Instagram",
+    "facebook": "Facebook"
+  },
+
+  "reviews": {
+    "subtitle": "Përshtypjet e klientëve",
+    "title": "Histori të vërteta, rezultate të vërteta",
+    "description": "Krenohemi me shërbimin tonë. Shikoni çfarë thonë klientët tanë për përvojën e tyre me ne."
+  }
+
+
+
+
+}
