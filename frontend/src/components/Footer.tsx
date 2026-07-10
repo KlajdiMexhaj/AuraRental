@@ -1,10 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const Footer: React.FC = () => {
+  const { t, i18n } = useTranslation();
+  const currentLang = i18n.language;
+
   const handleDiscoverClick = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  // Helper function to create localized paths
+  const lp = (path: string) => `/${currentLang}${path === '/' ? '' : path}`;
 
   return (
     <footer className="bg-[#0b1c1c] pt-24 pb-12 border-t border-white/5">
@@ -13,57 +20,57 @@ const Footer: React.FC = () => {
 
           {/* Brand Column */}
           <div className="space-y-6">
-            <Link to="/" onClick={handleDiscoverClick} className="flex items-center space-x-3">
+            <Link to={lp("/")} onClick={handleDiscoverClick} className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-[#8ecd24] rounded-xl flex items-center justify-center shadow-[0_0_15px_rgba(142,205,36,0.3)]">
                 <span className="text-[#011111] font-black text-xl">A</span>
               </div>
               <span className="text-xl font-bold tracking-tight text-white flex flex-col leading-none">
-                AURA <span className="text-[#8ecd24] text-[10px] tracking-[0.4em] font-black uppercase">Rental</span>
+                AURA <span className="text-[#8ecd24] text-[10px] tracking-[0.4em] font-black uppercase">{t("footer.brand")}</span>
               </span>
             </Link>
             <p className="text-gray-500 text-sm leading-relaxed max-w-xs">
-              Redefining luxury mobility. We provide an exclusive fleet for those who demand performance, style, and perfection in every mile.
+              {t("footer.description")}
             </p>
           </div>
 
           {/* Navigation */}
           <div>
             <h4 className="text-white font-black text-xs uppercase tracking-[0.2em] mb-8">
-              Navigation
+              {t("footer.navigation")}
             </h4>
             <ul className="space-y-4">
               <li>
                 <Link
-                  to="/"
+                  to={lp("/")}
                   onClick={handleDiscoverClick}
                   className="text-gray-500 hover:text-[#8ecd24] transition-colors text-sm font-medium"
                 >
-                  Discover
+                  {t("footer.discover")}
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/car-rental"
+                  to={lp("/cars-rental")}
                   className="text-gray-500 hover:text-[#8ecd24] transition-colors text-sm font-medium"
                 >
-                  Our Fleet
+                  {t("footer.fleet")}
                 </Link>
               </li>
               <li>
-                <a
-                  href="/about"
+                <Link
+                  to={lp("/about")}
                   className="text-gray-500 hover:text-[#8ecd24] transition-colors text-sm font-medium"
                 >
-                  About
-                </a>
+                  {t("footer.about")}
+                </Link>
               </li>
               <li>
-                <a
-                  href="/contact"
+                <Link
+                  to={lp("/contact")}
                   className="text-gray-500 hover:text-[#8ecd24] transition-colors text-sm font-medium"
                 >
-                  Contact
-                </a>
+                  {t("footer.contact")}
+                </Link>
               </li>
             </ul>
           </div>
@@ -71,48 +78,48 @@ const Footer: React.FC = () => {
           {/* Client Services */}
           <div>
             <h4 className="text-white font-black text-xs uppercase tracking-[0.2em] mb-8">
-              Client Services
+              {t("footer.clientServices")}
             </h4>
-<ul className="space-y-4">
-  <li>
-    <Link
-      to="/privacy"
-      className="text-gray-500 hover:text-[#8ecd24] transition-colors text-sm font-medium"
-    >
-      Policies
-    </Link>
-  </li>
-  <li>
-    <Link
-      to="/terms"
-      className="text-gray-500 hover:text-[#8ecd24] transition-colors text-sm font-medium"
-    >
-      Insurance
-    </Link>
-  </li>
-  <li>
-    <Link
-      to="/contact"
-      className="text-gray-500 hover:text-[#8ecd24] transition-colors text-sm font-medium"
-    >
-      Concierge
-    </Link>
-  </li>
-  <li>
-    <Link
-      to="/cars-rental"
-      className="text-gray-500 hover:text-[#8ecd24] transition-colors text-sm font-medium"
-    >
-      Fleet
-    </Link>
-  </li>
-</ul>
+            <ul className="space-y-4">
+              <li>
+                <Link
+                  to={lp("/privacy")}
+                  className="text-gray-500 hover:text-[#8ecd24] transition-colors text-sm font-medium"
+                >
+                  {t("footer.policies")}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to={lp("/terms")}
+                  className="text-gray-500 hover:text-[#8ecd24] transition-colors text-sm font-medium"
+                >
+                  {t("footer.insurance")}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to={lp("/contact")}
+                  className="text-gray-500 hover:text-[#8ecd24] transition-colors text-sm font-medium"
+                >
+                  {t("footer.concierge")}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to={lp("/cars-rental")}
+                  className="text-gray-500 hover:text-[#8ecd24] transition-colors text-sm font-medium"
+                >
+                  {t("footer.fleet2")}
+                </Link>
+              </li>
+            </ul>
           </div>
 
           {/* Social Presence */}
           <div>
             <h4 className="text-white font-black text-xs uppercase tracking-[0.2em] mb-8">
-              Social Presence
+              {t("footer.social")}
             </h4>
             <div className="flex gap-4">
               <a
@@ -149,26 +156,26 @@ const Footer: React.FC = () => {
               </a>
             </div>
             <p className="mt-6 text-[10px] text-gray-600 font-bold uppercase tracking-widest">
-              Follow for daily exclusive fleet drops
+              {t("footer.follow")}
             </p>
           </div>
         </div>
 
         <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-gray-600 text-xs font-bold uppercase tracking-widest">
-            © 2024 Aura Rental. Prestige Mobility Group.
+            {t("footer.copyright")}
           </p>
           <div className="flex gap-8 text-[10px] text-gray-700 font-black uppercase tracking-widest">
-  <Link to="/privacy" className="hover:text-white transition-colors cursor-pointer">
-    Privacy
-  </Link>
-  <Link to="/terms" className="hover:text-white transition-colors cursor-pointer">
-    Terms
-  </Link>
-  <Link to="/cookies" className="hover:text-white transition-colors cursor-pointer">
-    Cookies
-  </Link>
-</div>
+            <Link to={lp("/privacy")} className="hover:text-white transition-colors cursor-pointer">
+              {t("footer.privacy")}
+            </Link>
+            <Link to={lp("/terms")} className="hover:text-white transition-colors cursor-pointer">
+              {t("footer.terms")}
+            </Link>
+            <Link to={lp("/cookies")} className="hover:text-white transition-colors cursor-pointer">
+              {t("footer.cookies")}
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

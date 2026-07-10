@@ -8,7 +8,8 @@ interface CarCardProps {
 }
 
 const CarCard: React.FC<CarCardProps> = ({ car }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
 
   const imageUrl = car.image?.startsWith("https")
     ? car.image
@@ -89,7 +90,7 @@ const CarCard: React.FC<CarCardProps> = ({ car }) => {
 
         {/* Button */}
         <Link
-          to={`/car-rental/${car.id}`}
+          to={`/${i18n.language}/car-rental/${car.id}`}
           className="group/btn relative w-full flex items-center justify-center bg-white/[0.05] border border-white/10 text-white py-5 rounded-2xl font-black text-[11px] uppercase tracking-[0.2em] transition-all hover:bg-[#8ecd24] hover:text-[#011111] hover:border-[#8ecd24]"
         >
           <span className="relative z-10 flex items-center gap-2">

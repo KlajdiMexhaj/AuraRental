@@ -434,7 +434,7 @@ if (extrasPayload.length > 0) {
                                 {destinations.find(d => d.id.toString() === formData.destination)?.name || t("carDetail.notSelected")}
                             </p>
                         </div>
-
+placeholder
                         {selectedExtras.length > 0 && (
                             <div className="bg-white/[0.03] p-4 rounded-2xl border border-white/5">
                                 <p className="text-[9px] text-gray-500 font-black uppercase mb-2">{t("carDetail.curatedExtras")}</p>
@@ -479,14 +479,14 @@ if (extrasPayload.length > 0) {
                 <div className="space-y-5">
                   <div className="space-y-1.5">
                     <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">{t("carDetail.fullName")}</label>
-                    <input required name="name_surname" value={formData.name_surname} onChange={handleInputChange} type="text" placeholder={t("carDetail.fullNamePlaceholder")} className={`w-full bg-white/[0.03] border ${submissionErrors.name_surname ? 'border-red-500/50' : 'border-white/10'} rounded-2xl px-5 py-4 focus:outline-none focus:border-[#8ecd24] text-white text-sm transition-all`} />
+                    <input required name="name_surname" value={formData.name_surname} onChange={handleInputChange} type="text" placeholder={t("carDetail.fullName")} className={`w-full bg-white/[0.03] border ${submissionErrors.name_surname ? 'border-red-500/50' : 'border-white/10'} rounded-2xl px-5 py-4 focus:outline-none focus:border-[#8ecd24] text-white text-sm transition-all`} />
                     {submissionErrors.name_surname && <p className="text-red-500 text-[10px] mt-1 font-bold italic ml-2">{submissionErrors.name_surname[0]}</p>}
                   </div>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
                       <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">{t("carDetail.email")}</label>
-                      <input required name="email" value={formData.email} onChange={handleInputChange} type="email" placeholder={t("carDetail.emailPlaceholder")} className={`w-full bg-white/[0.03] border ${submissionErrors.email ? 'border-red-500/50' : 'border-white/10'} rounded-2xl px-5 py-4 focus:outline-none focus:border-[#8ecd24] text-white text-sm transition-all`} />
+                      <input required name="email" value={formData.email} onChange={handleInputChange} type="email" placeholder={t("carDetail.email")} className={`w-full bg-white/[0.03] border ${submissionErrors.email ? 'border-red-500/50' : 'border-white/10'} rounded-2xl px-5 py-4 focus:outline-none focus:border-[#8ecd24] text-white text-sm transition-all`} />
                       {submissionErrors.email && <p className="text-red-500 text-[10px] mt-1 font-bold italic ml-2">{submissionErrors.email[0]}</p>}
                     </div>
                     <div className="space-y-1.5">
@@ -693,7 +693,7 @@ if (extrasPayload.length > 0) {
           ${passportFront ? 'text-white' : 'text-gray-500'}
         `}
       >
-        {passportFront ? t("carDetail.frontUploaded") : t("carDetail.frontDriverLicense")}
+        {passportFront ? t("carDetail.frontUploaded") : t("carDetail.frontLicense")}
       </span>
     </label>
 
@@ -743,7 +743,7 @@ if (extrasPayload.length > 0) {
           ${passportBack ? 'text-white' : 'text-gray-500'}
         `}
       >
-        {passportBack ? t("carDetail.backUploaded") : t("carDetail.backDriverLicense")}
+        {passportBack ? t("carDetail.backUploaded") : t("carDetail.backLicense")}
       </span>
     </label>
 
@@ -798,7 +798,7 @@ if (extrasPayload.length > 0) {
         ${passport ? 'text-white' : 'text-gray-500'}
       `}
     >
-      {passport ? t("carDetail.passportUploaded") : t("carDetail.uploadPassportId")}
+      {passport ? t("carDetail.passportUploaded") : t("carDetail.uploadPassport")}
     </span>
   </label>
 
