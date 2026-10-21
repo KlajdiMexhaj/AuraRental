@@ -95,20 +95,20 @@
     "badgeSubtitle": "Processo di prenotazione",
     "features": {
       "noCreditCard": {
-        "title": "Nessuna carta di credito richiesta",
-        "text": "Puoi prenotare e noleggiare un veicolo senza fornire una carta di credito."
+        "title": "Ritiro in aeroporto",
+        "text": "Accoglienza personalizzata all'aeroporto di Tirana, a qualsiasi ora arrivi il tuo volo."
       },
       "unlimitedKm": {
-        "title": "Chilometri illimitati inclusi",
-        "text": "Tutti i noleggi includono i chilometri nel prezzo — nessun costo nascosto."
+        "title": "Prezzi trasparenti",
+        "text": "Il prezzo che vedi è quello che paghi. Nessun costo aggiuntivo al momento del ritiro."
       },
       "flexiblePayment": {
-        "title": "Pagamento flessibile",
-        "text": "Paga in contanti, Visa o MasterCard al ritiro."
+        "title": "Opzioni assicurative",
+        "text": "Copertura base / Copertura completa – in base al pacchetto assicurativo scelto."
       },
       "warranty": {
-        "title": "Garanzia opzionale",
-        "text": "La cauzione è opzionale con carta o contanti (200 euro)."
+        "title": "Assistenza reale",
+        "text": "Una persona reale su WhatsApp, 24 ore su 24, in inglese, italiano e albanese."
       }
     }
   },
@@ -151,16 +151,16 @@
   },
 
   "hero": {
-    "badge": "Ora disponibile nella tua città",
-    "title1": "NOLEGGI DI PRESTIGIO",
-    "title2": "RIDEFINITI",
-    "description": "Non limitarti ad arrivare. Fatti notare con la nostra selezione di veicoli ad alte prestazioni ed economici.",
+    "badge": "AEROPORTO DI TIRANA (TIA) · CONSEGNA IN CITTÀ",
+    "title1": "Noleggiare un'auto in Albania.",
+    "title2": "In tutta semplicità.",
+    "description": "Ritira la tua auto all'aeroporto di Tirana o in qualsiasi punto della città. Prezzi trasparenti, opzioni assicurative complete e nessuna sorpresa al momento del ritiro.",
     "pickup": "Data e ora del ritiro",
     "return": "Data e ora della riconsegna",
     "cta": "SCOPRI LA FLOTTA",
-    "feature1": "Prenotazione immediata",
-    "feature2": "Assistenza 24/7",
-    "feature3": "Cancellazione gratuita"
+    "feature1": "Nessun costo nascosto",
+    "feature2": "Cancellazione gratuita fino a 48 ore prima",
+    "feature3": "Assistenza WhatsApp 24/7"
   },
 
   "location": {

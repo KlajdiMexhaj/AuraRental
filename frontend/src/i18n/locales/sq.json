@@ -95,20 +95,20 @@
     "badgeSubtitle": "Procesi i Rezervimit",
     "features": {
       "noCreditCard": {
-        "title": "Nuk kërkohet kartë krediti",
-        "text": "Mund të rezervoni dhe merrni një makinë pa dhënë kartë krediti."
+        "title": "Marrja në aeroport",
+        "text": "Ju presim në Aeroportin e Tiranës, pavarësisht orarit të mbërritjes së fluturimit tuaj."
       },
       "unlimitedKm": {
-        "title": "Kilometra të pakufizuar të përfshirë",
-        "text": "Të gjitha qiratë përfshijnë kilometrazhin në çmim — pa tarifa të fshehura."
+        "title": "Çmime transparente",
+        "text": "Çmimi që shihni është çmimi që paguani. Pa tarifa shtesë gjatë marrjes së makinës."
       },
       "flexiblePayment": {
-        "title": "Pagesë fleksibile",
-        "text": "Paguani me cash, Visa ose MasterCard në momentin e marrjes."
+        "title": "Mundësi sigurimi",
+        "text": "Mbulim bazë / Mbulim i plotë – në varësi të paketës së sigurimit të zgjedhur."
       },
       "warranty": {
-        "title": "Garanci opsionale",
-        "text": "Garancia është opsionale me kartë ose cash (200 euro)."
+        "title": "Mbështetje reale",
+        "text": "Një person real në WhatsApp, 24/7, në anglisht, italisht dhe shqip."
       }
     }
   },
@@ -151,16 +151,16 @@
   },
 
   "hero": {
-    "badge": "Tani i disponueshëm në qytetin tuaj",
-    "title1": "MAKINA ME QIRA PRESTIGJIOZE",
-    "title2": "TË RIPËRCAKTUARA",
-    "description": "Mos mbërrini thjesht. Lini përshtypje me koleksionin tonë të kuruar të automjeteve me performancë të lartë dhe ekonomike.",
+    "badge": "AEROPORTI I TIRANËS (TIA) · DORËZIM NË QYTET",
+    "title1": "Makina me qira në Shqipëri.",
+    "title2": "E thjeshtë.",
+    "description": "Merrni makinën në Aeroportin e Tiranës ose kudo në qytet. Çmime transparente, mundësi të plota sigurimi dhe pa surpriza gjatë marrjes së makinës.",
     "pickup": "Data dhe ora e marrjes",
     "return": "Data dhe ora e kthimit",
     "cta": "EKSPLORO FLOTËN",
-    "feature1": "Rezervim i menjëhershëm",
-    "feature2": "Mbështetje 24/7",
-    "feature3": "Anulim falas"
+    "feature1": "Pa tarifa të fshehura",
+    "feature2": "Anulim falas deri në 48 orë përpara",
+    "feature3": "Mbështetje në WhatsApp 24/7"
   },
 
   "location": {

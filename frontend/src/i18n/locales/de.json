@@ -95,20 +95,20 @@
     "badgeSubtitle": "Reservierungsprozess",
     "features": {
       "noCreditCard": {
-        "title": "Keine Kreditkarte erforderlich",
-        "text": "Sie können ein Fahrzeug reservieren und mieten, ohne eine Kreditkarte anzugeben."
+        "title": "Flughafenabholung",
+        "text": "Persönlicher Empfang am Flughafen Tirana, unabhängig von der Ankunftszeit Ihres Fluges."
       },
       "unlimitedKm": {
-        "title": "Unbegrenzte Kilometer im Preis enthalten",
-        "text": "Alle Mietverträge beinhalten die Kilometer im Preis — keine versteckten Kosten."
+        "title": "Transparente Preise",
+        "text": "Der angezeigte Preis ist der Preis, den Sie bezahlen. Keine zusätzlichen Gebühren bei der Abholung."
       },
       "flexiblePayment": {
-        "title": "Flexible Zahlungsmöglichkeiten",
-        "text": "Zahlen Sie bar, mit Visa oder MasterCard bei der Abholung."
+        "title": "Versicherungsoptionen",
+        "text": "Basisschutz / Vollkaskoschutz – je nach gewähltem Versicherungspaket."
       },
       "warranty": {
-        "title": "Optionale Kaution",
-        "text": "Die Kaution ist optional mit Karte oder bar (200 Euro)."
+        "title": "Persönlicher Support",
+        "text": "Ein echter Ansprechpartner über WhatsApp, rund um die Uhr, auf Englisch, Italienisch und Albanisch."
       }
     }
   },
@@ -151,16 +151,16 @@
   },
 
   "hero": {
-    "badge": "Jetzt in Ihrer Stadt verfügbar",
-    "title1": "PRESTIGE-FAHRZEUGVERMIETUNG",
-    "title2": "NEU DEFINIERT",
-    "description": "Kommen Sie nicht einfach an. Hinterlassen Sie Eindruck mit unserer sorgfältig ausgewählten Flotte aus leistungsstarken und wirtschaftlichen Fahrzeugen.",
+    "badge": "FLUGHAFEN TIRANA (TIA) · LIEFERUNG IN DIE STADT",
+    "title1": "Mietwagen in Albanien.",
+    "title2": "Einfach gemacht.",
+    "description": "Holen Sie Ihr Auto am Flughafen Tirana oder überall in der Stadt ab. Transparente Preise, umfassende Versicherungsoptionen und keine Überraschungen bei der Abholung.",
     "pickup": "Abholdatum und -uhrzeit",
     "return": "Rückgabedatum und -uhrzeit",
     "cta": "FLOTTE ENTDECKEN",
-    "feature1": "Sofortige Buchung",
-    "feature2": "24/7-Support",
-    "feature3": "Kostenlose Stornierung"
+    "feature1": "Keine versteckten Gebühren",
+    "feature2": "Kostenlose Stornierung bis 48 Stunden vorher",
+    "feature3": "WhatsApp-Support rund um die Uhr"
   },
 
   "location": {

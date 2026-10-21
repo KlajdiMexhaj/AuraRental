@@ -95,20 +95,20 @@
     "badgeSubtitle": "Proces rezerwacji",
     "features": {
       "noCreditCard": {
-        "title": "Bez karty kredytowej",
-        "text": "Możesz zarezerwować i wynająć pojazd bez podawania karty kredytowej."
+        "title": "Odbiór na lotnisku",
+        "text": "Powitanie na lotnisku w Tiranie, niezależnie od godziny przylotu."
       },
       "unlimitedKm": {
-        "title": "Nielimitowane kilometry w cenie",
-        "text": "Wszystkie wynajmy obejmują kilometry w cenie — bez ukrytych opłat."
+        "title": "Przejrzyste ceny",
+        "text": "Cena, którą widzisz, to cena, którą płacisz. Bez dodatkowych opłat przy odbiorze samochodu."
       },
       "flexiblePayment": {
-        "title": "Elastyczna płatność",
-        "text": "Płać gotówką, Visa lub MasterCard przy odbiorze."
+        "title": "Opcje ubezpieczenia",
+        "text": "Podstawowa ochrona / Pełna ochrona – w zależności od wybranego pakietu ubezpieczenia."
       },
       "warranty": {
-        "title": "Opcjonalna kaucja",
-        "text": "Kaucja jest opcjonalna kartą lub gotówką (200 euro)."
+        "title": "Prawdziwe wsparcie",
+        "text": "Kontakt z prawdziwą osobą przez WhatsApp 24/7, w języku angielskim, włoskim i albańskim."
       }
     }
   },
@@ -151,16 +151,16 @@
   },
 
   "hero": {
-    "badge": "Teraz dostępne w Twoim mieście",
-    "title1": "PRESTIŻOWY WYNAJEM",
-    "title2": "W NOWYM WYDANIU",
-    "description": "Nie tylko dojedź do celu. Zrób niezapomniane wrażenie dzięki naszej starannie dobranej kolekcji samochodów o wysokich osiągach i ekonomicznych.",
+    "badge": "LOTNISKO W TIRANIE (TIA) · DOSTAWA DO MIASTA",
+    "title1": "Wynajem samochodu w Albanii.",
+    "title2": "To proste.",
+    "description": "Odbierz samochód na lotnisku w Tiranie lub w dowolnym miejscu w mieście. Przejrzyste ceny, szeroki wybór opcji ubezpieczenia i żadnych niespodzianek przy odbiorze.",
     "pickup": "Data i godzina odbioru",
     "return": "Data i godzina zwrotu",
     "cta": "ODKRYJ FLOTĘ",
-    "feature1": "Natychmiastowa rezerwacja",
-    "feature2": "Wsparcie 24/7",
-    "feature3": "Bezpłatne anulowanie"
+    "feature1": "Brak ukrytych opłat",
+    "feature2": "Bezpłatne anulowanie do 48 godzin przed odbiorem",
+    "feature3": "Wsparcie przez WhatsApp 24/7"
   },
 
   "location": {

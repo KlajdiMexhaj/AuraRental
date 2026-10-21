@@ -96,20 +96,20 @@
     "badgeSubtitle": "Reservation Process",
     "features": {
       "noCreditCard": {
-        "title": "No Credit Card Required",
-        "text": "You can reserve and rent a vehicle without providing a credit card."
+        "title": "Airport pickup",
+        "text": "Meet & greet at Tirana Airport, at any hour of your flight.."
       },
       "unlimitedKm": {
-        "title": "Unlimited Kilometers Included",
-        "text": "All rentals include kilometers in the price — no hidden distance fees."
+        "title": "Clear prices",
+        "text": "The price you see is the price you pay. No extra charges at the counter."
       },
       "flexiblePayment": {
-        "title": "Flexible Payment",
-        "text": "Pay with cash, Visa or MasterCard at pickup."
+        "title": "Insurance options",
+        "text": "Basic / Full Coverage – specify your actual insurance terms."
       },
       "warranty": {
-        "title": "Optional Warranty",
-        "text": "The guarantee is optional by card or cash (200 euros)."
+        "title": "Real support",
+        "text": "A real person on WhatsApp 24/7, in English, Italian and Albanian."
       }
     }
   },
@@ -152,16 +152,16 @@
     },
 
     "hero": {
-    "badge": "Now Available in your city",
-    "title1": "PRESTIGE RENTALS",
-    "title2": "REDEFINED",
-    "description": "Don’t just arrive. Make an entrance with our curated collection of high-performance and economical vehicles.",
+    "badge": "TIRANA AIRPORT (TIA) . CITY DELIVERY",
+    "title1": "Rent a car in Albania.",
+    "title2": "Made easy.",
+    "description": "Pick up your car at Tirana Airport or anywhere in the city. Clear prices, full insurance options, no surprises at the counter.",
     "pickup": "Pick-up date & time",
     "return": "Return date & time",
     "cta": "EXPLORE FLEET",
-    "feature1": "Instant Booking",
-    "feature2": "24/7 Support",
-    "feature3": "Free Cancellation"
+    "feature1": "No hidden fees",
+    "feature2": "Free cancellation up to 48h",
+    "feature3": "24/7 WhatsApp support"
     },
 
     "location": {
